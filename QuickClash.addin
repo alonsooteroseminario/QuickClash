@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+  <AddIn Type="Application">
+    <Name>Application QuickClash</Name>
+    <Assembly>QuickClash.dll</Assembly>
+    <FullClassName>QuickClash.App</FullClassName>
+    <ClientId>9746eaf5-d2b6-4b37-9472-ac28d3865395</ClientId>
+    <VendorId>com.typepad.thebuildingcoder</VendorId>
+    <VendorDescription>The Building Coder, http://thebuildingcoder.typepad.com</VendorDescription>
+  </AddIn>
+</RevitAddIns>
