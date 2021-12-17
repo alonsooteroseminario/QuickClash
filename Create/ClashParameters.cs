@@ -20,7 +20,7 @@ namespace QuickClash.Create
 
             if (exists)
             {
-				List<BuiltInCategory> bics = Lists.BuiltCategories();
+				List<BuiltInCategory> bics = Lists.BuiltCategories(false);
 				CategorySet categories = app.Create.NewCategorySet();
 				foreach (BuiltInCategory bic in bics)
 				{
@@ -51,7 +51,7 @@ namespace QuickClash.Create
 
 				CategorySet categories = app.Create.NewCategorySet();
 
-				List<BuiltInCategory> bics = Lists.BuiltCategories();
+				List<BuiltInCategory> bics = Lists.BuiltCategories(false);
 
 				foreach (BuiltInCategory bic in bics)
 				{
@@ -77,7 +77,6 @@ namespace QuickClash.Create
 						t.Commit();
 					}
 				}
-				CreateView.Do(commandData);
 			}
 		}
 	}

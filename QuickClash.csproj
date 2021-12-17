@@ -54,10 +54,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="Set\SetParameter.cs" />
+    <Compile Include="Elements\Get.cs" />
+    <Compile Include="Set\SetEmptyYesNoParameters.cs" />
+    <Compile Include="Set\SetIDValue.cs" />
     <Compile Include="Create\ClashParameters.cs" />
     <Compile Include="Lists.cs" />
     <Compile Include="StartClash.cs" />
-    <Compile Include="CreateView.cs" />
+    <Compile Include="Create\3DView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -65,6 +69,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if $(ConfigurationName) == Debug mkdir "$(AppData)\Autodesk\REVIT\Addins\2021\$(TargetName)\"

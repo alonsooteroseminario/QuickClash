@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace QuickClash
 {
-    public static class CreateView
+    public static class View
     {
 		/// <summary>
 		/// Devuelve la lista de valores del diccionario ingresado como parámetro.

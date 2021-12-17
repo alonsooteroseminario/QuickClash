@@ -4,6 +4,7 @@ using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using Autodesk.Revit.UI.Selection;
+using QuickClash.Create;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -51,17 +52,18 @@ namespace QuickClash
                     if (dg.Name.ToString() == "ClashParameters")
                     {
                         grupos_existe.Add(dg);
-						Create.ClashParameters.WhenSharedParameter(commandData, true);
+						ClashParameters.WhenSharedParameter(commandData, true);
 					}
                     else 
                     {
                         grupos.Add(dg);
-						Create.ClashParameters.WhenSharedParameter(commandData, false);
+						ClashParameters.WhenSharedParameter(commandData, false);
 					}
                 }
-				#endregion
+                View.Do(commandData);
+                #endregion
 
-				return Result.Succeeded;
+                return Result.Succeeded;
             } 
             catch (Exception e)
             {
