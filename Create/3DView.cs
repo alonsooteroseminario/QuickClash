@@ -14,7 +14,7 @@ namespace QuickClash
 		/// Devuelve la lista de valores del diccionario ingresado como parámetro.
 		/// </summary>
 		/// <param>List of BuiltCategories.</param>
-		public static void Do(ExternalCommandData commandData)
+		public static void Create(ExternalCommandData commandData)
 		{
 			UIApplication uiapp = commandData.Application;
 			UIDocument uidoc = uiapp.ActiveUIDocument;

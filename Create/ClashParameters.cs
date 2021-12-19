@@ -11,7 +11,7 @@ namespace QuickClash.Create
 {
     class ClashParameters
     {
-		public static void WhenSharedParameter(ExternalCommandData commandData, bool exists)
+		public static void CreateWhenSharedParameter(ExternalCommandData commandData, bool exists)
         {
 			UIApplication uiapp = commandData.Application;
 			UIDocument uidoc = uiapp.ActiveUIDocument;
@@ -27,12 +27,8 @@ namespace QuickClash.Create
 					Category MECat = doc.Settings.Categories.get_Item(bic);
 					categories.Insert(MECat);
 				}
-				// open shared parameter file
 				DefinitionFile myDefinitionFile = app.OpenSharedParameterFile();
-
-				// get a group
 				DefinitionGroup myGroup = myDefinitionFile.Groups.get_Item("ClashParameters");
-
 				foreach (var param in Lists.Params())
 				{
 					Definition myDefinition_ProductDate = myGroup.Definitions.get_Item(param);
@@ -48,20 +44,22 @@ namespace QuickClash.Create
             else
             {
 				List<string> listParam = Lists.Params();
-
 				CategorySet categories = app.Create.NewCategorySet();
-
 				List<BuiltInCategory> bics = Lists.BuiltCategories(false);
-
 				foreach (BuiltInCategory bic in bics)
 				{
 					Category MECat = doc.Settings.Categories.get_Item(bic);
 					categories.Insert(MECat);
 				}
-
-
 				DefinitionFile myDefinitionFile = app.OpenSharedParameterFile();
+
+
+
+
 				DefinitionGroup myGroup = myDefinitionFile.Groups.Create("ClashParameters");
+
+
+
 
 				foreach (string paramName in listParam)
 				{

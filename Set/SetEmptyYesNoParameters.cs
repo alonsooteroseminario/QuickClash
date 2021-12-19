@@ -19,13 +19,8 @@ namespace QuickClash
 		/// <param></param>
 		public static void Do(ExternalCommandData commandData)
 		{
-			List<BuiltInCategory> bics = Lists.BuiltCategories(true);
-
-			foreach (BuiltInCategory bic in bics)
-			{
-				IList<Element> mechanicalequipment = Get.ElementsByBuiltCategory(commandData, bic, "mechanicalequipment");
-				SetParameter.Do(commandData, mechanicalequipment);
-			};
+			IList<Element> mechanicalequipment = Get.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_MechanicalEquipment, "mechanicalequipment");
+			SetParameter.Do(commandData, mechanicalequipment);
 
 			IList<Element> ducts = Get.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_DuctCurves, "ducts");
 			IList<Element> pipes = Get.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_PipeCurves, "pipes");

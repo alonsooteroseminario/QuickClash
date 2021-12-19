@@ -54,6 +54,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="Create\ClashSOLVEDFilterMultipleElementsInView.cs" />
+    <Compile Include="Create\ClashSchedules.cs" />
+    <Compile Include="Create\ClashFilterMultipleElementsInView.cs" />
+    <Compile Include="Set\SetNoValueAllParameters.cs" />
     <Compile Include="Set\SetParameter.cs" />
     <Compile Include="Elements\Get.cs" />
     <Compile Include="Set\SetEmptyYesNoParameters.cs" />

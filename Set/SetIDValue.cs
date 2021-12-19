@@ -14,18 +14,28 @@ namespace QuickClash
     public static class SetIDValue
 	{
 		/// <summary>
-		/// Devuelve la lista de valores del diccionario ingresado como parámetro.
+		/// 
 		/// </summary>
-		/// <param>List of BuiltCategories.</param>
+		/// <param></param>
 		public static void Do(ExternalCommandData commandData)
 		{
-			UIApplication uiapp = commandData.Application;
-			UIDocument uidoc = uiapp.ActiveUIDocument;
-			Document doc = uidoc.Document;
 
-		
+			IList<Element> ducts = Get.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_DuctCurves, "ducts");
+			IList<Element> pipes = Get.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_PipeCurves, "pipes");
+			IList<Element> conduits = Get.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_Conduit, "conduits");
+			IList<Element> cabletrays = Get.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_CableTray, "cabletrays");
+			IList<Element> flexducts = Get.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_FlexDuctCurves, "flexducts");
+			IList<Element> flexpipes = Get.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_FlexPipeCurves, "flexpipes");
 
-			
+			SetParameter.Id(commandData, ducts);
+			SetParameter.Id(commandData, pipes);
+			SetParameter.Id(commandData, conduits);
+			SetParameter.Id(commandData, cabletrays);
+			SetParameter.Id(commandData, flexducts);
+			SetParameter.Id(commandData, flexpipes);
+
+			IList<Element> mechanicalequipment = Get.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_MechanicalEquipment, "mechanicalequipment");
+			SetParameter.Id(commandData, mechanicalequipment);
 
 		}
 	}

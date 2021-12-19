@@ -17,13 +17,13 @@ namespace QuickClash
 		/// Devuelve la lista de valores del diccionario ingresado como parámetro.
 		/// </summary>
 		/// <param>List of BuiltCategories.</param>
-		public static void Do(ExternalCommandData commandData, IList<Element> element)
+		public static void Do(ExternalCommandData commandData, IList<Element> elements)
 		{
 			UIApplication uiapp = commandData.Application;
 			UIDocument uidoc = uiapp.ActiveUIDocument;
 			Document doc = uidoc.Document;
 
-			foreach (Element e in element)
+			foreach (Element e in elements)
 			{
 				Parameter param = e.LookupParameter("Clash Solved");
 				Parameter param2 = e.LookupParameter("Done");
@@ -39,6 +39,32 @@ namespace QuickClash
 					t.Commit();
 				}
 
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param></param>
+		public static void Id(ExternalCommandData commandData, IList<Element> elements)
+		{
+			UIApplication uiapp = commandData.Application;
+			UIDocument uidoc = uiapp.ActiveUIDocument;
+			Document doc = uidoc.Document;
+
+			foreach (Element e in elements)
+			{
+				Parameter param = e.LookupParameter("ID Element");
+
+				Autodesk.Revit.DB.ElementId selectedId = e.Id;
+				string idString = selectedId.IntegerValue.ToString();
+
+				using (Transaction t = new Transaction(doc, "ID Element"))
+				{
+					t.Start();
+					param.Set(idString);
+					t.Commit();
+				}
 			}
 		}
 	}

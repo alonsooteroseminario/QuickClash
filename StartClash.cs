@@ -34,8 +34,6 @@ namespace QuickClash
                 #region try region
 
                 List<DefinitionGroup> defGroups = new List<DefinitionGroup>();
-                List<DefinitionGroup> grupos = new List<DefinitionGroup>();
-                List<DefinitionGroup> grupos_existe = new List<DefinitionGroup>();
 
                 TaskDialog.Show("Dynoscript", "Recuerda:\n\n1.- Tener los Worksets del proyecto en modo Editables. \n\n2.- Si el Modelo es muy grande algunas tareas pueden demorar varios minutos. "
                                 + Environment.NewLine + "\n3.- Si ya probaste Quick Clash por favor déjanos tus comentarios en nuestra página : \n" + Environment.NewLine + new Uri("https://www.dynoscript.com/quickclash/")
@@ -46,21 +44,47 @@ namespace QuickClash
                     defGroups.Add(dg);
                 }
 
+                IList<Element> ducts = Get.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_DuctCurves, "ducts");
+                Element e = ducts.First(); // primer ducto
+                Parameter param = e.LookupParameter("Clash"); // buscamos el parametro "Clash" con el elemento e
+                List<string> list_dg = new List<string>();
+
                 for (int i = 0; i < defGroups.Count(); i++)
                 {
                     DefinitionGroup dg = defGroups[i];
-                    if (dg.Name.ToString() == "ClashParameters")
-                    {
-                        grupos_existe.Add(dg);
-						ClashParameters.WhenSharedParameter(commandData, true);
-					}
-                    else 
-                    {
-                        grupos.Add(dg);
-						ClashParameters.WhenSharedParameter(commandData, false);
-					}
+                    list_dg.Add(dg.Name.ToString());
                 }
-                View.Do(commandData);
+                //¿existe el group shared parameter?
+                if (list_dg.Contains("ClashParameters")) // si existe group parameter
+                {
+                    // ¿existe parametro Clash?
+                    if (param != null)// true
+                    {
+                        // no hacer nada
+                    }
+                    else//false
+                    {
+                        ClashParameters.CreateWhenSharedParameter(commandData, true);
+                        //ClashSchedules.Create(commandData);
+                    }
+                }
+                else // no existe group parameter
+                {
+                    // ¿existe parametro Clash?
+                    if (param != null) //true
+                    {
+                        // no hacer nada
+                    }
+                    else //false
+                    {
+                        ClashParameters.CreateWhenSharedParameter(commandData, false);
+                        //ClashSchedules.Create(commandData);
+                    }
+                }
+                View.Create(commandData);
+                SetIDValue.Do(commandData);
+                SetEmptyYesNoParameters.Do(commandData);
+
                 #endregion
 
                 return Result.Succeeded;
