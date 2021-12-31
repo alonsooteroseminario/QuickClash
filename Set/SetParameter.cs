@@ -14,9 +14,9 @@ namespace QuickClash
 	public static class SetParameter
 	{
 		/// <summary>
-		/// Devuelve la lista de valores del diccionario ingresado como parámetro.
+		/// 
 		/// </summary>
-		/// <param>List of BuiltCategories.</param>
+		/// <param></param>
 		public static void Do(ExternalCommandData commandData, IList<Element> elements)
 		{
 			UIApplication uiapp = commandData.Application;

@@ -51,8 +51,9 @@ namespace QuickClash
 
 			IList<Element> salida = null;
 
-			IList <Element> mechanicalequipment = MEcoll.WherePasses(MEInstancesFilter).ToElements();
+			IList <Element> family_instances_all = MEcoll.WherePasses(MEInstancesFilter).ToElements();
 			FilteredElementCollector DUcoll = new FilteredElementCollector(doc);
+
 			IList<Element> ducts = DUcoll.WherePasses(DUInstancesFilter).ToElements();
 			FilteredElementCollector DUcoll2 = new FilteredElementCollector(doc);
 			IList<Element> pipes = DUcoll2.WherePasses(DUInstancesFilter2).ToElements();
@@ -65,9 +66,11 @@ namespace QuickClash
 			FilteredElementCollector DUcoll6 = new FilteredElementCollector(doc);
 			IList<Element> flexpipes = DUcoll6.WherePasses(DUInstancesFilter6).ToElements();
 
-			if (builtCategory == "mechanicalequipment")
+
+
+			if (builtCategory == "family_instances_all")
             {
-				salida = mechanicalequipment;
+				salida = family_instances_all;
             }
 			if (builtCategory == "ducts")
 			{

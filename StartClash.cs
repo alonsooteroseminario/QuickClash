@@ -64,8 +64,7 @@ namespace QuickClash
                     }
                     else//false
                     {
-                        ClashParameters.CreateWhenSharedParameter(commandData, true);
-                        //ClashSchedules.Create(commandData);
+                        ClashParameters.CreateWhenSharedParameter(commandData, true);                    
                     }
                 }
                 else // no existe group parameter
@@ -78,12 +77,13 @@ namespace QuickClash
                     else //false
                     {
                         ClashParameters.CreateWhenSharedParameter(commandData, false);
-                        //ClashSchedules.Create(commandData);
                     }
                 }
+
                 View.Create(commandData);
                 SetIDValue.Do(commandData);
                 SetEmptyYesNoParameters.Do(commandData);
+                //ClashSchedules.Create(commandData);
 
                 #endregion
 
