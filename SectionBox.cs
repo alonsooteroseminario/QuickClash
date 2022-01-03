@@ -21,13 +21,10 @@ namespace QuickClash
     {
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
-            //Get application and document objects
             UIApplication uiApp = commandData.Application;
             UIDocument uidoc = uiApp.ActiveUIDocument;
             Document doc = uiApp.ActiveUIDocument.Document;
             Application app = uiApp.Application;
-
-            // Get Active View
             var activeView = uidoc.ActiveView;
 
 			var view = doc.ActiveView;
@@ -37,7 +34,6 @@ namespace QuickClash
 			List<bool> listabool_1 = new List<bool>();
 			List<bool> listabool_4 = new List<bool>();
 
-			string ee = "";
 			using (var form = new Form3())
 			{
 				form.ShowDialog();

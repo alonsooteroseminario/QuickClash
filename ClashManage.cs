@@ -21,21 +21,15 @@ namespace QuickClash
     {
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
-			UIApplication uiApp = commandData.Application;
-			UIDocument uidoc = uiApp.ActiveUIDocument;
-
 			List<string> lista1 = new List<string>(); // seleccion "s" Element
 			List<string> lista2 = new List<string>(); // seleccion "s" Family Instance
 
 			List<string> lista3 = new List<string>(); // seleccion "s" Element
 			List<string> lista4 = new List<string>(); // seleccion "s" Family Instance
 
-
 			List<bool> lista_checkBox_1 = new List<bool>();
-			List<bool> lista_checkBox_2 = new List<bool>();
 			List<bool> lista_checkBox_3 = new List<bool>();
 
-			//add the window form. Create an instance on the form and display it. We need to lead the system.windows.form namaspace
 			using (var form = new Form2())
 			{
 				form.ShowDialog();
@@ -108,44 +102,43 @@ namespace QuickClash
 			List<BuiltInCategory> UI_list4 = new List<BuiltInCategory>(); // Family Instance
 
 			// Elements
-			List<BuiltInCategory> bics = Lists.BuiltCategories(true);
+			List<BuiltInCategory> bics = Lists.BuiltCategories(false);
 
-			foreach (BuiltInCategory bic in bics) // bic  = BuiltInCategory.OST_CableTray
+			foreach (BuiltInCategory bic in bics) 
 			{
-				foreach (string s in lista1) // CableTray
+				foreach (string s in lista1) 
 				{
-					string sT = "OST_" + s; // OST_CableTray
-					if (bic.ToString().Contains(sT)) // ¿"OST_CableTray" dentro de : "BuiltInCategory.OST_CableTray"? : TRUE
+					string sT = "OST_" + s; 
+					if (bic.ToString().Contains(sT)) 
 					{
-						if (!UI_list1.Contains(bic)) // ¿BuiltInCategory.OST_CableTray dentro de : Lista UI_list1? : !FALSE == TRUE
+						if (!UI_list1.Contains(bic)) 
 						{
-							UI_list1.Add(bic); // agregar BuiltInCategory.OST_CableTray a : Lista UI_list1
+							UI_list1.Add(bic); 
 						}
 					}
 				}
-				foreach (string s in lista3) // CableTray
+				foreach (string s in lista3) 
 				{
-					string sT = "OST_" + s; // sT = "OST_CableTray
-					if (bic.ToString().Contains(sT)) // ¿"OST_CableTray" dentro de : "BuiltInCategory.OST_CableTray"? : TRUE
+					string sT = "OST_" + s; 
+					if (bic.ToString().Contains(sT))
 					{
 						if (!UI_list3.Contains(bic))
 						{
-							UI_list3.Add(bic); // agregar BuiltInCategory.OST_CableTray a : Lista UI_list2
+							UI_list3.Add(bic); 
 						}
 					}
 				}
 			}
 
-
 			// Family Instance
 			List<BuiltInCategory> bics_finst = Lists.BuiltCategories(true);
 
-			foreach (BuiltInCategory bic in bics_finst) // BuiltInCategory.OST_CableTrayFitting = bic
+			foreach (BuiltInCategory bic in bics_finst)
 			{
-				foreach (string s in lista2) // CableTrayFitting
+				foreach (string s in lista2) 
 				{
-					string sT = "OST_" + s; // "OST_CableTrayFitting"
-					if (bic.ToString().Contains(sT)) //  ¿"OST_CableTrayFitting" dentro de : "BuiltInCategory.OST_CableTrayFitting"? == TRUE
+					string sT = "OST_" + s; 
+					if (bic.ToString().Contains(sT)) 
 					{
 						if (!UI_list2.Contains(bic))
 						{
