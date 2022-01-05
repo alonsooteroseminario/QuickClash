@@ -159,29 +159,6 @@ namespace QuickClash
 				}
 			}
 
-			string a1 = "Numero total UI_list1 = " + UI_list1.Count().ToString() + Environment.NewLine;
-			string a2 = "Numero total UI_list2 = " + UI_list2.Count().ToString() + Environment.NewLine;
-
-			string a3 = "Numero total UI_list3 = " + UI_list3.Count().ToString() + Environment.NewLine;
-			string a4 = "Numero total UI_list4 = " + UI_list4.Count().ToString() + Environment.NewLine;
-
-			foreach (BuiltInCategory e in UI_list1)
-			{
-				a1 = a1 + e.ToString() + " : " + Environment.NewLine;
-			}
-			foreach (BuiltInCategory e in UI_list2)
-			{
-				a2 = a2 + e.ToString() + " : " + Environment.NewLine;
-			}
-			foreach (BuiltInCategory e in UI_list3)
-			{
-				a3 = a3 + e.ToString() + " : " + Environment.NewLine;
-			}
-			foreach (BuiltInCategory e in UI_list4)
-			{
-				a4 = a4 + e.ToString() + " : " + Environment.NewLine;
-			}
-
 			if (checkBox_1s && !checkBox_3s) // TRUE Solo Vista Activa
 			{
 				Intersect.MultipleElementsToMultipleCategory_UI(commandData, UI_list1, UI_list3);

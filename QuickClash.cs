@@ -30,7 +30,7 @@ namespace QuickClash
 
 			Intersect.MultipleFamilyInstanceToMultipleFamilyInstances_BBox(commandData);
 
-			SetClashGridLocation.Do(commandData);
+            SetClashGridLocation.DoAllDocument(commandData);
 
 			SetIDValue_ActiveView.Do(commandData);
 
