@@ -1,5 +1,4 @@
-﻿using Autodesk.Revit.ApplicationServices;
-using Autodesk.Revit.DB;
+﻿using Autodesk.Revit.DB;
 using Autodesk.Revit.DB.Electrical;
 using Autodesk.Revit.DB.Mechanical;
 using Autodesk.Revit.DB.Plumbing;
@@ -8,7 +7,7 @@ using System.Collections.Generic;
 
 namespace QuickClash
 {
-    public static class GetAllNOClashElements_OnlyActiveView
+    public static class GetAllClashElements_OnlyActiveView
     {
         public static List<Element> Do(ExternalCommandData commandData)
         {
@@ -26,13 +25,11 @@ namespace QuickClash
                 LogicalAndFilter MEInstancesFilter = new LogicalAndFilter(familyFilter, MECategoryfilter);
                 FilteredElementCollector MEcoll = new FilteredElementCollector(doc, activeView.Id);
                 IList<Element> mechanicalequipment = MEcoll.WherePasses(MEInstancesFilter).ToElements();
-
                 foreach (Element elem in mechanicalequipment)
                 {
                     if (elem.LookupParameter("Clash").AsString() == "YES")
                     {
                         clash.Add(elem);
-
                     }
                     else
                     {
@@ -113,7 +110,7 @@ namespace QuickClash
                     clash_no.Add(elem);
                 }
             }
-            return clash_no;
+            return clash;
         }
     }
 }

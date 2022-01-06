@@ -62,10 +62,13 @@
     <Compile Include="ClashComments.cs" />
     <Compile Include="ClashManage.cs" />
     <Compile Include="CleanClash.cs" />
+    <Compile Include="Create\3DClashSectionBoxView.cs" />
     <Compile Include="Create\3DClashSectionBoxView_ZONE.cs" />
+    <Compile Include="Create\ClashFilterMultipleElementsInMultipleViews_UI.cs" />
     <Compile Include="Create\ClashFilterMultipleElementsInView_UI.cs" />
     <Compile Include="Create\3DClashSectionBoxView_ELEMENT.cs" />
     <Compile Include="Create\3DClashSectionBoxView_LEVELS.cs" />
+    <Compile Include="Create\ClashSOLVEDFilterMultipleElementsInMultipleViews_UI.cs" />
     <Compile Include="Create\ClashSOLVEDFilterMultipleElementsInView_UI.cs" />
     <Compile Include="Create\ClashSOLVEDFilterMultipleElementsInView.cs" />
     <Compile Include="Create\ClashSchedules.cs" />
@@ -88,6 +91,8 @@
     <Compile Include="Form3.Designer.cs">
       <DependentUpon>Form3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Get\GetAllClashElements_OnlyActiveView.cs" />
+    <Compile Include="Get\GetIntersections.cs" />
     <Compile Include="Get\GetAllNOClashElements_OnlyActiveView.cs" />
     <Compile Include="Intersect\Intersect.cs" />
     <Compile Include="QuickClash.cs" />

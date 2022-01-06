@@ -3,11 +3,9 @@ using Autodesk.Revit.ApplicationServices;
 using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
-using Autodesk.Revit.UI.Selection;
 using QuickClash.Create;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 
 #endregion
@@ -64,7 +62,7 @@ namespace QuickClash
                     }
                     else//false
                     {
-                        ClashParameters.CreateWhenSharedParameter(commandData, true);                    
+                        ClashParameters.CreateWhenSharedParameter(commandData, true);
                     }
                 }
                 else // no existe group parameter
@@ -88,7 +86,7 @@ namespace QuickClash
                 #endregion
 
                 return Result.Succeeded;
-            } 
+            }
             catch (Exception e)
             {
                 TaskDialog.Show("Error", e.Message.ToString());

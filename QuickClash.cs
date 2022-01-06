@@ -1,15 +1,7 @@
-﻿using Autodesk.Revit.ApplicationServices;
-using Autodesk.Revit.Attributes;
+﻿using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
-using Autodesk.Revit.DB.Electrical;
-using Autodesk.Revit.DB.Mechanical;
-using Autodesk.Revit.DB.Plumbing;
 using Autodesk.Revit.UI;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QuickClash
 {
@@ -24,15 +16,15 @@ namespace QuickClash
 
             SetNoValueClashParameter.Do(commandData); // Vista Activa , "Clash" y "Clash Grid Location" = " " vacio.
 
-			Intersect.MultipleElementsToMultipleCategory(commandData);
+            Intersect.MultipleElementsToMultipleCategory(commandData);
 
-			Intersect.MultipleElementsToMultipleFamilyInstances(commandData);// Vista Activa
+            Intersect.MultipleElementsToMultipleFamilyInstances(commandData);// Vista Activa
 
-			Intersect.MultipleFamilyInstanceToMultipleFamilyInstances_BBox(commandData);
+            Intersect.MultipleFamilyInstanceToMultipleFamilyInstances_BBox(commandData);
 
             SetClashGridLocation.DoAllDocument(commandData);
 
-			SetIDValue_ActiveView.Do(commandData);
+            SetIDValue_ActiveView.Do(commandData);
 
             List<Element> iclash_yes = GetAllNOClashElements_OnlyActiveView.Do(commandData);// Vista Activa
 
@@ -46,5 +38,5 @@ namespace QuickClash
             return Result.Succeeded;
         }
 
-	}
+    }
 }
