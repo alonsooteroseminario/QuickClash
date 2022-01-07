@@ -94,7 +94,7 @@ namespace QuickClash
             List<BuiltInCategory> UI_list4 = new List<BuiltInCategory>(); // Family Instance
 
             // Elements
-            List<BuiltInCategory> bics = Lists.BuiltCategories(false);
+            List<BuiltInCategory> bics = GetLists.BuiltCategories(false);
 
             foreach (BuiltInCategory bic in bics)
             {
@@ -123,7 +123,7 @@ namespace QuickClash
             }
 
             // Family Instance
-            List<BuiltInCategory> bics_finst = Lists.BuiltCategories(true);
+            List<BuiltInCategory> bics_finst = GetLists.BuiltCategories(true);
 
             foreach (BuiltInCategory bic in bics_finst)
             {

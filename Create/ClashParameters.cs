@@ -16,7 +16,7 @@ namespace QuickClash.Create
 
             if (exists)
             {
-                List<BuiltInCategory> bics = Lists.BuiltCategories(false);
+                List<BuiltInCategory> bics = GetLists.BuiltCategories(false);
                 CategorySet categories = app.Create.NewCategorySet();
                 foreach (BuiltInCategory bic in bics)
                 {
@@ -25,7 +25,7 @@ namespace QuickClash.Create
                 }
                 DefinitionFile myDefinitionFile = app.OpenSharedParameterFile();
                 DefinitionGroup myGroup = myDefinitionFile.Groups.get_Item("ClashParameters");
-                foreach (var param in Lists.Params())
+                foreach (var param in GetLists.Params())
                 {
                     Definition myDefinition_ProductDate = myGroup.Definitions.get_Item(param);
                     InstanceBinding instanceBinding = app.Create.NewInstanceBinding(categories);
@@ -39,9 +39,9 @@ namespace QuickClash.Create
             }
             else
             {
-                List<string> listParam = Lists.Params();
+                List<string> listParam = GetLists.Params();
                 CategorySet categories = app.Create.NewCategorySet();
-                List<BuiltInCategory> bics = Lists.BuiltCategories(false);
+                List<BuiltInCategory> bics = GetLists.BuiltCategories(false);
                 foreach (BuiltInCategory bic in bics)
                 {
                     Category MECat = doc.Settings.Categories.get_Item(bic);

@@ -23,7 +23,7 @@ namespace QuickClash
             cats.Add(new ElementId(BuiltInCategory.OST_CableTray));
             cats.Add(new ElementId(BuiltInCategory.OST_FlexDuctCurves));
             cats.Add(new ElementId(BuiltInCategory.OST_FlexPipeCurves));
-            List<BuiltInCategory> bics_familyIns = Lists.BuiltCategories(true);
+            List<BuiltInCategory> bics_familyIns = GetLists.BuiltCategories(true);
             foreach (BuiltInCategory bic in bics_familyIns)
             {
                 cats.Add(new ElementId(bic));

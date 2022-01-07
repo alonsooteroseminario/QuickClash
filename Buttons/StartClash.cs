@@ -42,7 +42,7 @@ namespace QuickClash
                     defGroups.Add(dg);
                 }
 
-                IList<Element> ducts = Get.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_DuctCurves, "ducts");
+                IList<Element> ducts = GetElements.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_DuctCurves, "ducts");
                 Element e = ducts.First(); // primer ducto
                 Parameter param = e.LookupParameter("Clash"); // buscamos el parametro "Clash" con el elemento e
                 List<string> list_dg = new List<string>();

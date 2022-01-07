@@ -59,9 +59,9 @@
   <ItemGroup>
     <Compile Include="App.cs" />
     <Compile Include="Check\CheckClashSolved.cs" />
-    <Compile Include="ClashComments.cs" />
-    <Compile Include="ClashManage.cs" />
-    <Compile Include="CleanClash.cs" />
+    <Compile Include="Buttons\ClashComments.cs" />
+    <Compile Include="Buttons\ClashManage.cs" />
+    <Compile Include="Buttons\CleanClash.cs" />
     <Compile Include="Create\3DClashSectionBoxView.cs" />
     <Compile Include="Create\3DClashSectionBoxView_ZONE.cs" />
     <Compile Include="Create\ClashFilterMultipleElementsInMultipleViews_UI.cs" />
@@ -73,41 +73,41 @@
     <Compile Include="Create\ClashSOLVEDFilterMultipleElementsInView.cs" />
     <Compile Include="Create\ClashSchedules.cs" />
     <Compile Include="Create\ClashFilterMultipleElementsInView.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="Forms\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
+    <Compile Include="Forms\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form2.cs">
+    <Compile Include="Forms\Form2.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form2.Designer.cs">
+    <Compile Include="Forms\Form2.Designer.cs">
       <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form3.cs">
+    <Compile Include="Forms\Form3.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form3.Designer.cs">
+    <Compile Include="Forms\Form3.Designer.cs">
       <DependentUpon>Form3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Get\GetElements.cs" />
     <Compile Include="Get\GetAllClashElements_OnlyActiveView.cs" />
     <Compile Include="Get\GetIntersections.cs" />
     <Compile Include="Get\GetAllNOClashElements_OnlyActiveView.cs" />
     <Compile Include="Intersect\Intersect.cs" />
-    <Compile Include="QuickClash.cs" />
-    <Compile Include="SectionBox.cs" />
+    <Compile Include="Buttons\QuickClash.cs" />
+    <Compile Include="Buttons\SectionBox.cs" />
     <Compile Include="Set\SetClashGridLocation.cs" />
     <Compile Include="Set\SetIDValue_ActiveView.cs" />
     <Compile Include="Set\SetNoValueClashParameter.cs" />
     <Compile Include="Set\SetNoValueAllParameters.cs" />
     <Compile Include="Set\SetParameter.cs" />
-    <Compile Include="Elements\Get.cs" />
     <Compile Include="Set\SetEmptyYesNoParameters.cs" />
     <Compile Include="Set\SetIDValue.cs" />
     <Compile Include="Create\ClashParameters.cs" />
-    <Compile Include="Lists.cs" />
-    <Compile Include="StartClash.cs" />
+    <Compile Include="Get\GetLists.cs" />
+    <Compile Include="Buttons\StartClash.cs" />
     <Compile Include="Create\3DView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -117,13 +117,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Form1.resx">
+    <EmbeddedResource Include="Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form2.resx">
+    <EmbeddedResource Include="Forms\Form2.resx">
       <DependentUpon>Form2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form3.resx">
+    <EmbeddedResource Include="Forms\Form3.resx">
       <DependentUpon>Form3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace QuickClash
 {
-    public static class Get
+    public static class GetElements
     {
         /// <summary>
         /// 

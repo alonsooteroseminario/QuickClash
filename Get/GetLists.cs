@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace QuickClash
 {
-    public static class Lists
+    public static class GetLists
     {
         /// <summary>
         /// Devuelve la lista de valores del diccionario ingresado como parámetro, 'false' para Elementos y 'true' para Family Instance 

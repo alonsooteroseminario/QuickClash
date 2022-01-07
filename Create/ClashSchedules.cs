@@ -15,7 +15,7 @@ namespace QuickClash.Create
             Document doc = uidoc.Document;
 
 
-            List<BuiltInCategory> bics = Lists.BuiltCategories(true);
+            List<BuiltInCategory> bics = GetLists.BuiltCategories(true);
 
             string msg = "";
             string msg3 = "";

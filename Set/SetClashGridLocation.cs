@@ -23,12 +23,12 @@ namespace QuickClash
             IList<ElementId> clashID_elements = new List<ElementId>();
             IList<ElementId> clashID_familyinstance = new List<ElementId>();
 
-            IList<Element> ducts = Get.ElementsByBuiltCategoryActiveView(commandData, BuiltInCategory.OST_DuctCurves, "ducts");
-            IList<Element> pipes = Get.ElementsByBuiltCategoryActiveView(commandData, BuiltInCategory.OST_PipeCurves, "pipes");
-            IList<Element> conduits = Get.ElementsByBuiltCategoryActiveView(commandData, BuiltInCategory.OST_Conduit, "conduits");
-            IList<Element> cabletrays = Get.ElementsByBuiltCategoryActiveView(commandData, BuiltInCategory.OST_CableTray, "cabletrays");
-            IList<Element> flexducts = Get.ElementsByBuiltCategoryActiveView(commandData, BuiltInCategory.OST_FlexDuctCurves, "flexducts");
-            IList<Element> flexpipes = Get.ElementsByBuiltCategoryActiveView(commandData, BuiltInCategory.OST_FlexPipeCurves, "flexpipes");
+            IList<Element> ducts = GetElements.ElementsByBuiltCategoryActiveView(commandData, BuiltInCategory.OST_DuctCurves, "ducts");
+            IList<Element> pipes = GetElements.ElementsByBuiltCategoryActiveView(commandData, BuiltInCategory.OST_PipeCurves, "pipes");
+            IList<Element> conduits = GetElements.ElementsByBuiltCategoryActiveView(commandData, BuiltInCategory.OST_Conduit, "conduits");
+            IList<Element> cabletrays = GetElements.ElementsByBuiltCategoryActiveView(commandData, BuiltInCategory.OST_CableTray, "cabletrays");
+            IList<Element> flexducts = GetElements.ElementsByBuiltCategoryActiveView(commandData, BuiltInCategory.OST_FlexDuctCurves, "flexducts");
+            IList<Element> flexpipes = GetElements.ElementsByBuiltCategoryActiveView(commandData, BuiltInCategory.OST_FlexPipeCurves, "flexpipes");
 
             // ELEMENTS
 
@@ -105,10 +105,10 @@ namespace QuickClash
 
             // FAMILY INSTANCES
 
-            IList<BuiltInCategory> bics_familyIns = Lists.BuiltCategories(true);
+            IList<BuiltInCategory> bics_familyIns = GetLists.BuiltCategories(true);
             foreach (BuiltInCategory bic in bics_familyIns)
             {
-                IList<Element> familyInstance = Get.ElementsByBuiltCategoryActiveView(commandData, bic, "family_instances_all");
+                IList<Element> familyInstance = GetElements.ElementsByBuiltCategoryActiveView(commandData, bic, "family_instances_all");
 
                 foreach (Element elem in familyInstance)
                 {
@@ -228,12 +228,12 @@ namespace QuickClash
             IList<ElementId> clashID_elements = new List<ElementId>();
             IList<ElementId> clashID_familyinstance = new List<ElementId>();
 
-            IList<Element> ducts = Get.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_DuctCurves, "ducts");
-            IList<Element> pipes = Get.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_PipeCurves, "pipes");
-            IList<Element> conduits = Get.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_Conduit, "conduits");
-            IList<Element> cabletrays = Get.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_CableTray, "cabletrays");
-            IList<Element> flexducts = Get.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_FlexDuctCurves, "flexducts");
-            IList<Element> flexpipes = Get.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_FlexPipeCurves, "flexpipes");
+            IList<Element> ducts = GetElements.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_DuctCurves, "ducts");
+            IList<Element> pipes = GetElements.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_PipeCurves, "pipes");
+            IList<Element> conduits = GetElements.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_Conduit, "conduits");
+            IList<Element> cabletrays = GetElements.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_CableTray, "cabletrays");
+            IList<Element> flexducts = GetElements.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_FlexDuctCurves, "flexducts");
+            IList<Element> flexpipes = GetElements.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_FlexPipeCurves, "flexpipes");
 
             // ELEMENTS
 
@@ -310,10 +310,10 @@ namespace QuickClash
 
             // FAMILY INSTANCES
 
-            IList<BuiltInCategory> bics_familyIns = Lists.BuiltCategories(true);
+            IList<BuiltInCategory> bics_familyIns = GetLists.BuiltCategories(true);
             foreach (BuiltInCategory bic in bics_familyIns)
             {
-                IList<Element> familyInstance = Get.ElementsByBuiltCategory(commandData, bic, "family_instances_all");
+                IList<Element> familyInstance = GetElements.ElementsByBuiltCategory(commandData, bic, "family_instances_all");
 
                 foreach (Element elem in familyInstance)
                 {
