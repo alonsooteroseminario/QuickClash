@@ -149,6 +149,64 @@ namespace QuickClash.Create
                     //	tsd.InsertColumn(0);
                     //	tran.Commit();
                     //}
+                    
+                    
+                    //		public void CreateSchedule()
+                    //		{
+                    //			
+                    //			UIDocument uidoc = this.ActiveUIDocument;
+                    //		 	Document doc = this.ActiveUIDocument.Document;
+                    //		 	
+                    //		 	Transaction t = new Transaction(doc, "Create Schedule");
+                    //		 	t.Start();
+                    //		 	
+                    //		 	ElementId GenericModelId = new ElementId(BuiltInCategory.OST_GenericModel);
+                    //		 	ViewSchedule schedule = ViewSchedule.CreateSchedule(doc, GenericModelId);
+                    //
+                    //		 	string nombreGenericModel = "SquareX";
+                    //		 	schedule.Name = "TRIMBLE POINTS SCHEDULE - " + nombreGenericModel;
+                    //		 	
+                    //		 	List<string> listFields = new List<string>(){
+                    //				"Field Point Family Name Shared",
+                    //				"Field Point Annotation Text Shared",
+                    //				"Field Point Type Shared",
+                    //				"Field Point Group Shared",
+                    //				"Field Point Point Number"
+                    //		 	};
+                    //		 	List<ScheduleFieldId> fieldIds = new List<ScheduleFieldId>();
+                    //		 	
+                    //		 	foreach (SchedulableField sf in schedule.Definition.GetSchedulableFields()) 
+                    //		 	{
+                    //
+                    //				foreach (string field in listFields) {
+                    //		 			
+                    //					if(sf.GetName(doc).ToString() == field)
+                    //			 		{
+                    //			 			ScheduleField scheduleField = schedule.Definition.AddField(sf);
+                    //			 			fieldIds.Add(scheduleField.FieldId);
+                    //			 		}
+                    //				
+                    //				}
+                    //		 	}
+                    //		 	
+                    //		 	ScheduleField foundField = schedule.Definition.GetField(fieldIds[1]);
+                    //		 	
+                    //		 	t.Commit();
+                    //		 	
+                    //		 	using (Transaction ta = new Transaction(doc, "Add filter"))
+                    //            {
+                    //	            ta.Start();
+                    //	            ScheduleFilter filter = new ScheduleFilter(foundField.FieldId, ScheduleFilterType.Contains, nombreGenericModel);
+                    //	            schedule.Definition.AddFilter(filter);
+                    //	            ta.Commit();
+                    //            }
+                    //		
+                    //		 	uidoc.ActiveView = schedule;
+                    //		}
+                    
+                    
+                    
+                    
                 }
             }
             TaskDialog.Show("Creation CLASH Parameters", msg + "Se crearon los siguientes Clash Parameters: \n\n" + msg3 + Environment.NewLine);
