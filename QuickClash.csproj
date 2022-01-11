@@ -65,9 +65,9 @@
     <Compile Include="Create\3DClashSectionBoxView.cs" />
     <Compile Include="Create\3DClashSectionBoxView_ZONE.cs" />
     <Compile Include="Create\ClashFilterMultipleElementsInMultipleViews_UI.cs" />
-    <Compile Include="Create\ClashFilterMultipleElementsInView_UI.cs" />
     <Compile Include="Create\3DClashSectionBoxView_ELEMENT.cs" />
     <Compile Include="Create\3DClashSectionBoxView_LEVELS.cs" />
+    <Compile Include="Create\ClashFilterMultipleElementsInView_UI.cs" />
     <Compile Include="Create\ClashSOLVEDFilterMultipleElementsInMultipleViews_UI.cs" />
     <Compile Include="Create\ClashSOLVEDFilterMultipleElementsInView_UI.cs" />
     <Compile Include="Create\ClashSOLVEDFilterMultipleElementsInView.cs" />
@@ -99,7 +99,6 @@
     <Compile Include="Buttons\QuickClash.cs" />
     <Compile Include="Buttons\SectionBox.cs" />
     <Compile Include="Set\SetClashGridLocation.cs" />
-    <Compile Include="Set\SetIDValue_ActiveView.cs" />
     <Compile Include="Set\SetNoValueClashParameter.cs" />
     <Compile Include="Set\SetNoValueAllParameters.cs" />
     <Compile Include="Set\SetParameter.cs" />

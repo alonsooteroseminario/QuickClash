@@ -14,31 +14,23 @@ namespace QuickClash
             UIApplication uiapp = commandData.Application;
             UIDocument uidoc = uiapp.ActiveUIDocument;
             Document doc = uidoc.Document;
-
             FilteredElementCollector elementss = new FilteredElementCollector(doc);
             FillPatternElement solidFillPattern = elementss.OfClass(typeof(FillPatternElement)).Cast<FillPatternElement>().First(a => a.GetFillPattern().IsSolidFill);
-
-            #region cats
             List<ElementId> cats = new List<ElementId>();
-
             cats.Add(new ElementId(BuiltInCategory.OST_DuctCurves));
             cats.Add(new ElementId(BuiltInCategory.OST_PipeCurves));
             cats.Add(new ElementId(BuiltInCategory.OST_Conduit));
             cats.Add(new ElementId(BuiltInCategory.OST_CableTray));
             cats.Add(new ElementId(BuiltInCategory.OST_FlexDuctCurves));
             cats.Add(new ElementId(BuiltInCategory.OST_FlexPipeCurves));
-
             List<BuiltInCategory> bics_familyIns = GetLists.BuiltCategories(true);
             foreach (BuiltInCategory bic in bics_familyIns)
             {
                 cats.Add(new ElementId(bic));
             }
-            #endregion
-
             List<ParameterFilterElement> lista_ParameterFilterElement1 = new List<ParameterFilterElement>();
             List<ParameterFilterElement> lista_ParameterFilterElement2 = new List<ParameterFilterElement>();
             List<ParameterFilterElement> lista_ParameterFilterElement_no = new List<ParameterFilterElement>();
-
             using (Transaction ta = new Transaction(doc, "create clash filter view"))
             {
                 ta.Start();
@@ -87,7 +79,6 @@ namespace QuickClash
                 if (lista_ParameterFilterElement_no.Count() == 0)
                 {
                     ParameterFilterElement parameterFilterElement_no = ParameterFilterElement.Create(doc, "CLASH NO FILTER", cats, elementFilterList_no.First());
-
                     lista_ParameterFilterElement_no.Add(parameterFilterElement_no);
                 }
                 ParameterFilterElement aa = lista_ParameterFilterElement1.First();

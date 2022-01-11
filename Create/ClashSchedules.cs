@@ -14,11 +14,7 @@ namespace QuickClash.Create
             UIDocument uidoc = uiapp.ActiveUIDocument;
             Document doc = uidoc.Document;
 
-
             List<BuiltInCategory> bics = GetLists.BuiltCategories(true);
-
-            string msg = "";
-            string msg3 = "";
 
             foreach (BuiltInCategory bic in bics)
             {
@@ -30,8 +26,11 @@ namespace QuickClash.Create
                     doc.Regenerate();
                     ScheduleDefinition definition = clashSchedule.Definition;
                     IList<SchedulableField> schedulableFields = definition.GetSchedulableFields(); // [a,b,c,s,d,f,....]
+                    clashSchedule.Name = "CLASH " + bic.ToString() + " SCHEDULE";
+
+
                     List<SchedulableField> listashparam = new List<SchedulableField>();
-                    List<ScheduleFieldId> clashId = new List<ScheduleFieldId>();
+                    List<ScheduleFieldId> fieldIds = new List<ScheduleFieldId>();
 
                     foreach (SchedulableField element in schedulableFields)
                     {
@@ -43,84 +42,25 @@ namespace QuickClash.Create
 
                     double nro_items_listahpram = listashparam.Count();
 
-                    //for (int i = 0; i < 1; i++)
-                    //{
-                    //	if (listashparam[i].GetName(doc).ToString() == "Clash")
-                    //	{
-                    //		clashSchedule.Definition.AddField(listashparam[i]);
-                    //		ScheduleField field = clashSchedule.Definition.GetField(0);
-                    //		ScheduleFieldId fielId = clashSchedule.Definition.GetFieldId(0);
-                    //		clashId.Add(fielId);
-                    //	}
-                    //	if (listashparam[i + 1].GetName(doc).ToString() == "Clash Category")
-                    //	{
-                    //		clashSchedule.Definition.AddField(listashparam[i + 1]);
-                    //		//ScheduleField field = clashSchedule.Definition.GetField(0);
-                    //		ScheduleFieldId fielId2 = clashSchedule.Definition.GetFieldId(0);
-                    //		clashId.Add(fielId2);
-                    //	}
-                    //	if (listashparam[i + 2].GetName(doc).ToString() == "Clash Comments")
-                    //	{
-                    //		clashSchedule.Definition.AddField(listashparam[i + 2]);
-                    //		//ScheduleField field = clashSchedule.Definition.GetField(0);
-                    //		ScheduleFieldId fielId3 = clashSchedule.Definition.GetFieldId(0);
-                    //		clashId.Add(fielId3);
-                    //	}
-                    //	if (listashparam[i + 3].GetName(doc).ToString() == "Clash Grid Location")
-                    //	{
-                    //		clashSchedule.Definition.AddField(listashparam[i + 3]);
-                    //		//ScheduleField field = clashSchedule.Definition.GetField(0);
-                    //		ScheduleFieldId fielId3 = clashSchedule.Definition.GetFieldId(0);
-                    //		clashId.Add(fielId3);
-                    //	}
-                    //	if (listashparam[i + 4].GetName(doc).ToString() == "Clash Solved")
-                    //	{
-                    //		clashSchedule.Definition.AddField(listashparam[i + 4]);
-                    //		//ScheduleField field = clashSchedule.Definition.GetField(0);
-                    //		ScheduleFieldId fielId4 = clashSchedule.Definition.GetFieldId(0);
-                    //		clashId.Add(fielId4);
-                    //	}
-                    //	if (listashparam[i + 5].GetName(doc).ToString() == "Done")
-                    //	{
-                    //		clashSchedule.Definition.AddField(listashparam[i + 5]);
-                    //		//ScheduleField field = clashSchedule.Definition.GetField(0);
-                    //		ScheduleFieldId fielId5 = clashSchedule.Definition.GetFieldId(0);
-                    //		clashId.Add(fielId5);
-                    //	}
-                    //	if (listashparam[i + 6].GetName(doc).ToString() == "ID Element")
-                    //	{
-                    //		clashSchedule.Definition.AddField(listashparam[i + 6]);
-                    //		//ScheduleField field = clashSchedule.Definition.GetField(0);
-                    //		ScheduleFieldId fielId6 = clashSchedule.Definition.GetFieldId(0);
-                    //		clashId.Add(fielId6);
-                    //	}
-                    //	if (listashparam[i + 7].GetName(doc).ToString() == "Percent Done")
-                    //	{
-                    //		clashSchedule.Definition.AddField(listashparam[i + 7]);
-                    //		//ScheduleField field = clashSchedule.Definition.GetField(0);
-                    //		ScheduleFieldId fielId7 = clashSchedule.Definition.GetFieldId(0);
-                    //		clashId.Add(fielId7);
-                    //	}
-                    //	if (listashparam[i + 8].GetName(doc).ToString() == "Zone")
-                    //	{
-                    //		clashSchedule.Definition.AddField(listashparam[i + 8]);
-                    //		//ScheduleField field = clashSchedule.Definition.GetField(0);
-                    //		ScheduleFieldId fielId8 = clashSchedule.Definition.GetFieldId(0);
-                    //		clashId.Add(fielId8);
-                    //	}
-                    //	msg3 = listashparam[i].GetName(doc).ToString() + Environment.NewLine
-                    //		+ listashparam[i + 1].GetName(doc).ToString() + Environment.NewLine
-                    //		+ listashparam[i + 2].GetName(doc).ToString() + Environment.NewLine
-                    //		+ listashparam[i + 3].GetName(doc).ToString() + Environment.NewLine
-                    //		+ listashparam[i + 4].GetName(doc).ToString() + Environment.NewLine
-                    //		+ listashparam[i + 5].GetName(doc).ToString() + Environment.NewLine
-                    //		+ listashparam[i + 6].GetName(doc).ToString() + Environment.NewLine
-                    //		+ listashparam[i + 7].GetName(doc).ToString() + Environment.NewLine
-                    //		+ listashparam[i + 8].GetName(doc).ToString() + Environment.NewLine;
-                    //}
+                    List<string> list_params = new List<string>()
+                    {
+                        "Clash", "Clash Category", "Clash Comments", "Clash Grid Location", "Clash Solved", "Done", "ID Element", "Done", "Percent Done", "Zone"
+                    };
 
+                    foreach (SchedulableField item in listashparam)
+                    {
+                        foreach (string param in list_params)
+                        {
+                            if (item.GetName(doc).ToString() == param)
+                            {
+                                ScheduleField scheduleField = clashSchedule.Definition.AddField(item);
+                                fieldIds.Add(scheduleField.FieldId);
+                            }
+                        }
+                    }
 
-                    //ScheduleField foundField = clashSchedule.Definition.GetField(clashId.FirstOrDefault());
+                    // "Clash" parameter equal "YES"
+                    ScheduleField foundField = clashSchedule.Definition.GetField(fieldIds.FirstOrDefault());
 
                     if (null != clashSchedule)
                     {
@@ -131,28 +71,16 @@ namespace QuickClash.Create
                         transaction.RollBack();
                     }
 
-                    //using (Transaction t = new Transaction(doc, "Add filter"))
-                    //{
-                    //	t.Start();
-                    //	ScheduleFilter filter = new ScheduleFilter(foundField.FieldId, ScheduleFilterType.Equal, "YES");
-                    //	clashSchedule.Definition.AddFilter(filter);
-                    //	t.Commit();
-                    //}
-                    //using (Transaction tran = new Transaction(doc, "Cambiar nombre"))
-                    //{
-                    //	tran.Start();
-                    //	TableData td = clashSchedule.GetTableData(); // get viewschedule table data
-                    //	TableSectionData tsd = td.GetSectionData(SectionType.Header); // get header section data
-                    //	string text = tsd.GetCellText(0, 0);
-                    //	tsd.SetCellText(0, 0, "CLASH " + bic.ToString() + " SCHEDULE");
-                    //	clashSchedule.Name = "CLASH " + bic.ToString() + " SCHEDULE";
-                    //	tsd.InsertColumn(0);
-                    //	tran.Commit();
-                    //}
+                    using (Transaction ta = new Transaction(doc, "Add filter"))
+                    {
+                        ta.Start();
+                        ScheduleFilter filter = new ScheduleFilter(foundField.FieldId, ScheduleFilterType.Contains, "YES");
+                        clashSchedule.Definition.AddFilter(filter);
+                        ta.Commit();
+                    }
+
                 }
             }
-            TaskDialog.Show("Creation CLASH Parameters", msg + "Se crearon los siguientes Clash Parameters: \n\n" + msg3 + Environment.NewLine);
-
         }
     }
 }

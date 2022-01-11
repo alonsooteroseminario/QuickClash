@@ -7,10 +7,10 @@ namespace QuickClash
     {
         public static Dictionary<string, XYZ> Do(Document _doc)
         {
-            string coordinate = null;
-            string coordA = null;
-            string coordB = null;
-            string coordC = null;
+            string coordinate;
+            string coordA;
+            string coordB;
+            string coordC;
             Dictionary<string, XYZ> intersectionPoints = new Dictionary<string, XYZ>();
 
 
@@ -35,9 +35,8 @@ namespace QuickClash
                     coordB = g2.Name;
                     Curve c2 = g2.Curve;
 
-                    IntersectionResultArray results;
 
-                    SetComparisonResult result = c.Intersect(c2, out results);
+                    SetComparisonResult result = c.Intersect(c2, out IntersectionResultArray results);
 
                     if (result != SetComparisonResult.Overlap)
                     { }

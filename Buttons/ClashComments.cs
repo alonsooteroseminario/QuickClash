@@ -25,9 +25,9 @@ namespace QuickClash
                 ElementCategoryFilter MECategoryfilter = new ElementCategoryFilter(bic);
                 LogicalAndFilter MEInstancesFilter = new LogicalAndFilter(familyFilter, MECategoryfilter);
                 FilteredElementCollector MEcoll = new FilteredElementCollector(doc);
-                IList<Element> mechanicalequipment = MEcoll.WherePasses(MEInstancesFilter).ToElements();
+                IList<Element> familyInstance = MEcoll.WherePasses(MEInstancesFilter).ToElements();
 
-                foreach (Element elem in mechanicalequipment)
+                foreach (Element elem in familyInstance)
                 {
                     if (elem.LookupParameter("Clash").AsString() == "YES")
                     {
@@ -45,70 +45,27 @@ namespace QuickClash
             IList<Element> cabletrays = GetElements.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_CableTray, "cabletrays");
             IList<Element> flexducts = GetElements.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_FlexDuctCurves, "flexducts");
             IList<Element> flexpipes = GetElements.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_FlexPipeCurves, "flexpipes");
-            foreach (Element elem in ducts)
+            List<IList<Element>> list_elements = new List<IList<Element>>
             {
-                if (elem.LookupParameter("Clash").AsString() == "YES")
-                {
-                    clash.Add(elem);
-                }
-                else
-                {
-                    clash_no.Add(elem);
-                }
-            }
-            foreach (Element elem in pipes)
+                ducts,
+                pipes,
+                conduits,
+                cabletrays,
+                flexducts,
+                flexpipes
+            };
+            foreach (IList<Element> elems in list_elements)
             {
-                if (elem.LookupParameter("Clash").AsString() == "YES")
+                foreach (Element elem in elems)
                 {
-                    clash.Add(elem);
-                }
-                else
-                {
-                    clash_no.Add(elem);
-                }
-            }
-            foreach (Element elem in conduits)
-            {
-                if (elem.LookupParameter("Clash").AsString() == "YES")
-                {
-                    clash.Add(elem);
-                }
-                else
-                {
-                    clash_no.Add(elem);
-                }
-            }
-            foreach (Element elem in cabletrays)
-            {
-                if (elem.LookupParameter("Clash").AsString() == "YES")
-                {
-                    clash.Add(elem);
-                }
-                else
-                {
-                    clash_no.Add(elem);
-                }
-            }
-            foreach (Element elem in flexducts)
-            {
-                if (elem.LookupParameter("Clash").AsString() == "YES")
-                {
-                    clash.Add(elem);
-                }
-                else
-                {
-                    clash_no.Add(elem);
-                }
-            }
-            foreach (Element elem in flexpipes)
-            {
-                if (elem.LookupParameter("Clash").AsString() == "YES")
-                {
-                    clash.Add(elem);
-                }
-                else
-                {
-                    clash_no.Add(elem);
+                    if (elem.LookupParameter("Clash").AsString() == "YES")
+                    {
+                        clash.Add(elem);
+                    }
+                    else
+                    {
+                        clash_no.Add(elem);
+                    }
                 }
             }
             using (var form = new Form1())

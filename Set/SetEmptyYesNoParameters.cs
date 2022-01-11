@@ -22,7 +22,7 @@ namespace QuickClash
             IList<Element> flexpipes = GetElements.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_FlexPipeCurves, "flexpipes");
 
 
-            IList<Element> mechanicalequipment = GetElements.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_MechanicalEquipment, "mechanicalequipment");
+            IList<Element> mechanicalequipment = GetElements.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_MechanicalEquipment, "family_instances_all");
             IList<Element> ducts_fittings = GetElements.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_DuctFitting, "family_instances_all");
             IList<Element> conduit_fittings = GetElements.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_ConduitFitting, "family_instances_all");
             IList<Element> pipe_fittings = GetElements.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_PipeFitting, "family_instances_all");

@@ -13,11 +13,11 @@ namespace QuickClash
     {
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
-            List<string> lista1 = new List<string>(); // seleccion "s" Element
-            List<string> lista2 = new List<string>(); // seleccion "s" Family Instance
+            List<string> lista1 = new List<string>();
+            List<string> lista2 = new List<string>();
 
-            List<string> lista3 = new List<string>(); // seleccion "s" Element
-            List<string> lista4 = new List<string>(); // seleccion "s" Family Instance
+            List<string> lista3 = new List<string>();
+            List<string> lista4 = new List<string>();
 
             List<bool> lista_checkBox_1 = new List<bool>();
             List<bool> lista_checkBox_3 = new List<bool>();
@@ -26,57 +26,52 @@ namespace QuickClash
             {
                 form.ShowDialog();
 
-                if (form.DialogResult == forms.DialogResult.Cancel) // Boton Cancel
+                if (form.DialogResult == forms.DialogResult.Cancel)
                 {
                     return Result.Cancelled;
                 }
-
-                if (form.DialogResult == forms.DialogResult.OK) // OK
+                if (form.DialogResult == forms.DialogResult.OK)
                 {
-                    bool checkBox_1 = form.checkBox_1; // solo vista activa
+                    bool checkBox_1 = form.checkBox_1; 
                     lista_checkBox_1.Add(checkBox_1);
 
-                    bool checkBox_3 = form.checkBox_3; // todo documento
+                    bool checkBox_3 = form.checkBox_3;
                     lista_checkBox_3.Add(checkBox_3);
 
                     foreach (string s in form.checkedItems1)
                     {
-                        //TaskDialog.Show("Selected", s);
                         if (s == "CableTray" || s == "Conduit" || s == "Duct" || s == "Pipe" || s == "FlexDuct" || s == "FlexPipe")
                         {
-                            lista1.Add(s); // Elements del grupo 1
+                            lista1.Add(s);
                         }
 
                     }
 
                     foreach (string s in form.checkedItems1)
                     {
-                        //TaskDialog.Show("Selected", s);
                         if (s == "CableTrayFitting" || s == "ConduitFitting" || s == "DuctFitting" || s == "DuctTerminal" || s == "ElectricalEquipment" ||
                             s == "ElectricalFixtures" || s == "LightingDevices" || s == "LightingFixtures" || s == "MechanicalEquipment" || s == "PipeFitting" ||
                             s == "PlumbingFixtures" || s == "SpecialityEquipment" || s == "Sprinklers")
                         {
-                            lista2.Add(s); // Family Instance dele grupo 1
+                            lista2.Add(s);
                         }
                     }
 
                     foreach (string s in form.checkedItems2)
                     {
-                        //TaskDialog.Show("Selected", s);
                         if (s == "CableTray" || s == "Conduit" || s == "Duct" || s == "Pipe" || s == "FlexDuct" || s == "FlexPipe")
                         {
-                            lista3.Add(s); // Elements del grupo 2
+                            lista3.Add(s);
                         }
 
                     }
                     foreach (string s in form.checkedItems2)
                     {
-                        //TaskDialog.Show("Selected", s);
                         if (s == "CableTrayFitting" || s == "ConduitFitting" || s == "DuctFitting" || s == "DuctTerminal" || s == "ElectricalEquipment" ||
                             s == "ElectricalFixtures" || s == "LightingDevices" || s == "LightingFixtures" || s == "MechanicalEquipment" || s == "PipeFitting" ||
                             s == "PlumbingFixtures" || s == "SpecialityEquipment" || s == "Sprinklers")
                         {
-                            lista4.Add(s); // Family Instance dele grupo 2
+                            lista4.Add(s);
                         }
                     }
 
@@ -87,13 +82,12 @@ namespace QuickClash
             bool checkBox_1s = lista_checkBox_1.First();
             bool checkBox_3s = lista_checkBox_3.First();
 
-            List<BuiltInCategory> UI_list1 = new List<BuiltInCategory>(); // Element	
-            List<BuiltInCategory> UI_list2 = new List<BuiltInCategory>(); // Family Instance
+            List<BuiltInCategory> UI_list1 = new List<BuiltInCategory>();	
+            List<BuiltInCategory> UI_list2 = new List<BuiltInCategory>();
 
-            List<BuiltInCategory> UI_list3 = new List<BuiltInCategory>(); // Element
-            List<BuiltInCategory> UI_list4 = new List<BuiltInCategory>(); // Family Instance
+            List<BuiltInCategory> UI_list3 = new List<BuiltInCategory>();
+            List<BuiltInCategory> UI_list4 = new List<BuiltInCategory>();
 
-            // Elements
             List<BuiltInCategory> bics = GetLists.BuiltCategories(false);
 
             foreach (BuiltInCategory bic in bics)
@@ -121,10 +115,7 @@ namespace QuickClash
                     }
                 }
             }
-
-            // Family Instance
             List<BuiltInCategory> bics_finst = GetLists.BuiltCategories(true);
-
             foreach (BuiltInCategory bic in bics_finst)
             {
                 foreach (string s in lista2)
@@ -150,25 +141,19 @@ namespace QuickClash
                     }
                 }
             }
-
-            if (checkBox_1s && !checkBox_3s) // TRUE Solo Vista Activa
+            if (checkBox_1s && !checkBox_3s)
             {
-                Intersect.MultipleElementsToMultipleCategory_UI(commandData, UI_list1, UI_list3);
-                Intersect.MultipleElementsToMultipleFamilyInstances_UI(commandData, UI_list1, UI_list4);
-                Intersect.MultipleFamilyInstanceToMultipleFamilyInstances_BBox_UI(commandData, UI_list2, UI_list4);
+                Intersect.MultipleElementsToMultipleCategory_UI(commandData, UI_list1, UI_list3, true);
+                Intersect.MultipleElementsToMultipleFamilyInstances_UI(commandData, UI_list1, UI_list4, true);
+                Intersect.MultipleFamilyInstanceToMultipleFamilyInstances_BBox_UI(commandData, UI_list2, UI_list4, true);
 
             }
-            else if (checkBox_3s && !checkBox_1s) // TRUE Todo documento
+            else if (checkBox_3s && !checkBox_1s)
             {
-                Intersect.MultipleElementsToMultipleCategory_UI_doc(commandData, UI_list1, UI_list3);
-                Intersect.MultipleElementsToMultipleFamilyInstances_UI_doc(commandData, UI_list1, UI_list4);
-                Intersect.MultipleFamilyInstanceToMultipleFamilyInstances_BBox_UI_doc(commandData, UI_list2, UI_list4);
+                Intersect.MultipleElementsToMultipleCategory_UI(commandData, UI_list1, UI_list3, false);
+                Intersect.MultipleElementsToMultipleFamilyInstances_UI(commandData, UI_list1, UI_list4, false);
+                Intersect.MultipleFamilyInstanceToMultipleFamilyInstances_BBox_UI(commandData, UI_list2, UI_list4, false);
             }
-            else
-            {
-
-            }
-
             return Result.Succeeded;
         }
         public Result OnStartup(UIControlledApplication application)

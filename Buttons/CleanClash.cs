@@ -23,70 +23,27 @@ namespace QuickClash
             IList<Element> flexpipes = GetElements.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_FlexPipeCurves, "flexpipes");
             IList<Element> clash = new List<Element>();
             IList<Element> clash_no = new List<Element>();
-            foreach (Element elem in ducts)
+            List<IList<Element>> list_elements = new List<IList<Element>>
             {
-                if (elem.LookupParameter("Clash").AsString() == "YES")
-                {
-                    clash.Add(elem);
-                }
-                else
-                {
-                    clash_no.Add(elem);
-                }
-            }
-            foreach (Element elem in pipes)
+                ducts,
+                pipes,
+                conduits,
+                cabletrays,
+                flexducts,
+                flexpipes
+            };
+            foreach (IList<Element> elems in list_elements)
             {
-                if (elem.LookupParameter("Clash").AsString() == "YES")
+                foreach (Element elem in elems)
                 {
-                    clash.Add(elem);
-                }
-                else
-                {
-                    clash_no.Add(elem);
-                }
-            }
-            foreach (Element elem in conduits)
-            {
-                if (elem.LookupParameter("Clash").AsString() == "YES")
-                {
-                    clash.Add(elem);
-                }
-                else
-                {
-                    clash_no.Add(elem);
-                }
-            }
-            foreach (Element elem in cabletrays)
-            {
-                if (elem.LookupParameter("Clash").AsString() == "YES")
-                {
-                    clash.Add(elem);
-                }
-                else
-                {
-                    clash_no.Add(elem);
-                }
-            }
-            foreach (Element elem in flexducts)
-            {
-                if (elem.LookupParameter("Clash").AsString() == "YES")
-                {
-                    clash.Add(elem);
-                }
-                else
-                {
-                    clash_no.Add(elem);
-                }
-            }
-            foreach (Element elem in flexpipes)
-            {
-                if (elem.LookupParameter("Clash").AsString() == "YES")
-                {
-                    clash.Add(elem);
-                }
-                else
-                {
-                    clash_no.Add(elem);
+                    if (elem.LookupParameter("Clash").AsString() == "YES")
+                    {
+                        clash.Add(elem);
+                    }
+                    else
+                    {
+                        clash_no.Add(elem);
+                    }
                 }
             }
             foreach (Element e in clash)
@@ -130,7 +87,6 @@ namespace QuickClash
                     t.Commit();
                 }
             }
-            // FAMILY INSTANCES
             List<BuiltInCategory> bics_familyIns = GetLists.BuiltCategories(true);
             IList<Element> familyInstance_clash = new List<Element>();
             IList<Element> familyInstance_clash_no = new List<Element>();
@@ -140,9 +96,9 @@ namespace QuickClash
                 ElementCategoryFilter DUFCategoryfilter = new ElementCategoryFilter(bic);
                 LogicalAndFilter DUFInstancesFilter = new LogicalAndFilter(DUFelemFilter, DUFCategoryfilter);
                 FilteredElementCollector DUFcoll = new FilteredElementCollector(doc, activeView.Id);
-                IList<Element> ductfittings = DUFcoll.WherePasses(DUFInstancesFilter).ToElements();
+                IList<Element> familyInstance = DUFcoll.WherePasses(DUFInstancesFilter).ToElements();
 
-                foreach (Element elem in ductfittings)
+                foreach (Element elem in familyInstance)
                 {
                     if (elem.LookupParameter("Clash").AsString() == "YES")
                     {

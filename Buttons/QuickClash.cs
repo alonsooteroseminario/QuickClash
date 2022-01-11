@@ -24,7 +24,7 @@ namespace QuickClash
 
             SetClashGridLocation.DoAllDocument(commandData);
 
-            SetIDValue_ActiveView.Do(commandData);
+            SetIDValue.Do(commandData, "ActiveView");
 
             List<Element> iclash_yes = GetAllNOClashElements_OnlyActiveView.Do(commandData);// Vista Activa
 

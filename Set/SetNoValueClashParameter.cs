@@ -28,70 +28,25 @@ namespace QuickClash
             IList<Element> clash = new List<Element>();
             IList<Element> clash_no = new List<Element>();
 
-            foreach (Element elem in ducts)
+            List<IList<Element>> elements = new List<IList<Element>>();
+            elements.Add(ducts);
+            elements.Add(pipes);
+            elements.Add(conduits);
+            elements.Add(cabletrays);
+            elements.Add(flexducts);
+            elements.Add(flexpipes);
+            foreach (IList<Element> elems in elements)
             {
-                if (elem.LookupParameter("Clash").AsString() == "YES")
+                foreach (var item in elems)
                 {
-                    clash.Add(elem);
-                }
-                else
-                {
-                    clash_no.Add(elem);
-                }
-            }
-            foreach (Element elem in pipes)
-            {
-                if (elem.LookupParameter("Clash").AsString() == "YES")
-                {
-                    clash.Add(elem);
-                }
-                else
-                {
-                    clash_no.Add(elem);
-                }
-            }
-            foreach (Element elem in conduits)
-            {
-                if (elem.LookupParameter("Clash").AsString() == "YES")
-                {
-                    clash.Add(elem);
-                }
-                else
-                {
-                    clash_no.Add(elem);
-                }
-            }
-            foreach (Element elem in cabletrays)
-            {
-                if (elem.LookupParameter("Clash").AsString() == "YES")
-                {
-                    clash.Add(elem);
-                }
-                else
-                {
-                    clash_no.Add(elem);
-                }
-            }
-            foreach (Element elem in flexducts)
-            {
-                if (elem.LookupParameter("Clash").AsString() == "YES")
-                {
-                    clash.Add(elem);
-                }
-                else
-                {
-                    clash_no.Add(elem);
-                }
-            }
-            foreach (Element elem in flexpipes)
-            {
-                if (elem.LookupParameter("Clash").AsString() == "YES")
-                {
-                    clash.Add(elem);
-                }
-                else
-                {
-                    clash_no.Add(elem);
+                    if (item.LookupParameter("Clash").AsString() == "YES")
+                    {
+                        clash.Add(item);
+                    }
+                    else
+                    {
+                        clash_no.Add(item);
+                    }
                 }
             }
 

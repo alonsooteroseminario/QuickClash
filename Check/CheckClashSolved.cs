@@ -27,8 +27,8 @@ namespace QuickClash
                 ElementCategoryFilter MECategoryfilter = new ElementCategoryFilter(bic);
                 LogicalAndFilter MEInstancesFilter = new LogicalAndFilter(familyFilter, MECategoryfilter);
                 FilteredElementCollector MEcoll = new FilteredElementCollector(doc, activeView.Id);
-                IList<Element> mechanicalequipment = MEcoll.WherePasses(MEInstancesFilter).ToElements();
-                foreach (Element e in mechanicalequipment)
+                IList<Element> familyInstance = MEcoll.WherePasses(MEInstancesFilter).ToElements();
+                foreach (Element e in familyInstance)
                 {
                     Parameter param = e.LookupParameter("Clash Solved");
                     Parameter param2 = e.LookupParameter("Clash");
@@ -63,190 +63,47 @@ namespace QuickClash
             IList<Element> cabletrays = GetElements.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_CableTray, "cabletrays");
             IList<Element> flexducts = GetElements.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_FlexDuctCurves, "flexducts");
             IList<Element> flexpipes = GetElements.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_FlexPipeCurves, "flexpipes");
-
-            foreach (Element e in ducts)
+            List<IList<Element>> list_elements = new List<IList<Element>>
             {
-                Parameter param = e.LookupParameter("Clash Solved");
-                Parameter param2 = e.LookupParameter("Clash");
-
-                using (Transaction t = new Transaction(doc, "parameters duct"))
-                {
-                    t.Start();
-                    if (param.AsInteger() == 1 && param2.AsString() == "YES")
-                    {
-                        param2.Set("");
-                        clashsolved_yes.Add(e);
-                    }
-                    else if (param.AsInteger() == 1 && !(param2.AsString() == "YES"))
-                    {
-                        clashsolved_yes.Add(e);
-                    }
-                    else
-                    {
-                        clashsolved_no.Add(e);
-                    }
-                    if (param2.AsString() == "YES")
-                    {
-                        clash_yes.Add(e);
-                    }
-                    t.Commit();
-                }
-
-            }
-            foreach (Element e in pipes)
+                ducts,
+                pipes,
+                conduits,
+                cabletrays,
+                flexducts,
+                flexpipes
+            };
+            foreach (IList<Element> elems in list_elements)
             {
-                Parameter param = e.LookupParameter("Clash Solved");
-                Parameter param2 = e.LookupParameter("Clash");
-
-                using (Transaction t2 = new Transaction(doc, "parameters pipes"))
+                foreach (Element e in elems)
                 {
-                    t2.Start();
-                    if (param.AsInteger() == 1 && param2.AsString() == "YES")
-                    {
-                        param2.Set("");
-                        clashsolved_yes.Add(e);
-                    }
-                    else if (param.AsInteger() == 1 && !(param2.AsString() == "YES"))
-                    {
-                        clashsolved_yes.Add(e);
-                    }
-                    else
-                    {
-                        clashsolved_no.Add(e);
-                    }
+                    Parameter param = e.LookupParameter("Clash Solved");
+                    Parameter param2 = e.LookupParameter("Clash");
 
-                    if (param2.AsString() == "YES")
+                    using (Transaction t = new Transaction(doc, "parameters elems"))
                     {
-                        clash_yes.Add(e);
+                        t.Start();
+                        if (param.AsInteger() == 1 && param2.AsString() == "YES")
+                        {
+                            param2.Set("");
+                            clashsolved_yes.Add(e);
+                        }
+                        else if (param.AsInteger() == 1 && !(param2.AsString() == "YES"))
+                        {
+                            clashsolved_yes.Add(e);
+                        }
+                        else
+                        {
+                            clashsolved_no.Add(e);
+                        }
+                        if (param2.AsString() == "YES")
+                        {
+                            clash_yes.Add(e);
+                        }
+                        t.Commit();
                     }
-
-                    t2.Commit();
                 }
-
             }
-            foreach (Element e in conduits)
-            {
-                Parameter param = e.LookupParameter("Clash Solved");
-                Parameter param2 = e.LookupParameter("Clash");
 
-                using (Transaction t3 = new Transaction(doc, "parameters conduits"))
-                {
-                    t3.Start();
-                    if (param.AsInteger() == 1 && param2.AsString() == "YES")
-                    {
-                        param2.Set("");
-                        clashsolved_yes.Add(e);
-                    }
-                    else if (param.AsInteger() == 1 && !(param2.AsString() == "YES"))
-                    {
-                        clashsolved_yes.Add(e);
-                    }
-                    else
-                    {
-                        clashsolved_no.Add(e);
-                    }
-                    if (param2.AsString() == "YES")
-                    {
-                        clash_yes.Add(e);
-                    }
-
-                    t3.Commit();
-                }
-
-            }
-            foreach (Element e in cabletrays)
-            {
-                Parameter param = e.LookupParameter("Clash Solved");
-                Parameter param2 = e.LookupParameter("Clash");
-
-                using (Transaction t4 = new Transaction(doc, "parameters cable tray"))
-                {
-                    t4.Start();
-                    if (param.AsInteger() == 1 && param2.AsString() == "YES")
-                    {
-                        param2.Set("");
-                        clashsolved_yes.Add(e);
-                    }
-                    else if (param.AsInteger() == 1 && !(param2.AsString() == "YES"))
-                    {
-                        clashsolved_yes.Add(e);
-                    }
-                    else
-                    {
-                        clashsolved_no.Add(e);
-                    }
-
-                    if (param2.AsString() == "YES")
-                    {
-                        clash_yes.Add(e);
-                    }
-
-                    t4.Commit();
-                }
-
-            }
-            foreach (Element e in flexducts)
-            {
-                Parameter param = e.LookupParameter("Clash Solved");
-                Parameter param2 = e.LookupParameter("Clash");
-
-                using (Transaction t = new Transaction(doc, "parameters flexduct"))
-                {
-                    t.Start();
-                    if (param.AsInteger() == 1 && param2.AsString() == "YES")
-                    {
-                        param2.Set("");
-                        clashsolved_yes.Add(e);
-                    }
-                    else if (param.AsInteger() == 1 && !(param2.AsString() == "YES"))
-                    {
-                        clashsolved_yes.Add(e);
-                    }
-                    else
-                    {
-                        clashsolved_no.Add(e);
-                    }
-
-                    if (param2.AsString() == "YES")
-                    {
-                        clash_yes.Add(e);
-                    }
-
-                    t.Commit();
-                }
-
-            }
-            foreach (Element e in flexpipes)
-            {
-                Parameter param = e.LookupParameter("Clash Solved");
-                Parameter param2 = e.LookupParameter("Clash");
-
-                using (Transaction t = new Transaction(doc, "parameters flexpipes"))
-                {
-                    t.Start();
-                    if (param.AsInteger() == 1 && param2.AsString() == "YES")
-                    {
-                        param2.Set("");
-                        clashsolved_yes.Add(e);
-                    }
-                    else if (param.AsInteger() == 1 && !(param2.AsString() == "YES"))
-                    {
-                        clashsolved_yes.Add(e);
-                    }
-                    else
-                    {
-                        clashsolved_no.Add(e);
-                    }
-
-                    if (param2.AsString() == "YES")
-                    {
-                        clash_yes.Add(e);
-                    }
-
-                    t.Commit();
-                }
-
-            }
             foreach (Element elem in clash_no)
             {
                 Parameter param2 = elem.LookupParameter("Clash");

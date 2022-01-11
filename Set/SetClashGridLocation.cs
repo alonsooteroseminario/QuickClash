@@ -29,73 +29,28 @@ namespace QuickClash
             IList<Element> cabletrays = GetElements.ElementsByBuiltCategoryActiveView(commandData, BuiltInCategory.OST_CableTray, "cabletrays");
             IList<Element> flexducts = GetElements.ElementsByBuiltCategoryActiveView(commandData, BuiltInCategory.OST_FlexDuctCurves, "flexducts");
             IList<Element> flexpipes = GetElements.ElementsByBuiltCategoryActiveView(commandData, BuiltInCategory.OST_FlexPipeCurves, "flexpipes");
-
+            List<IList<Element>> elements = new List<IList<Element>>
+            {
+                ducts,
+                pipes,
+                conduits,
+                cabletrays,
+                flexducts,
+                flexpipes
+            };
             // ELEMENTS
-
-            foreach (Element elem in ducts)
+            foreach (IList<Element> elems in elements)
             {
-                if (elem.LookupParameter("Clash").AsString() == "YES")
+                foreach (var elem in elems)
                 {
-                    clash.Add(elem);
-                }
-                else
-                {
-                    clash_no.Add(elem);
-                }
-            }
-            foreach (Element elem in pipes)
-            {
-                if (elem.LookupParameter("Clash").AsString() == "YES")
-                {
-                    clash.Add(elem);
-                }
-                else
-                {
-                    clash_no.Add(elem);
-                }
-            }
-            foreach (Element elem in conduits)
-            {
-                if (elem.LookupParameter("Clash").AsString() == "YES")
-                {
-                    clash.Add(elem);
-                }
-                else
-                {
-                    clash_no.Add(elem);
-                }
-            }
-            foreach (Element elem in cabletrays)
-            {
-                if (elem.LookupParameter("Clash").AsString() == "YES")
-                {
-                    clash.Add(elem);
-                }
-                else
-                {
-                    clash_no.Add(elem);
-                }
-            }
-            foreach (Element elem in flexducts)
-            {
-                if (elem.LookupParameter("Clash").AsString() == "YES")
-                {
-                    clash.Add(elem);
-                }
-                else
-                {
-                    clash_no.Add(elem);
-                }
-            }
-            foreach (Element elem in flexpipes)
-            {
-                if (elem.LookupParameter("Clash").AsString() == "YES")
-                {
-                    clash.Add(elem);
-                }
-                else
-                {
-                    clash_no.Add(elem);
+                    if (elem.LookupParameter("Clash").AsString() == "YES")
+                    {
+                        clash.Add(elem);
+                    }
+                    else
+                    {
+                        clash_no.Add(elem);
+                    }
                 }
             }
             foreach (Element elem in clash)
@@ -234,73 +189,28 @@ namespace QuickClash
             IList<Element> cabletrays = GetElements.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_CableTray, "cabletrays");
             IList<Element> flexducts = GetElements.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_FlexDuctCurves, "flexducts");
             IList<Element> flexpipes = GetElements.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_FlexPipeCurves, "flexpipes");
-
+            List<IList<Element>> elements = new List<IList<Element>>
+            {
+                ducts,
+                pipes,
+                conduits,
+                cabletrays,
+                flexducts,
+                flexpipes
+            };
             // ELEMENTS
-
-            foreach (Element elem in ducts)
+            foreach (IList<Element> elems in elements)
             {
-                if (elem.LookupParameter("Clash").AsString() == "YES")
+                foreach (var elem in elems)
                 {
-                    clash.Add(elem);
-                }
-                else
-                {
-                    clash_no.Add(elem);
-                }
-            }
-            foreach (Element elem in pipes)
-            {
-                if (elem.LookupParameter("Clash").AsString() == "YES")
-                {
-                    clash.Add(elem);
-                }
-                else
-                {
-                    clash_no.Add(elem);
-                }
-            }
-            foreach (Element elem in conduits)
-            {
-                if (elem.LookupParameter("Clash").AsString() == "YES")
-                {
-                    clash.Add(elem);
-                }
-                else
-                {
-                    clash_no.Add(elem);
-                }
-            }
-            foreach (Element elem in cabletrays)
-            {
-                if (elem.LookupParameter("Clash").AsString() == "YES")
-                {
-                    clash.Add(elem);
-                }
-                else
-                {
-                    clash_no.Add(elem);
-                }
-            }
-            foreach (Element elem in flexducts)
-            {
-                if (elem.LookupParameter("Clash").AsString() == "YES")
-                {
-                    clash.Add(elem);
-                }
-                else
-                {
-                    clash_no.Add(elem);
-                }
-            }
-            foreach (Element elem in flexpipes)
-            {
-                if (elem.LookupParameter("Clash").AsString() == "YES")
-                {
-                    clash.Add(elem);
-                }
-                else
-                {
-                    clash_no.Add(elem);
+                    if (elem.LookupParameter("Clash").AsString() == "YES")
+                    {
+                        clash.Add(elem);
+                    }
+                    else
+                    {
+                        clash_no.Add(elem);
+                    }
                 }
             }
             foreach (Element elem in clash)
@@ -333,19 +243,14 @@ namespace QuickClash
                 clashID_familyinstance.Add(elem.Id);
             }
 
-
-
             Dictionary<string, XYZ> intersectionPoints = GetIntersections.Do(doc);
             string intersection = "??";
-            string msg = "Los resultados son:\n" + Environment.NewLine;
 
             foreach (ElementId eid in clashID_elements)
             {
                 Element e = doc.GetElement(eid);
 
                 Options op = new Options();
-                //            		op.View = doc.ActiveView;
-                //            		op.ComputeReferences = true;
                 GeometryElement gm = e.get_Geometry(op);
                 Solid so = gm.First() as Solid;
                 XYZ p = so.ComputeCentroid();
@@ -366,20 +271,15 @@ namespace QuickClash
                     }
 
                 }
-
                 double distanceInMeter = distanceMin / 3.281;
-                //TaskDialog.Show("Clash Grid Location", intersection);
-
                 Parameter param = e.LookupParameter("Clash Grid Location");
                 string param_value = intersection;
-
                 using (Transaction t = new Transaction(doc, "Set Clash grid location to element"))
                 {
                     t.Start();
                     param.Set(param_value);
                     t.Commit();
                 }
-                msg += "Centroid Point : (" + p.X.ToString() + ", " + p.Y.ToString() + ", 0)  :  " + "Clash Grid Location : " + param_value + "  Category:" + e.Category.Name.ToString() + "  ID : " + e.Id.ToString() + Environment.NewLine;
             }
 
             foreach (ElementId eid in clashID_familyinstance)
@@ -404,8 +304,6 @@ namespace QuickClash
                 }
 
                 double distanceInMeter = distanceMin / 3.281;
-                //TaskDialog.Show("Clash Grid Location", intersection);
-
                 Parameter param = e.LookupParameter("Clash Grid Location");
                 string param_value = intersection;
 
@@ -415,7 +313,6 @@ namespace QuickClash
                     param.Set(param_value);
                     t.Commit();
                 }
-                msg += "Clash Grid Location : " + param_value + "      Category:" + e.Category.Name.ToString() + "      ID : " + e.Id.ToString() + Environment.NewLine;
             }
 
 
@@ -452,8 +349,6 @@ namespace QuickClash
                 Element e = doc.GetElement(eid);
 
                 Options op = new Options();
-                //            		op.View = doc.ActiveView;
-                //            		op.ComputeReferences = true;
                 GeometryElement gm = e.get_Geometry(op);
                 Solid so = gm.First() as Solid;
                 XYZ p = so.ComputeCentroid();
@@ -476,7 +371,6 @@ namespace QuickClash
                 }
 
                 double distanceInMeter = distanceMin / 3.281;
-                //TaskDialog.Show("Clash Grid Location", intersection);
 
                 Parameter param = e.LookupParameter("Clash Grid Location");
                 string param_value = intersection;

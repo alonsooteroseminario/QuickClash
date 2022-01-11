@@ -35,6 +35,7 @@ namespace QuickClash
             List<ParameterFilterElement> lista_ParameterFilterElement1 = new List<ParameterFilterElement>();
             List<ParameterFilterElement> lista_ParameterFilterElement2 = new List<ParameterFilterElement>();
             List<ParameterFilterElement> lista_ParameterFilterElement_no = new List<ParameterFilterElement>();
+
             using (Transaction ta = new Transaction(doc, "create clash filter view"))
             {
                 ta.Start();
