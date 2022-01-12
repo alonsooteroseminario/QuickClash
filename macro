@@ -1,0 +1,210 @@
+		public void SelectElementsAndCreateAssemblyAndViews(){
+			
+			UIDocument uidoc = this.ActiveUIDocument;
+		 	Document doc = this.ActiveUIDocument.Document;
+			
+			List<ElementId> ids = new List<ElementId>();
+						
+			IList<Reference> references = uidoc.Selection.PickObjects(ObjectType.Element);
+				 		
+			
+			foreach (Reference reference in references)
+			{
+				Element e = doc.GetElement(reference);
+				ElementId eId = e.Id;
+				ids.Add(eId);	
+			}
+			
+			CreateAssemblyAndViews(doc, ids);
+		}
+		
+		// Create assembly instance, name the assembly, and create views of the assembly
+		public void CreateAssemblyAndViews(Autodesk.Revit.DB.Document doc, ICollection<ElementId> elementIds)
+		{
+		   using (Transaction transaction = new Transaction(doc))
+		   {
+		       ElementId categoryId = doc.GetElement(elementIds.First()).Category.Id; // use category of one of the assembly elements
+		       
+		       ViewFamilyType viewFamilyType = (from elem in new FilteredElementCollector(doc).OfClass(typeof(ViewFamilyType))
+											    let type = elem as ViewFamilyType
+											    where type.ViewFamily == ViewFamily.FloorPlan
+											    select type).FirstOrDefault();
+//		       TaskDialog.Show("msg2", viewFamilyType.Name.ToString());
+		       
+		       var titleBlockId = ( from elem in new FilteredElementCollector(doc).OfCategory(BuiltInCategory.OST_TitleBlocks)
+		                             where elem.Name == "OME_Spool_11x17L_R18"
+		                             select elem.Id).FirstOrDefault();
+
+		       if (AssemblyInstance.IsValidNamingCategory(doc, categoryId, elementIds))
+		       {
+		           transaction.Start("Create Assembly Instance");
+		           AssemblyInstance assemblyInstance = AssemblyInstance.Create(doc, elementIds, categoryId);
+		           transaction.Commit(); // commit the transaction that creates the assembly instance before modifying the instance's name
+		
+		           if (transaction.GetStatus() == TransactionStatus.Committed)
+		           {
+		              transaction.Start("Set Assembly Name");
+//
+//		              List<AssemblyInstance> AssemblyInstancesFromProject = GetAssemblyInstancesFromProject(doc);
+//		              List<AssemblyInstance> NEWAssemblyInstances = new List<AssemblyInstance>();
+//		              foreach (var element in AssemblyInstancesFromProject) {
+//		              	if(element.Name.ToString().Contains("Assembly Example")){
+//		              		NEWAssemblyInstances.Add(element);
+//		              	}
+//		              }
+//		              
+//		              if( AssemblyInstancesFromProject.Last().Name.ToString().Contains("Assembly Example") )
+//		              {
+//		              		assemblyInstance.AssemblyTypeName = "Assembly Example" + (NEWAssemblyInstances.Count() + 1).ToString();
+//		              }
+//		              else
+//		              {
+//		              		assemblyInstance.AssemblyTypeName = "Assembly Example";
+//		              }
+		              transaction.Commit();
+		           }
+		
+		           if (assemblyInstance.AllowsAssemblyViewCreation()) // create assembly views for this assembly instance
+		           {
+		              if (transaction.GetStatus() == TransactionStatus.Committed)
+		              {
+		                  transaction.Start("View Creation");
+		                  
+		                  View3D view3d = AssemblyViewUtils.Create3DOrthographic(doc, assemblyInstance.Id);
+		                  view3d.DetailLevel = ViewDetailLevel.Fine;
+		                  view3d.DisplayStyle = DisplayStyle.Shading;
+		                  
+		                  var viewTop = AssemblyViewUtils.CreateDetailSection(doc,assemblyInstance.Id, AssemblyDetailViewOrientation.ElevationTop);
+		                  viewTop.DetailLevel = ViewDetailLevel.Fine;
+		                  viewTop.DisplayStyle = DisplayStyle.Shading;
+		                  
+		                  var viewFront = AssemblyViewUtils.CreateDetailSection(doc,assemblyInstance.Id, AssemblyDetailViewOrientation.ElevationFront);
+		                  viewFront.DetailLevel = ViewDetailLevel.Fine;
+		                  viewFront.DisplayStyle = DisplayStyle.Shading;
+		                  
+		                  var viewRight = AssemblyViewUtils.CreateDetailSection(doc,assemblyInstance.Id, AssemblyDetailViewOrientation.ElevationRight);
+		                  viewRight.DetailLevel = ViewDetailLevel.Fine;
+		                  viewRight.DisplayStyle = DisplayStyle.Shading;
+		                  
+		                  ViewSchedule partList = AssemblyViewUtils.CreatePartList(doc, assemblyInstance.Id);
+		                  ScheduleField field1 = partList.Definition.GetField(1);
+		                  field1.GridColumnWidth = 0.2;
+
+						  //Create Sheet with Views inside
+						  var sheet_new = AssemblyViewUtils.CreateSheet(doc, assemblyInstance.Id, titleBlockId);
+						  var o = sheet_new.Outline;
+						  var x = o.Max.U - o.Min.U;
+						  var y = o.Max.V - o.Min.V;
+						  
+						  var uv1 = new XYZ(x/85-0.2, y/2, 0);
+						  var uv2 = new XYZ(x/5-0.1, y/2, 0);
+						  var uv3 = new XYZ(x/85-0.2, y/7.5, 0);
+						  var uv4 = new XYZ(x/5-0.1, y/7.5, 0);
+						  
+						  var uv5 = new XYZ(x/3-0.075, y/1.4, 0);
+						  
+						  Viewport viewport1 = Viewport.Create(doc, sheet_new.Id, view3d.Id, uv1);
+						  Viewport viewport2 = Viewport.Create(doc, sheet_new.Id, viewTop.Id, uv2);
+						  Viewport viewport3 = Viewport.Create(doc, sheet_new.Id, viewFront.Id, uv3);
+						  Viewport viewport4 = Viewport.Create(doc, sheet_new.Id, viewRight.Id, uv4);
+						  ScheduleSheetInstance.Create(doc, sheet_new.Id, partList.Id, uv5);
+
+						  
+		                  transaction.Commit();
+		              }
+		           }
+		       }
+		   }
+		}
+		
+		public void CreateGenericModelSchedule()
+		{
+			UIDocument uidoc = this.ActiveUIDocument;
+		 	Document doc = this.ActiveUIDocument.Document;
+		 	
+			ElementClassFilter GenericModelFilter = new ElementClassFilter(typeof(FamilyInstance));
+		 	ElementCategoryFilter Categoryfilter = new ElementCategoryFilter(BuiltInCategory.OST_GenericModel);
+		 	LogicalAndFilter InstancesFilter = new LogicalAndFilter(GenericModelFilter, Categoryfilter);
+		 	FilteredElementCollector collector = new FilteredElementCollector(doc);
+		 	IList<Element> genericModel = collector.WherePasses(InstancesFilter).ToElements();
+		 	
+		 	string msg = "";
+		 	List<string> lista_TiposGenericModel = new List<string>();
+		 	
+		 	foreach (var element in genericModel) {
+
+		 		
+		 		if (!lista_TiposGenericModel.Contains(element.Name.ToString())) {
+		 			lista_TiposGenericModel.Add(element.Name.ToString());
+		 			msg = msg + element.Name.ToString() + Environment.NewLine;
+				}
+			}
+		 	TaskDialog.Show("msg", msg);
+		 	
+		 	foreach (var element in lista_TiposGenericModel) {
+		 		CreateSchedule(element);
+			}
+		}
+		
+		public void CreateSchedule(string nombreGenericModel)
+		{
+			
+			UIDocument uidoc = this.ActiveUIDocument;
+		 	Document doc = this.ActiveUIDocument.Document;
+		 	
+		 	
+		 	Transaction t = new Transaction(doc, "Create Schedule");
+		 	t.Start();
+		 	
+		 	ElementId GenericModelId = new ElementId(BuiltInCategory.OST_GenericModel);
+		 	ViewSchedule schedule = ViewSchedule.CreateSchedule(doc, GenericModelId);
+
+//		 	string nombreGenericModel = "CircleX";
+		 	schedule.Name = "TRIMBLE POINTS SCHEDULE - " + nombreGenericModel;
+		 	
+		 	List<string> listFields = new List<string>(){
+				"Field Point Family Name Shared",
+				"Field Point Annotation Text Shared",
+				"Field Point Type Shared",
+				"Field Point Group Shared",
+				"Field Point Point Number",
+				"Elevation from Level"
+		 	};
+		 	List<ScheduleFieldId> fieldIds = new List<ScheduleFieldId>();
+		 	
+		 	foreach (SchedulableField sf in schedule.Definition.GetSchedulableFields()) 
+		 	{
+
+				foreach (string field in listFields) {
+		 			
+					if(sf.GetName(doc).ToString() == field)
+			 		{
+			 			ScheduleField scheduleField = schedule.Definition.AddField(sf);
+			 			fieldIds.Add(scheduleField.FieldId);
+			 		}
+//					if ( sf.ParameterId == new ElementId(BuiltInParameter.INSTANCE_REFERENCE_LEVEL_PARAM) ) {
+//						schedule.Definition.AddField(sf);
+//					}
+				
+				}
+		 	}
+		 	
+		 	
+		 	
+		 	ScheduleField foundField = schedule.Definition.GetField(fieldIds[2]);
+		 	ScheduleField foundField2 = schedule.Definition.GetField(fieldIds[0]);
+		 	
+		 	t.Commit();
+		 	
+		 	using (Transaction ta = new Transaction(doc, "Add filter"))
+            {
+	            ta.Start();
+	            ScheduleFilter filter = new ScheduleFilter(foundField.FieldId, ScheduleFilterType.Contains, nombreGenericModel);
+	            schedule.Definition.AddFilter(filter);
+	            schedule.Definition.AddSortGroupField(new ScheduleSortGroupField(foundField2.FieldId));
+
+	            ta.Commit();
+            }
+		
+		 	uidoc.ActiveView = schedule;
+		}
