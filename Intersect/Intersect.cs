@@ -23,8 +23,8 @@ namespace QuickClash
             Document doc = uidoc.Document;
             var activeView = uidoc.ActiveView;
 
-            List<BuiltInCategory> UI_list1 = UI_list1_; // Element grupo 1
-            List<BuiltInCategory> UI_list3 = UI_list3_; // Element grupo 2
+            List<BuiltInCategory> UI_list1 = UI_list1_;
+            List<BuiltInCategory> UI_list3 = UI_list3_;
 
             List<Element> allElements = new List<Element>();
 
@@ -48,7 +48,7 @@ namespace QuickClash
                 }
                 if (bic == BuiltInCategory.OST_Conduit)
                 {
-                    IList<Element> conduits =null;
+                    IList<Element> conduits = null;
                     if (ActiveViewBoolean)
                     {
                         conduits = GetElements.ElementsByBuiltCategoryActiveView(commandData, bic, "conduits");
@@ -471,15 +471,13 @@ namespace QuickClash
             foreach (Element elem in clash_yesA)
             {
                 Parameter param = elem.LookupParameter("Clash");
-                string clash = "YES";
                 using (Transaction t = new Transaction(doc, "Clash YES"))
                 {
                     t.Start();
-                    param.Set(clash);
+                    param.Set(1);
                     t.Commit();
                 }
             }
-
             SetClashGridLocation.DoActiveView(commandData);
 
         } // Elem vs Elem // Only Active View
@@ -841,11 +839,10 @@ namespace QuickClash
             foreach (Element elem in clash_yesA)
             {
                 Parameter param = elem.LookupParameter("Clash");
-                string clash = "YES";
                 using (Transaction t = new Transaction(doc, "Clash YES"))
                 {
                     t.Start();
-                    param.Set(clash);
+                    param.Set(1);
                     t.Commit();
                 }
             }
@@ -867,8 +864,8 @@ namespace QuickClash
             Document doc = uidoc.Document;
             var activeView = uidoc.ActiveView;
 
-            List<BuiltInCategory> UI_list1 = UI_list1_; // Element grupo 1
-            List<BuiltInCategory> UI_list4 = UI_list4_; // Family instance grupo 2
+            List<BuiltInCategory> UI_list1 = UI_list1_;
+            List<BuiltInCategory> UI_list4 = UI_list4_;
 
             List<Element> allElements = new List<Element>();
 
@@ -990,7 +987,7 @@ namespace QuickClash
                     collector.WherePasses(DU2InstancesFilter);
                     collector.WherePasses(new ElementIntersectsSolidFilter(solid)).ToElements(); // Apply intersection filter to find matches
 
-                    if (collector.Count() > 0) // agrega el elemento
+                    if (collector.Count() > 0)
                     {
                         Parameter param = e.LookupParameter("Clash Category");
                         Parameter paramID = e.LookupParameter("ID Element");
@@ -1008,7 +1005,7 @@ namespace QuickClash
                         }
                     }
 
-                    foreach (Element elem in collector) // agrega el family instances
+                    foreach (Element elem in collector)
                     {
                         Parameter param = elem.LookupParameter("Clash Category");
                         Parameter paramID = elem.LookupParameter("ID Element");
@@ -1030,17 +1027,14 @@ namespace QuickClash
 
             foreach (Element elem in clash_yesA)
             {
-                // set clash YES
                 Parameter param = elem.LookupParameter("Clash");
-                string clash = "YES";
                 using (Transaction t = new Transaction(doc, "Clash YES"))
                 {
                     t.Start();
-                    param.Set(clash);
+                    param.Set(1);
                     t.Commit();
                 }
             }
-
             SetClashGridLocation.UI(commandData, clash_yesA_element, clash_yesA_familyinstance);
 
         } // Elem vs FamilyInstance // Only Active View
@@ -1050,8 +1044,8 @@ namespace QuickClash
             UIDocument uidoc = uiapp.ActiveUIDocument;
             Document doc = uidoc.Document;
 
-            List<BuiltInCategory> UI_list1 = GetLists.BuiltCategories(false); // Element grupo 1
-            List<BuiltInCategory> UI_list4 = GetLists.BuiltCategories(true); // Family instance grupo 2
+            List<BuiltInCategory> UI_list1 = GetLists.BuiltCategories(false);
+            List<BuiltInCategory> UI_list4 = GetLists.BuiltCategories(true);
 
             List<Element> allElements = new List<Element>();
 
@@ -1145,7 +1139,7 @@ namespace QuickClash
                     collector.WherePasses(DU2InstancesFilter);
                     collector.WherePasses(new ElementIntersectsSolidFilter(solid)).ToElements(); // Apply intersection filter to find matches
 
-                    if (collector.Count() > 0) // agrega el elemento
+                    if (collector.Count() > 0)
                     {
                         Parameter param = e.LookupParameter("Clash Category");
                         Parameter paramID = e.LookupParameter("ID Element");
@@ -1163,7 +1157,7 @@ namespace QuickClash
                         }
                     }
 
-                    foreach (Element elem in collector) // agrega el family instances
+                    foreach (Element elem in collector)
                     {
                         Parameter param = elem.LookupParameter("Clash Category");
                         Parameter paramID = elem.LookupParameter("ID Element");
@@ -1185,13 +1179,11 @@ namespace QuickClash
 
             foreach (Element elem in clash_yesA)
             {
-                // set clash YES
                 Parameter param = elem.LookupParameter("Clash");
-                string clash = "YES";
                 using (Transaction t = new Transaction(doc, "Clash YES"))
                 {
                     t.Start();
-                    param.Set(clash);
+                    param.Set(1);
                     t.Commit();
                 }
             }
@@ -1211,8 +1203,6 @@ namespace QuickClash
         {
             UIApplication uiApp = commandData.Application;
             Document doc = uiApp.ActiveUIDocument.Document;
-
-            // FAMILY INSTANCES
             List<BuiltInCategory> bics_finst = UI_list2_;
             List<BuiltInCategory> bics_finst_2 = UI_list4_;
 
@@ -1252,7 +1242,7 @@ namespace QuickClash
                     }
                     IList<Element> elementss = coll_outline_2.WherePasses(bbfilter_2).WherePasses(InstancesFilter).ToElements();
 
-                    if (elementss.Count() > 0) // clash
+                    if (elementss.Count() > 0)
                     {
                         if (!clash_yesA.Contains(elem))
                         {
@@ -1280,13 +1270,12 @@ namespace QuickClash
             foreach (Element elem in clash_yesA)
             {
                 Parameter param = elem.LookupParameter("Clash");
-                string clash = "YES";
                 using (Transaction t = new Transaction(doc, "Clash YES"))
                 {
                     t.Start();
-                    if (!(param.AsString() == "YES"))
+                    if (!(param.AsInteger() == 1))
                     {
-                        param.Set(clash);
+                        param.Set(1);
                     }
                     t.Commit();
                 }
@@ -1297,8 +1286,6 @@ namespace QuickClash
         {
             UIApplication uiApp = commandData.Application;
             Document doc = uiApp.ActiveUIDocument.Document;
-
-            // FAMILY INSTANCES
             List<BuiltInCategory> bics_finst = GetLists.BuiltCategories(true);
             List<BuiltInCategory> bics_finst_2 = GetLists.BuiltCategories(true);
 
@@ -1330,7 +1317,7 @@ namespace QuickClash
                     FilteredElementCollector coll_outline_2 = new FilteredElementCollector(doc);
                     IList<Element> elementss = coll_outline_2.WherePasses(bbfilter_2).WherePasses(InstancesFilter).ToElements();
 
-                    if (elementss.Count() > 0) // clash
+                    if (elementss.Count() > 0)
                     {
                         if (!clash_yesA.Contains(elem))
                         {
@@ -1358,13 +1345,12 @@ namespace QuickClash
             foreach (Element elem in clash_yesA)
             {
                 Parameter param = elem.LookupParameter("Clash");
-                string clash = "YES";
                 using (Transaction t = new Transaction(doc, "Clash YES"))
                 {
                     t.Start();
-                    if (!(param.AsString() == "YES"))
+                    if (!(param.AsInteger() == 1))
                     {
-                        param.Set(clash);
+                        param.Set(1);
                     }
                     t.Commit();
                 }

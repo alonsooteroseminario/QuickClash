@@ -39,7 +39,7 @@ namespace QuickClash
             {
                 foreach (var item in elems)
                 {
-                    if (item.LookupParameter("Clash").AsString() == "YES")
+                    if (item.LookupParameter("Clash").AsInteger() == 1)
                     {
                         clash.Add(item);
                     }
@@ -52,9 +52,7 @@ namespace QuickClash
 
             foreach (Element e in clash)
             {
-                Parameter param = e.LookupParameter("Clash");
-                //Parameter param2 = e.LookupParameter("Clash Solved");
-                //Parameter param3 = e.LookupParameter("Clash Comments");
+                Parameter clashParam = e.LookupParameter("Clash");
                 Parameter param4 = e.LookupParameter("Clash Grid Location");
                 Parameter param5 = e.LookupParameter("Clash Category");
 
@@ -63,9 +61,7 @@ namespace QuickClash
                 using (Transaction t = new Transaction(doc, "Set No value to Clash elements in Active View"))
                 {
                     t.Start();
-                    param.Set(param_value);
-                    //param2.Set(1);
-                    //param3.Set(param_value);
+                    clashParam.Set(0);
                     param4.Set(param_value);
                     param5.Set(param_value);
                     t.Commit();
@@ -73,26 +69,20 @@ namespace QuickClash
             }
             foreach (Element e in clash_no)
             {
-                Parameter param = e.LookupParameter("Clash");
-                //Parameter param2 = e.LookupParameter("Clash Comments");
                 Parameter param3 = e.LookupParameter("Clash Grid Location");
                 Parameter param5 = e.LookupParameter("Clash Category");
-
 
                 string param_value = "";
 
                 using (Transaction t = new Transaction(doc, "Set No value to Clash elements in Active View"))
                 {
                     t.Start();
-                    param.Set(param_value);
-                    //param2.Set(param_value);
                     param3.Set(param_value);
                     param5.Set(param_value);
                     t.Commit();
                 }
             }
 
-            // FAMILY INSTANCES
             List<BuiltInCategory> bics_familyIns = GetLists.BuiltCategories(true);
 
             IList<Element> familyInstance_clash = new List<Element>();
@@ -108,7 +98,7 @@ namespace QuickClash
 
                 foreach (Element elem in family_instance)
                 {
-                    if (elem.LookupParameter("Clash").AsString() == "YES")
+                    if (elem.LookupParameter("Clash").AsInteger() == 1)
                     {
                         familyInstance_clash.Add(elem);
                     }
@@ -122,9 +112,7 @@ namespace QuickClash
 
             foreach (Element e in familyInstance_clash)
             {
-                Parameter param = e.LookupParameter("Clash");
-                //Parameter param2 = e.LookupParameter("Clash Solved");
-                //Parameter param3 = e.LookupParameter("Clash Comments");
+                Parameter clashParam = e.LookupParameter("Clash");
                 Parameter param4 = e.LookupParameter("Clash Grid Location");
                 Parameter param5 = e.LookupParameter("Clash Category");
 
@@ -133,9 +121,7 @@ namespace QuickClash
                 using (Transaction t = new Transaction(doc, "Set No value to Clash elements in Active View"))
                 {
                     t.Start();
-                    param.Set(param_value);
-                    //param2.Set(1);
-                    //param3.Set(param_value);
+                    clashParam.Set(0);
                     param4.Set(param_value);
                     param5.Set(param_value);
                     t.Commit();
@@ -144,8 +130,6 @@ namespace QuickClash
 
             foreach (Element e in familyInstance_clash_no)
             {
-                Parameter param = e.LookupParameter("Clash");
-                //Parameter param2 = e.LookupParameter("Clash Comments");
                 Parameter param3 = e.LookupParameter("Clash Grid Location");
                 Parameter param5 = e.LookupParameter("Clash Category");
 
@@ -154,8 +138,6 @@ namespace QuickClash
                 using (Transaction t = new Transaction(doc, "Set No value to Clash elements in Active View"))
                 {
                     t.Start();
-                    param.Set(param_value);
-                    //param2.Set(param_value);
                     param3.Set(param_value);
                     param5.Set(param_value);
                     t.Commit();

@@ -38,7 +38,6 @@ namespace QuickClash
                 flexducts,
                 flexpipes
             };
-            // ELEMENTS
             foreach (IList<Element> elems in elements)
             {
                 foreach (var elem in elems)
@@ -57,9 +56,6 @@ namespace QuickClash
             {
                 clashID_elements.Add(elem.Id);
             }
-
-            // FAMILY INSTANCES
-
             IList<BuiltInCategory> bics_familyIns = GetLists.BuiltCategories(true);
             foreach (BuiltInCategory bic in bics_familyIns)
             {
@@ -76,35 +72,23 @@ namespace QuickClash
                         clash_no.Add(elem);
                     }
                 }
-
             }
             foreach (Element elem in clash_familyinstance)
             {
                 clashID_familyinstance.Add(elem.Id);
             }
-
-
-
             Dictionary<string, XYZ> intersectionPoints = GetIntersections.Do(doc);
             string intersection = "??";
-            string msg = "Los resultados son:\n" + Environment.NewLine;
-
             foreach (ElementId eid in clashID_elements)
             {
                 Element e = doc.GetElement(eid);
-
                 Options op = new Options();
-                //            		op.View = doc.ActiveView;
-                //            		op.ComputeReferences = true;
                 GeometryElement gm = e.get_Geometry(op);
                 Solid so = gm.First() as Solid;
                 XYZ p = so.ComputeCentroid();
-
                 XYZ xyz = new XYZ(p.X, p.Y, 0);
-
                 double distanceMin = 0;
                 double distance = 0;
-
                 distanceMin = xyz.DistanceTo(intersectionPoints.First().Value);
                 foreach (KeyValuePair<string, XYZ> kp in intersectionPoints)
                 {
@@ -114,33 +98,24 @@ namespace QuickClash
                         distanceMin = distance;
                         intersection = kp.Key;
                     }
-
                 }
-
                 double distanceInMeter = distanceMin / 3.281;
-                //TaskDialog.Show("Clash Grid Location", intersection);
-
                 Parameter param = e.LookupParameter("Clash Grid Location");
                 string param_value = intersection;
-
                 using (Transaction t = new Transaction(doc, "Set Clash grid location to element"))
                 {
                     t.Start();
                     param.Set(param_value);
                     t.Commit();
                 }
-                msg += "Centroid Point : (" + p.X.ToString() + ", " + p.Y.ToString() + ", 0)  :  " + "Clash Grid Location : " + param_value + "  Category:" + e.Category.Name.ToString() + "  ID : " + e.Id.ToString() + Environment.NewLine;
             }
-
             foreach (ElementId eid in clashID_familyinstance)
             {
                 Element e = doc.GetElement(eid);
                 LocationPoint p = e.Location as LocationPoint;
-
                 XYZ xyz = new XYZ(p.Point.X, p.Point.Y, 0);
                 double distanceMin = 0;
                 double distance = 0;
-
                 distanceMin = xyz.DistanceTo(intersectionPoints.First().Value);
                 foreach (KeyValuePair<string, XYZ> kp in intersectionPoints)
                 {
@@ -150,26 +125,17 @@ namespace QuickClash
                         distanceMin = distance;
                         intersection = kp.Key;
                     }
-
                 }
-
                 double distanceInMeter = distanceMin / 3.281;
-                //TaskDialog.Show("Clash Grid Location", intersection);
-
                 Parameter param = e.LookupParameter("Clash Grid Location");
                 string param_value = intersection;
-
                 using (Transaction t = new Transaction(doc, "Set Clash grid location to element"))
                 {
                     t.Start();
                     param.Set(param_value);
                     t.Commit();
                 }
-                msg += "Clash Grid Location : " + param_value + "      Category:" + e.Category.Name.ToString() + "      ID : " + e.Id.ToString() + Environment.NewLine;
             }
-
-
-
         }
 
         public static void DoAllDocument(ExternalCommandData commandData)
@@ -198,7 +164,6 @@ namespace QuickClash
                 flexducts,
                 flexpipes
             };
-            // ELEMENTS
             foreach (IList<Element> elems in elements)
             {
                 foreach (var elem in elems)
@@ -217,14 +182,10 @@ namespace QuickClash
             {
                 clashID_elements.Add(elem.Id);
             }
-
-            // FAMILY INSTANCES
-
             IList<BuiltInCategory> bics_familyIns = GetLists.BuiltCategories(true);
             foreach (BuiltInCategory bic in bics_familyIns)
             {
                 IList<Element> familyInstance = GetElements.ElementsByBuiltCategory(commandData, bic, "family_instances_all");
-
                 foreach (Element elem in familyInstance)
                 {
                     if (elem.LookupParameter("Clash").AsString() == "YES")
@@ -236,30 +197,23 @@ namespace QuickClash
                         clash_no.Add(elem);
                     }
                 }
-
             }
             foreach (Element elem in clash_familyinstance)
             {
                 clashID_familyinstance.Add(elem.Id);
             }
-
             Dictionary<string, XYZ> intersectionPoints = GetIntersections.Do(doc);
             string intersection = "??";
-
             foreach (ElementId eid in clashID_elements)
             {
                 Element e = doc.GetElement(eid);
-
                 Options op = new Options();
                 GeometryElement gm = e.get_Geometry(op);
                 Solid so = gm.First() as Solid;
                 XYZ p = so.ComputeCentroid();
-
                 XYZ xyz = new XYZ(p.X, p.Y, 0);
-
                 double distanceMin = 0;
                 double distance = 0;
-
                 distanceMin = xyz.DistanceTo(intersectionPoints.First().Value);
                 foreach (KeyValuePair<string, XYZ> kp in intersectionPoints)
                 {
@@ -269,7 +223,6 @@ namespace QuickClash
                         distanceMin = distance;
                         intersection = kp.Key;
                     }
-
                 }
                 double distanceInMeter = distanceMin / 3.281;
                 Parameter param = e.LookupParameter("Clash Grid Location");
@@ -281,16 +234,13 @@ namespace QuickClash
                     t.Commit();
                 }
             }
-
             foreach (ElementId eid in clashID_familyinstance)
             {
                 Element e = doc.GetElement(eid);
                 LocationPoint p = e.Location as LocationPoint;
-
                 XYZ xyz = new XYZ(p.Point.X, p.Point.Y, 0);
                 double distanceMin = 0;
                 double distance = 0;
-
                 distanceMin = xyz.DistanceTo(intersectionPoints.First().Value);
                 foreach (KeyValuePair<string, XYZ> kp in intersectionPoints)
                 {
@@ -300,13 +250,10 @@ namespace QuickClash
                         distanceMin = distance;
                         intersection = kp.Key;
                     }
-
                 }
-
                 double distanceInMeter = distanceMin / 3.281;
                 Parameter param = e.LookupParameter("Clash Grid Location");
                 string param_value = intersection;
-
                 using (Transaction t = new Transaction(doc, "Set Clash grid location to element"))
                 {
                     t.Start();
@@ -314,9 +261,6 @@ namespace QuickClash
                     t.Commit();
                 }
             }
-
-
-
         }
 
         public static void UI(ExternalCommandData commandData, IList<Element> clash_, IList<Element> clash_familyinstance_)
@@ -324,40 +268,30 @@ namespace QuickClash
             UIApplication uiapp = commandData.Application;
             UIDocument uidoc = uiapp.ActiveUIDocument;
             Document doc = uidoc.Document;
-
             List<ElementId> clashID_elements = new List<ElementId>();
             List<ElementId> clashID_familyinstance = new List<ElementId>();
-
             IList<Element> clash = clash_;
             IList<Element> clash_familyinstance = clash_familyinstance_;
-
             foreach (Element elem in clash)
             {
                 clashID_elements.Add(elem.Id);
             }
-
             foreach (Element elem in clash_familyinstance)
             {
                 clashID_familyinstance.Add(elem.Id);
             }
-
             Dictionary<string, XYZ> intersectionPoints = GetIntersections.Do(doc);
             string intersection = "??";
-
             foreach (ElementId eid in clashID_elements)
             {
                 Element e = doc.GetElement(eid);
-
                 Options op = new Options();
                 GeometryElement gm = e.get_Geometry(op);
                 Solid so = gm.First() as Solid;
                 XYZ p = so.ComputeCentroid();
-
                 XYZ xyz = new XYZ(p.X, p.Y, 0);
-
                 double distanceMin = 0;
                 double distance = 0;
-
                 distanceMin = xyz.DistanceTo(intersectionPoints.First().Value);
                 foreach (KeyValuePair<string, XYZ> kp in intersectionPoints)
                 {
@@ -369,30 +303,23 @@ namespace QuickClash
                     }
 
                 }
-
                 double distanceInMeter = distanceMin / 3.281;
-
                 Parameter param = e.LookupParameter("Clash Grid Location");
                 string param_value = intersection;
-
                 using (Transaction t = new Transaction(doc, "Set Clash grid location to element"))
                 {
                     t.Start();
                     param.Set(param_value);
                     t.Commit();
                 }
-
             }
-
             foreach (ElementId eid in clashID_familyinstance)
             {
                 Element e = doc.GetElement(eid);
                 LocationPoint p = e.Location as LocationPoint;
-
                 XYZ xyz = new XYZ(p.Point.X, p.Point.Y, 0);
                 double distanceMin = 0;
                 double distance = 0;
-
                 distanceMin = xyz.DistanceTo(intersectionPoints.First().Value);
                 foreach (KeyValuePair<string, XYZ> kp in intersectionPoints)
                 {
@@ -402,13 +329,10 @@ namespace QuickClash
                         distanceMin = distance;
                         intersection = kp.Key;
                     }
-
                 }
-
                 double distanceInMeter = distanceMin / 3.281;
                 Parameter param = e.LookupParameter("Clash Grid Location");
                 string param_value = intersection;
-
                 using (Transaction t = new Transaction(doc, "Set Clash grid location to element"))
                 {
                     t.Start();
@@ -417,6 +341,5 @@ namespace QuickClash
                 }
             }
         }
-
     }
 }

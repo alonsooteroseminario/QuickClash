@@ -98,6 +98,11 @@
     <Compile Include="Intersect\Intersect.cs" />
     <Compile Include="Buttons\QuickClash.cs" />
     <Compile Include="Buttons\SectionBox.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Set\SetClashGridLocation.cs" />
     <Compile Include="Set\SetNoValueClashParameter.cs" />
     <Compile Include="Set\SetNoValueAllParameters.cs" />
@@ -125,6 +130,28 @@
     <EmbeddedResource Include="Forms\Form3.resx">
       <DependentUpon>Form3.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\3d-%281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\architech-working-%281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\broom-%281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\check-list-%281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\edit-%281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\pipes-angles-%281%29.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -28,10 +28,10 @@ namespace QuickClash
                 Application app = uiapp.Application;
                 Document doc = uidoc.Document;
                 List<DefinitionGroup> defGroups = new List<DefinitionGroup>();
-                TaskDialog.Show("Dynoscript", "Recuerda:\n\n1.- Tener los Worksets del proyecto en modo Editables. \n\n2.- Si el Modelo es muy grande algunas tareas pueden demorar varios minutos. "
-                                + Environment.NewLine + "\n3.- Si ya probaste Quick Clash por favor déjanos tus comentarios en nuestra página : \n" + Environment.NewLine + new Uri("https://www.dynoscript.com/quickclash/")
-                                + " \n\nSe recibe cualquier tipo de FeedBack. Muchas Gracias! :) ", TaskDialogCommonButtons.Ok);
-                DefinitionFile sharedParameterFile = app.OpenSharedParameterFile(); 
+                //TaskDialog.Show("Dynoscript", "Recuerda:\n\n1.- Tener los Worksets del proyecto en modo Editables. \n\n2.- Si el Modelo es muy grande algunas tareas pueden demorar varios minutos. "
+                //                + Environment.NewLine + "\n3.- Si ya probaste Quick Clash por favor déjanos tus comentarios en nuestra página : \n" + Environment.NewLine + new Uri("https://www.dynoscript.com/quickclash/")
+                //                + " \n\nSe recibe cualquier tipo de FeedBack. Muchas Gracias! :) ", TaskDialogCommonButtons.Ok);
+                DefinitionFile sharedParameterFile = app.OpenSharedParameterFile();
                 foreach (DefinitionGroup dg in sharedParameterFile.Groups)
                 {
                     defGroups.Add(dg);
@@ -49,7 +49,7 @@ namespace QuickClash
                 {
                     if (param != null)
                     {
-                        
+
                     }
                     else
                     {
@@ -60,18 +60,32 @@ namespace QuickClash
                 {
                     if (param != null)
                     {
-                        
+
                     }
-                    else 
+                    else
                     {
                         ClashParameters.CreateWhenSharedParameter(commandData, false);
                     }
                 }
 
                 View.Create(commandData);
-                SetIDValue.Do(commandData, "AllProject");
+                //SetIDValue.Do(commandData, "AllProject");
                 SetEmptyYesNoParameters.Do(commandData);
-                //ClashSchedules.Create(commandData);
+                FilteredElementCollector schedules = new FilteredElementCollector(doc).OfClass(typeof(ViewSchedule));
+                bool val = true;
+                foreach (var schedule in schedules)
+                {
+
+                    if (schedule.Name.ToString().Contains("OST_"))
+                    {
+                        val = false;
+                        break;
+                    }
+                }
+                if (val)
+                {
+                    ClashSchedules.Create(commandData);
+                }
                 return Result.Succeeded;
             }
             catch (Exception e)

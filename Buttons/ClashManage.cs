@@ -32,13 +32,13 @@ namespace QuickClash
                 }
                 if (form.DialogResult == forms.DialogResult.OK)
                 {
-                    bool checkBox_1 = form.checkBox_1; 
+                    bool checkBox_1 = form.CheckBox_1;
                     lista_checkBox_1.Add(checkBox_1);
 
-                    bool checkBox_3 = form.checkBox_3;
+                    bool checkBox_3 = form.CheckBox_3;
                     lista_checkBox_3.Add(checkBox_3);
 
-                    foreach (string s in form.checkedItems1)
+                    foreach (string s in form.CheckedItems1)
                     {
                         if (s == "CableTray" || s == "Conduit" || s == "Duct" || s == "Pipe" || s == "FlexDuct" || s == "FlexPipe")
                         {
@@ -47,7 +47,7 @@ namespace QuickClash
 
                     }
 
-                    foreach (string s in form.checkedItems1)
+                    foreach (string s in form.CheckedItems1)
                     {
                         if (s == "CableTrayFitting" || s == "ConduitFitting" || s == "DuctFitting" || s == "DuctTerminal" || s == "ElectricalEquipment" ||
                             s == "ElectricalFixtures" || s == "LightingDevices" || s == "LightingFixtures" || s == "MechanicalEquipment" || s == "PipeFitting" ||
@@ -57,7 +57,7 @@ namespace QuickClash
                         }
                     }
 
-                    foreach (string s in form.checkedItems2)
+                    foreach (string s in form.CheckedItems2)
                     {
                         if (s == "CableTray" || s == "Conduit" || s == "Duct" || s == "Pipe" || s == "FlexDuct" || s == "FlexPipe")
                         {
@@ -65,7 +65,7 @@ namespace QuickClash
                         }
 
                     }
-                    foreach (string s in form.checkedItems2)
+                    foreach (string s in form.CheckedItems2)
                     {
                         if (s == "CableTrayFitting" || s == "ConduitFitting" || s == "DuctFitting" || s == "DuctTerminal" || s == "ElectricalEquipment" ||
                             s == "ElectricalFixtures" || s == "LightingDevices" || s == "LightingFixtures" || s == "MechanicalEquipment" || s == "PipeFitting" ||
@@ -82,7 +82,7 @@ namespace QuickClash
             bool checkBox_1s = lista_checkBox_1.First();
             bool checkBox_3s = lista_checkBox_3.First();
 
-            List<BuiltInCategory> UI_list1 = new List<BuiltInCategory>();	
+            List<BuiltInCategory> UI_list1 = new List<BuiltInCategory>();
             List<BuiltInCategory> UI_list2 = new List<BuiltInCategory>();
 
             List<BuiltInCategory> UI_list3 = new List<BuiltInCategory>();
