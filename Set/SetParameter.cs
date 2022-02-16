@@ -24,11 +24,11 @@ namespace QuickClash
                 using (Transaction t = new Transaction(doc, "set parameter"))
                 {
                     t.Start();
-                    param.Set(1);
-                    param.Set(0);
+                    //param.Set("YES");
+                    //param.Set("NO");
 
-                    param2.Set(1);
-                    param2.Set(0);
+                    //param2.Set("YES");
+                    //param2.Set("NO");
                     t.Commit();
                 }
 

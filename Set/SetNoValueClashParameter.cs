@@ -39,7 +39,7 @@ namespace QuickClash
             {
                 foreach (var item in elems)
                 {
-                    if (item.LookupParameter("Clash").AsInteger() == 1)
+                    if (item.LookupParameter("Clash").AsString() == "YES")
                     {
                         clash.Add(item);
                     }
@@ -61,7 +61,7 @@ namespace QuickClash
                 using (Transaction t = new Transaction(doc, "Set No value to Clash elements in Active View"))
                 {
                     t.Start();
-                    clashParam.Set(0);
+                    clashParam.Set("NO");
                     param4.Set(param_value);
                     param5.Set(param_value);
                     t.Commit();
@@ -98,7 +98,7 @@ namespace QuickClash
 
                 foreach (Element elem in family_instance)
                 {
-                    if (elem.LookupParameter("Clash").AsInteger() == 1)
+                    if (elem.LookupParameter("Clash").AsString() == "YES")
                     {
                         familyInstance_clash.Add(elem);
                     }
@@ -121,7 +121,7 @@ namespace QuickClash
                 using (Transaction t = new Transaction(doc, "Set No value to Clash elements in Active View"))
                 {
                     t.Start();
-                    clashParam.Set(0);
+                    clashParam.Set("NO");
                     param4.Set(param_value);
                     param5.Set(param_value);
                     t.Commit();

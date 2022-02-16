@@ -474,7 +474,7 @@ namespace QuickClash
                 using (Transaction t = new Transaction(doc, "Clash YES"))
                 {
                     t.Start();
-                    param.Set(1);
+                    param.Set("YES");
                     t.Commit();
                 }
             }
@@ -842,7 +842,7 @@ namespace QuickClash
                 using (Transaction t = new Transaction(doc, "Clash YES"))
                 {
                     t.Start();
-                    param.Set(1);
+                    param.Set("YES");
                     t.Commit();
                 }
             }
@@ -1031,7 +1031,7 @@ namespace QuickClash
                 using (Transaction t = new Transaction(doc, "Clash YES"))
                 {
                     t.Start();
-                    param.Set(1);
+                    param.Set("YES");
                     t.Commit();
                 }
             }
@@ -1183,7 +1183,7 @@ namespace QuickClash
                 using (Transaction t = new Transaction(doc, "Clash YES"))
                 {
                     t.Start();
-                    param.Set(1);
+                    param.Set("YES");
                     t.Commit();
                 }
             }
@@ -1273,10 +1273,7 @@ namespace QuickClash
                 using (Transaction t = new Transaction(doc, "Clash YES"))
                 {
                     t.Start();
-                    if (!(param.AsInteger() == 1))
-                    {
-                        param.Set(1);
-                    }
+                    param.Set("YES");
                     t.Commit();
                 }
             }
@@ -1348,10 +1345,7 @@ namespace QuickClash
                 using (Transaction t = new Transaction(doc, "Clash YES"))
                 {
                     t.Start();
-                    if (!(param.AsInteger() == 1))
-                    {
-                        param.Set(1);
-                    }
+                    param.Set("YES");
                     t.Commit();
                 }
             }

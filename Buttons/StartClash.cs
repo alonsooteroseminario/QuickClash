@@ -70,7 +70,7 @@ namespace QuickClash
 
                 View.Create(commandData);
                 //SetIDValue.Do(commandData, "AllProject");
-                SetEmptyYesNoParameters.Do(commandData);
+                //SetEmptyYesNoParameters.Do(commandData);
                 FilteredElementCollector schedules = new FilteredElementCollector(doc).OfClass(typeof(ViewSchedule));
                 bool val = true;
                 foreach (var schedule in schedules)
