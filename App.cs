@@ -41,7 +41,7 @@ namespace QuickClash
 
             RibbonPanel panel2 = application.CreateRibbonPanel(tabName, "Clash Review");
 
-            PushButton button4 = panel2.AddItem(new PushButtonData("button4", "Quick Clash", ExecutingAssemblyPath, "QuickClash.StartClash")) as PushButton;
+            PushButton button4 = panel2.AddItem(new PushButtonData("button4", "Quick Clash", ExecutingAssemblyPath, "QuickClash.QuickClash")) as PushButton;
             PushButton button5 = panel2.AddItem(new PushButtonData("button5", "Clean Clash", ExecutingAssemblyPath, "QuickClash.CleanClash")) as PushButton;
             PushButton button6 = panel2.AddItem(new PushButtonData("button6", "Clash Comments", ExecutingAssemblyPath, "QuickClash.ClashComments")) as PushButton;
 

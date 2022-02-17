@@ -12,7 +12,7 @@ namespace QuickClash
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
 
-            SetNoValueClashParameter.Do(commandData); // Vista Activa , "Clash" y "Clash Grid Location" = " " vacio.
+            //SetNoValueClashParameter.Do(commandData); // Vista Activa , "Clash" y "Clash Grid Location" = " " vacio.
 
             Intersect.MultipleElementsToMultipleCategory(commandData);
 
@@ -20,9 +20,9 @@ namespace QuickClash
 
             Intersect.MultipleFamilyInstanceToMultipleFamilyInstances_BBox(commandData);
 
-            //SetClashGridLocation.DoAllDocument(commandData);
+            SetClashGridLocation.DoActiveView(commandData);
 
-            //SetIDValue.Do(commandData, "ActiveView");
+            SetIDValue.Do(commandData, "ActiveView");
 
             //List<Element> clash_yes = GetAllNOClashElements_OnlyActiveView.Do(commandData);// Vista Activa
 
