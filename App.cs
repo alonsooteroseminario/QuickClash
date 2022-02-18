@@ -42,23 +42,34 @@ namespace QuickClash
             RibbonPanel panel2 = application.CreateRibbonPanel(tabName, "Clash Review");
 
             PushButton button4 = panel2.AddItem(new PushButtonData("button4", "Quick Clash", ExecutingAssemblyPath, "QuickClash.QuickClash")) as PushButton;
-            PushButton button5 = panel2.AddItem(new PushButtonData("button5", "Clean Clash", ExecutingAssemblyPath, "QuickClash.CleanClash")) as PushButton;
-            PushButton button6 = panel2.AddItem(new PushButtonData("button6", "Clash Comments", ExecutingAssemblyPath, "QuickClash.ClashComments")) as PushButton;
+
+
+
+
+            //PushButton button5 = panel2.AddItem(new PushButtonData("button5", "Clean Clash", ExecutingAssemblyPath, "QuickClash.CleanClash")) as PushButton;
+            //PushButton button6 = panel2.AddItem(new PushButtonData("button6", "Clash Comments", ExecutingAssemblyPath, "QuickClash.ClashComments")) as PushButton;
+
+
+
+            PushButton button7 = panel2.AddItem(new PushButtonData("button7", "Filter Clash", ExecutingAssemblyPath, "QuickClash.ClashFilter")) as PushButton;
+
+
+
 
             button4.LargeImage = new BitmapImage(new Uri("pack://application:,,,/QuickClash;component/Resources/pipes-angles-(1).png"));
             button4.ToolTip = "Quick Analysis";
             button4.LongDescription = "Quick Collision Analysis of all Categories against all Categories in Active View.";
             button4.SetContextualHelp(contextHelp);
 
-            button5.LargeImage = new BitmapImage(new Uri("pack://application:,,,/QuickClash;component/Resources/broom-(1).png"));
-            button5.ToolTip = "Clear Active View parameters";
-            button5.LongDescription = "Delete or return the Clash Parameters from the Active View to their default values. Minus the parameters: 'Clash Solved' and 'Clash Comments'.";
-            button5.SetContextualHelp(contextHelp);
+            //button5.LargeImage = new BitmapImage(new Uri("pack://application:,,,/QuickClash;component/Resources/broom-(1).png"));
+            //button5.ToolTip = "Clear Active View parameters";
+            //button5.LongDescription = "Delete or return the Clash Parameters from the Active View to their default values. Minus the parameters: 'Clash Solved' and 'Clash Comments'.";
+            //button5.SetContextualHelp(contextHelp);
 
-            button6.LargeImage = new BitmapImage(new Uri("pack://application:,,,/QuickClash;component/Resources/edit-(1).png"));
-            button6.ToolTip = "Comment on the Items pending revision";
-            button6.LongDescription = "The comment will be written in the Elements with CLASH of the Active View.";
-            button6.SetContextualHelp(contextHelp);
+            //button6.LargeImage = new BitmapImage(new Uri("pack://application:,,,/QuickClash;component/Resources/edit-(1).png"));
+            //button6.ToolTip = "Comment on the Items pending revision";
+            //button6.LongDescription = "The comment will be written in the Elements with CLASH of the Active View.";
+            //button6.SetContextualHelp(contextHelp);
 
             return Result.Succeeded;
         }
