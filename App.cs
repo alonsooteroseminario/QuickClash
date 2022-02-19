@@ -52,6 +52,7 @@ namespace QuickClash
 
 
             PushButton button7 = panel2.AddItem(new PushButtonData("button7", "Filter Clash", ExecutingAssemblyPath, "QuickClash.ClashFilter")) as PushButton;
+            PushButton button8 = panel2.AddItem(new PushButtonData("button8", "Remove Filter Clash", ExecutingAssemblyPath, "QuickClash.RemoveClashFilter")) as PushButton;
 
 
 

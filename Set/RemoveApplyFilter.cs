@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace QuickClash
 {
-    public static class ApplyFilter
+    public static class RemoveApplyFilter
     {
         /// <summary>
         /// 
@@ -129,15 +129,12 @@ namespace QuickClash
                     }
                 }
 
- 
-                
-                activeView.AddFilter(ParameterFilterElement1.Id);
-                activeView.AddFilter(ParameterFilterElement1_no.Id);
+                if (!existsFilterActiveView)
+                {
+                    activeView.RemoveFilter(ParameterFilterElement1.Id);
+                    activeView.RemoveFilter(ParameterFilterElement1_no.Id);
+                }
 
-
-                activeView.SetFilterOverrides(ParameterFilterElement1.Id, ogs3);
-                activeView.SetFilterOverrides(ParameterFilterElement1_no.Id, ogs4);
-                
                 
                 ta.Commit();
             }

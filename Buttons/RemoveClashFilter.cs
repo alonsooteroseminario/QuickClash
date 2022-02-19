@@ -8,7 +8,7 @@ namespace QuickClash
 {
     [TransactionAttribute(TransactionMode.Manual)]
     [RegenerationAttribute(RegenerationOption.Manual)]
-    class ClashFilter : IExternalCommand
+    class RemoveClashFilter : IExternalCommand
     {
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
@@ -17,7 +17,7 @@ namespace QuickClash
             Document doc = uidoc.Document;
             var activeView = uidoc.ActiveView;
 
-            ApplyFilter.Do(commandData);
+            RemoveApplyFilter.Do(commandData);
 
             return Result.Succeeded;
         }
