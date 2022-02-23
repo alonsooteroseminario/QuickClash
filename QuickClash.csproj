@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="Buttons\QuickClashLinks.cs" />
     <Compile Include="Buttons\RemoveClashFilter.cs" />
     <Compile Include="Buttons\ClashFilter.cs" />
     <Compile Include="Check\CheckClashSolved.cs" />

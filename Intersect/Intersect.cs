@@ -1,8 +1,10 @@
-﻿using Autodesk.Revit.DB;
+﻿using Autodesk.Revit.ApplicationServices;
+using Autodesk.Revit.DB;
 using Autodesk.Revit.DB.Electrical;
 using Autodesk.Revit.DB.Mechanical;
 using Autodesk.Revit.DB.Plumbing;
 using Autodesk.Revit.UI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -1353,5 +1355,154 @@ namespace QuickClash
                 }
             }
         }
+
+
+        //Elements vs Links Elements
+        public static void MultipleElementsToLinks(ExternalCommandData commandData)
+        {
+            UIApplication uiapp = commandData.Application;
+            UIDocument uidoc = uiapp.ActiveUIDocument;
+            Document doc = uidoc.Document;
+            var activeView = uidoc.ActiveView;
+
+            List<BuiltInCategory> UI_list1 = GetLists.BuiltCategories(false);
+            List<BuiltInCategory> UI_list3 = GetLists.BuiltCategories(false);
+
+            IList<Element> linkInstances = new FilteredElementCollector(doc).OfClass(typeof(RevitLinkInstance)).ToElements();
+
+            List<Element> lista_links = new List<Element>();
+
+            foreach (RevitLinkInstance link in linkInstances)
+            {
+                lista_links.Add(link);
+            }
+
+
+            List<Element> allElements = new List<Element>();
+
+            foreach (BuiltInCategory bic in UI_list1)
+            {
+                if (bic == BuiltInCategory.OST_CableTray)
+                {
+                    IList<Element> cabletrays = GetElements.ElementsByBuiltCategoryActiveView(commandData, bic, "cabletrays");
+                    foreach (Element i in cabletrays)
+                    {
+                        allElements.Add(i);
+                    }
+                }
+                if (bic == BuiltInCategory.OST_Conduit)
+                {
+                    IList<Element> conduits = GetElements.ElementsByBuiltCategoryActiveView(commandData, bic, "conduits");
+                    foreach (Element i in conduits)
+                    {
+                        allElements.Add(i);
+                    }
+                }
+                if (bic == BuiltInCategory.OST_DuctCurves)
+                {
+                    IList<Element> ducts = GetElements.ElementsByBuiltCategoryActiveView(commandData, bic, "ducts");
+                    foreach (Element i in ducts)
+                    {
+                        allElements.Add(i);
+                    }
+                }
+                if (bic == BuiltInCategory.OST_PipeCurves)
+                {
+                    IList<Element> pipes = GetElements.ElementsByBuiltCategoryActiveView(commandData, bic, "pipes");
+                    foreach (Element i in pipes)
+                    {
+                        allElements.Add(i);
+                    }
+                }
+                if (bic == BuiltInCategory.OST_FlexDuctCurves)
+                {
+                    IList<Element> flexducts = GetElements.ElementsByBuiltCategoryActiveView(commandData, bic, "flexducts");
+                    foreach (Element i in flexducts)
+                    {
+                        allElements.Add(i);
+                    }
+                }
+                if (bic == BuiltInCategory.OST_FlexPipeCurves)
+                {
+                    IList<Element> flexpipes = GetElements.ElementsByBuiltCategoryActiveView(commandData, bic, "flexpipes");
+                    foreach (Element i in flexpipes)
+                    {
+                        allElements.Add(i);
+                    }
+                }
+            }
+
+            List<Element> clash_yesA = new List<Element>();
+
+            foreach (Element e in allElements)
+            {
+                ElementId eID = e.Id;
+                GeometryElement geomElement = e.get_Geometry(new Options());
+                Solid solid = null;
+
+                foreach (GeometryObject geomObj in geomElement)
+                {
+                    solid = geomObj as Solid;
+                    if (solid != null)
+                    {
+                        break;
+                    }
+
+                }
+
+                ICollection<ElementId> collectoreID = new List<ElementId>();
+                collectoreID.Add(eID);
+
+
+                foreach (RevitLinkInstance link in lista_links)
+                {
+
+                    ExclusionFilter filter4 = new ExclusionFilter(collectoreID);
+                    FilteredElementCollector collector4 = new FilteredElementCollector(link.GetLinkDocument());
+
+                    collector4.WherePasses(new ElementIntersectsSolidFilter(solid)).ToElements(); // Apply intersection filter to find matches
+                    collector4.WherePasses(filter4);
+                    if (collector4.Count() > 0)
+                    {
+                        Parameter param = e.LookupParameter("Clash Category");
+                        Parameter paramID = e.LookupParameter("ID Element");
+                        string elemcategory = collector4.First().Category.Name.ToString() + " / ID: " + collector4.First().Id.ToString();
+                        using (Transaction t = new Transaction(doc, "Clash Category"))
+                        {
+                            t.Start();
+                            param.Set(elemcategory);
+                            t.Commit();
+                        }
+                        if (!clash_yesA.Contains(e))
+                        {
+                            clash_yesA.Add(e);
+                        }
+                    }
+                }
+            }
+
+            foreach (Element elem in clash_yesA)
+            {
+                Parameter param = elem.LookupParameter("Clash");
+                using (Transaction t = new Transaction(doc, "Clash YES"))
+                {
+                    t.Start();
+                    param.Set("YES");
+                    t.Commit();
+                }
+            }
+
+            //SetClashGridLocation.DoAllDocument(commandData);
+        }
+
+        public static void MultipleFamilyInstanceToLinks(ExternalCommandData commandData)
+        {
+
+        }
+        //FamilyIntance vs Links Elements
+
+
+
+
     }
 }
