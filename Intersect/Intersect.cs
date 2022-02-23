@@ -1456,26 +1456,175 @@ namespace QuickClash
 
                 foreach (RevitLinkInstance link in lista_links)
                 {
-
-                    ExclusionFilter filter4 = new ExclusionFilter(collectoreID);
-                    FilteredElementCollector collector4 = new FilteredElementCollector(link.GetLinkDocument());
-
-                    collector4.WherePasses(new ElementIntersectsSolidFilter(solid)).ToElements(); // Apply intersection filter to find matches
-                    collector4.WherePasses(filter4);
-                    if (collector4.Count() > 0)
+                    foreach (BuiltInCategory bic in UI_list3)
                     {
-                        Parameter param = e.LookupParameter("Clash Category");
-                        Parameter paramID = e.LookupParameter("ID Element");
-                        string elemcategory = collector4.First().Category.Name.ToString() + " / ID: " + collector4.First().Id.ToString();
-                        using (Transaction t = new Transaction(doc, "Clash Category"))
+                        if (bic == BuiltInCategory.OST_CableTray)
                         {
-                            t.Start();
-                            param.Set(elemcategory);
-                            t.Commit();
+                            ElementClassFilter DUFilter4 = new ElementClassFilter(typeof(CableTray));
+                            ElementCategoryFilter DU2Categoryfilter4 = new ElementCategoryFilter(BuiltInCategory.OST_CableTray);
+                            LogicalAndFilter DU2InstancesFilter4 = new LogicalAndFilter(DUFilter4, DU2Categoryfilter4);
+                            ExclusionFilter filter4 = new ExclusionFilter(collectoreID);
+                            FilteredElementCollector collector4 = new FilteredElementCollector(link.GetLinkDocument());
+                            collector4.OfClass(typeof(CableTray));
+                            collector4.WherePasses(DU2InstancesFilter4);
+                            collector4.WherePasses(new ElementIntersectsSolidFilter(solid)).ToElements(); // Apply intersection filter to find matches
+                            collector4.WherePasses(filter4);
+                            if (collector4.Count() > 0)
+                            {
+                                Parameter param = e.LookupParameter("Clash Category");
+                                Parameter paramID = e.LookupParameter("ID Element");
+                                string elemcategory = collector4.First().Category.Name.ToString() + " / ID: " + collector4.First().Id.ToString();
+                                using (Transaction t = new Transaction(doc, "Clash Category"))
+                                {
+                                    t.Start();
+                                    param.Set(elemcategory);
+                                    t.Commit();
+                                }
+                                if (!clash_yesA.Contains(e))
+                                {
+                                    clash_yesA.Add(e);
+                                }
+                            }
                         }
-                        if (!clash_yesA.Contains(e))
+                        if (bic == BuiltInCategory.OST_Conduit)
                         {
-                            clash_yesA.Add(e);
+                            ElementClassFilter DUFilter3 = new ElementClassFilter(typeof(Conduit));
+                            ElementCategoryFilter DU2Categoryfilter3 = new ElementCategoryFilter(BuiltInCategory.OST_Conduit);
+                            LogicalAndFilter DU2InstancesFilter3 = new LogicalAndFilter(DUFilter3, DU2Categoryfilter3);
+                            ExclusionFilter filter3 = new ExclusionFilter(collectoreID);
+                            FilteredElementCollector collector3 = new FilteredElementCollector(link.GetLinkDocument());
+                            collector3.OfClass(typeof(Conduit));
+                            collector3.WherePasses(DU2InstancesFilter3);
+                            collector3.WherePasses(new ElementIntersectsSolidFilter(solid)).ToElements(); // Apply intersection filter to find matches
+                            collector3.WherePasses(filter3);
+                            if (collector3.Count() > 0)
+                            {
+                                Parameter param = e.LookupParameter("Clash Category");
+                                Parameter paramID = e.LookupParameter("ID Element");
+                                string elemcategory = collector3.First().Category.Name.ToString() + " / ID: " + collector3.First().Id.ToString();
+                                using (Transaction t = new Transaction(doc, "Clash Category"))
+                                {
+                                    t.Start();
+                                    param.Set(elemcategory);
+                                    t.Commit();
+                                }
+                                if (!clash_yesA.Contains(e))
+                                {
+                                    clash_yesA.Add(e);
+                                }
+                            }
+                        }
+                        if (bic == BuiltInCategory.OST_DuctCurves)
+                        {
+                            ElementClassFilter DUFilter = new ElementClassFilter(typeof(Duct));
+                            ElementCategoryFilter DU2Categoryfilter = new ElementCategoryFilter(BuiltInCategory.OST_DuctCurves);
+                            LogicalAndFilter DU2InstancesFilter = new LogicalAndFilter(DUFilter, DU2Categoryfilter);
+                            ExclusionFilter filter = new ExclusionFilter(collectoreID);
+                            FilteredElementCollector collector = new FilteredElementCollector(link.GetLinkDocument());
+                            collector.OfClass(typeof(Duct));
+                            collector.WherePasses(DU2InstancesFilter);
+                            collector.WherePasses(new ElementIntersectsSolidFilter(solid)).ToElements(); // Apply intersection filter to find matches
+                            collector.WherePasses(filter);
+                            if (collector.Count() > 0)
+                            {
+                                Parameter param = e.LookupParameter("Clash Category");
+                                Parameter paramID = e.LookupParameter("ID Element");
+                                string elemcategory = collector.First().Category.Name.ToString() + " / ID: " + collector.First().Id.ToString();
+                                using (Transaction t = new Transaction(doc, "Clash Category"))
+                                {
+                                    t.Start();
+                                    param.Set(elemcategory);
+                                    t.Commit();
+                                }
+                                if (!clash_yesA.Contains(e))
+                                {
+                                    clash_yesA.Add(e);
+                                }
+                            }
+                        }
+                        if (bic == BuiltInCategory.OST_PipeCurves)
+                        {
+                            ElementClassFilter DUFilter2 = new ElementClassFilter(typeof(Pipe));
+                            ElementCategoryFilter DU2Categoryfilter2 = new ElementCategoryFilter(BuiltInCategory.OST_PipeCurves);
+                            LogicalAndFilter DU2InstancesFilter2 = new LogicalAndFilter(DUFilter2, DU2Categoryfilter2);
+                            ExclusionFilter filter2 = new ExclusionFilter(collectoreID);
+                            FilteredElementCollector collector2 = new FilteredElementCollector(link.GetLinkDocument());
+                            collector2.OfClass(typeof(Pipe));
+                            collector2.WherePasses(DU2InstancesFilter2);
+                            collector2.WherePasses(new ElementIntersectsSolidFilter(solid)).ToElements(); // Apply intersection filter to find matches
+                            collector2.WherePasses(filter2);
+                            if (collector2.Count() > 0)
+                            {
+                                Parameter param = e.LookupParameter("Clash Category");
+                                Parameter paramID = e.LookupParameter("ID Element");
+                                string elemcategory = collector2.First().Category.Name.ToString() + " / ID: " + collector2.First().Id.ToString();
+                                using (Transaction t = new Transaction(doc, "Clash Category"))
+                                {
+                                    t.Start();
+                                    param.Set(elemcategory);
+                                    t.Commit();
+                                }
+                                if (!clash_yesA.Contains(e))
+                                {
+                                    clash_yesA.Add(e);
+                                }
+                            }
+                        }
+                        if (bic == BuiltInCategory.OST_FlexDuctCurves)
+                        {
+                            ElementClassFilter DUFilter5 = new ElementClassFilter(typeof(FlexDuct));
+                            ElementCategoryFilter DU2Categoryfilter5 = new ElementCategoryFilter(BuiltInCategory.OST_FlexDuctCurves);
+                            LogicalAndFilter DU2InstancesFilter5 = new LogicalAndFilter(DUFilter5, DU2Categoryfilter5);
+                            ExclusionFilter filter5 = new ExclusionFilter(collectoreID);
+                            FilteredElementCollector collector5 = new FilteredElementCollector(link.GetLinkDocument());
+                            collector5.OfClass(typeof(FlexDuct));
+                            collector5.WherePasses(DU2InstancesFilter5);
+                            collector5.WherePasses(new ElementIntersectsSolidFilter(solid)).ToElements(); // Apply intersection filter to find matches
+                            collector5.WherePasses(filter5);
+                            if (collector5.Count() > 0)
+                            {
+                                Parameter param = e.LookupParameter("Clash Category");
+                                Parameter paramID = e.LookupParameter("ID Element");
+                                string elemcategory = collector5.First().Category.Name.ToString() + " / ID: " + collector5.First().Id.ToString();
+                                using (Transaction t = new Transaction(doc, "Clash Category"))
+                                {
+                                    t.Start();
+                                    param.Set(elemcategory);
+                                    t.Commit();
+                                }
+                                if (!clash_yesA.Contains(e))
+                                {
+                                    clash_yesA.Add(e);
+                                }
+                            }
+                        }
+                        if (bic == BuiltInCategory.OST_FlexPipeCurves)
+                        {
+                            ElementClassFilter DUFilter6 = new ElementClassFilter(typeof(FlexPipe));
+                            ElementCategoryFilter DU2Categoryfilter6 = new ElementCategoryFilter(BuiltInCategory.OST_FlexPipeCurves);
+                            LogicalAndFilter DU2InstancesFilter6 = new LogicalAndFilter(DUFilter6, DU2Categoryfilter6);
+                            ExclusionFilter filter6 = new ExclusionFilter(collectoreID);
+                            FilteredElementCollector collector6 = new FilteredElementCollector(link.GetLinkDocument());
+                            collector6.OfClass(typeof(FlexPipe));
+                            collector6.WherePasses(DU2InstancesFilter6);
+                            collector6.WherePasses(new ElementIntersectsSolidFilter(solid)).ToElements(); // Apply intersection filter to find matches
+                            collector6.WherePasses(filter6);
+                            if (collector6.Count() > 0)
+                            {
+                                Parameter param = e.LookupParameter("Clash Category");
+                                Parameter paramID = e.LookupParameter("ID Element");
+                                string elemcategory = collector6.First().Category.Name.ToString() + " / ID: " + collector6.First().Id.ToString();
+                                using (Transaction t = new Transaction(doc, "Clash Category"))
+                                {
+                                    t.Start();
+                                    param.Set(elemcategory);
+                                    t.Commit();
+                                }
+                                if (!clash_yesA.Contains(e))
+                                {
+                                    clash_yesA.Add(e);
+                                }
+                            }
                         }
                     }
                 }
