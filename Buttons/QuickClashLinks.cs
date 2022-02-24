@@ -20,9 +20,13 @@ namespace QuickClash
 
             //Intersect.MultipleFamilyInstanceToMultipleFamilyInstances_BBox(commandData);
 
-            Intersect.MultipleElementsToLinks(commandData);
+            Intersect.MultipleElementsToLinksElements(commandData);
 
-            Intersect.MultipleFamilyInstanceToLinks(commandData);
+            Intersect.MultipleFamilyInstanceToLinksElements(commandData);
+
+            Intersect.MultipleElementsToLinksFamilyInstance(commandData);
+
+            Intersect.MultipleFamilyInstanceToLinksFamilyInstance(commandData);
 
             SetClashGridLocation.DoActiveView(commandData);
 

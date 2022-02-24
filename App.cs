@@ -80,7 +80,7 @@ namespace QuickClash
 
 
 
-            PushButton button9 = panel2.AddItem(new PushButtonData("button9", "Quick Clash Links", ExecutingAssemblyPath, "QuickClash.QuickClashLinks")) as PushButton;
+            //PushButton button9 = panel2.AddItem(new PushButtonData("button9", "Quick Clash Links", ExecutingAssemblyPath, "QuickClash.QuickClashLinks")) as PushButton;
 
 
 
