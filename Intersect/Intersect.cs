@@ -1647,9 +1647,10 @@ namespace QuickClash
             UIApplication uiapp = commandData.Application;
             UIDocument uidoc = uiapp.ActiveUIDocument;
             Document doc = uidoc.Document;
+            var activeView = uidoc.ActiveView;
 
             List<BuiltInCategory> UI_list1 = GetLists.BuiltCategories(false);
-            List<BuiltInCategory> UI_list3 = GetLists.BuiltCategories(false);
+            List<BuiltInCategory> UI_list3 = GetLists.BuiltCategories(true);
 
             IList<Element> linkInstances = new FilteredElementCollector(doc).OfClass(typeof(RevitLinkInstance)).ToElements();
 
@@ -1739,14 +1740,14 @@ namespace QuickClash
 
                 foreach (RevitLinkInstance link in lista_links)
                 {
-                    foreach (BuiltInCategory bic in UI_list3)
-                    {
-
+                        var docLink = link.GetLinkDocument();
+                        var activeLinkViewId = link.Id;
                         ExclusionFilter filter4 = new ExclusionFilter(collectoreID);
-                        FilteredElementCollector collector4 = new FilteredElementCollector(link.GetLinkDocument());
+                        FilteredElementCollector collector4 = new FilteredElementCollector(docLink);
                         collector4.OfClass(typeof(FamilyInstance));
                         collector4.WherePasses(new ElementIntersectsSolidFilter(solid)).ToElements(); // Apply intersection filter to find matches
                         collector4.WherePasses(filter4);
+
                         if (collector4.Count() > 0)
                         {
                             Parameter param = e.LookupParameter("Clash Category");
@@ -1763,7 +1764,7 @@ namespace QuickClash
                                 clash_yesA.Add(e);
                             }
                         }
-                    }
+            
                 }
             }
 
@@ -1798,20 +1799,27 @@ namespace QuickClash
                 lista_links.Add(link);
             }
 
-
             List<Element> allElements = new List<Element>();
+            List<Element> familyinstance = new List<Element>();
 
-            foreach (BuiltInCategory bic in UI_list1)
+            foreach (var bic in UI_list1)
             {
-                IList<Element> familyinstance = GetElements.ElementsByBuiltCategoryActiveView(commandData, bic, "family_instances_all");
-                foreach (Element i in familyinstance)
+                IList<Element> familyInstances = GetElements.ElementsByBuiltCategoryActiveView(commandData, bic, "family_instances_all");
+                foreach (var item in familyInstances)
                 {
+                    familyinstance.Add(item);
+                }
+            }
+
+
+            foreach (Element i in familyinstance)
+            {
                     if (!allElements.Contains(i))
                     {
                         allElements.Add(i);
                     }
-                }
             }
+            
             List<Element> clash_yesA = new List<Element>();
 
             foreach (Element e in allElements)
@@ -2039,16 +2047,23 @@ namespace QuickClash
 
 
             List<Element> allElements = new List<Element>();
+            List<Element> familyinstance = new List<Element>();
 
-            foreach (BuiltInCategory bic in UI_list1)
+            foreach (var bic in UI_list1)
             {
-                IList<Element> familyinstance = GetElements.ElementsByBuiltCategoryActiveView(commandData, bic, "family_instances_all");
-                foreach (Element i in familyinstance)
+                IList<Element> familyInstances = GetElements.ElementsByBuiltCategoryActiveView(commandData, bic, "family_instances_all");
+                foreach (var item in familyInstances)
                 {
-                    if (!allElements.Contains(i))
-                    {
-                        allElements.Add(i);
-                    }
+                    familyinstance.Add(item);
+                }
+            }
+
+
+            foreach (Element i in familyinstance)
+            {
+                if (!allElements.Contains(i))
+                {
+                    allElements.Add(i);
                 }
             }
 
@@ -2063,11 +2078,12 @@ namespace QuickClash
 
                 foreach (RevitLinkInstance link in lista_links)
                 {
-                    foreach (BuiltInCategory bic in UI_list3)
-                    {
 
+                    
+                        var docLink = link.GetLinkDocument();
+                        var activeLinkViewId = link.Id;
                         ExclusionFilter filter4 = new ExclusionFilter(collectoreID);
-                        FilteredElementCollector collector4 = new FilteredElementCollector(link.GetLinkDocument());
+                        FilteredElementCollector collector4 = new FilteredElementCollector(docLink);
                         collector4.OfClass(typeof(FamilyInstance));
                         //collector4.WherePasses(new ElementIntersectsSolidFilter(solid)).ToElements(); // Apply intersection filter to find matches
                         collector4.WherePasses(new ElementIntersectsElementFilter(e)).ToElements(); // Apply intersection filter to find matches
@@ -2088,7 +2104,7 @@ namespace QuickClash
                                 clash_yesA.Add(e);
                             }
                         }
-                    }
+                    
                 }
             }
 
