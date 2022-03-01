@@ -119,26 +119,29 @@ namespace QuickClash
                 {
                     lista_filtrosActiveView.Add(e);
                 }
-                for (int i = 0; i < lista_filtrosActiveView.Count(); i++)
-                {
-                    if (lista_filtrosActiveView[i].Name == "CLASH YES FILTER")
-                    {
-                        i = lista_filtrosActiveView.Count();
-                        existsFilterActiveView = true;
-                        break;
-                    }
-                }
 
- 
-                
+                if (lista_filtrosActiveView.Count() != 0)
+                {
+                    for (int i = 0; i < lista_filtrosActiveView.Count(); i++)
+                    {
+                        if (lista_filtrosActiveView[i].Name == "CLASH YES FILTER")
+                        {
+                            i = lista_filtrosActiveView.Count();
+                            existsFilterActiveView = true;
+                            break;
+                        }
+                    }
+
+                }
                 activeView.AddFilter(ParameterFilterElement1.Id);
                 activeView.AddFilter(ParameterFilterElement1_no.Id);
 
 
                 activeView.SetFilterOverrides(ParameterFilterElement1.Id, ogs3);
                 activeView.SetFilterOverrides(ParameterFilterElement1_no.Id, ogs4);
-                
-                
+
+
+
                 ta.Commit();
             }
         }

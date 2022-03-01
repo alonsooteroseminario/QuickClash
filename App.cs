@@ -28,11 +28,11 @@ namespace QuickClash
             button.LongDescription = "We start the Quick Clash Tool by creating all the Clash Parameters or returning them to their default values if they already exist.";
             button.SetContextualHelp(contextHelp);
 
-            //PushButton button2 = panel1.AddItem(new PushButtonData("button2", "Clash Manage", ExecutingAssemblyPath, "QuickClash.ClashManage")) as PushButton;
-            //button2.LargeImage = new BitmapImage(new Uri("pack://application:,,,/QuickClash;component/Resources/check-list-(1).png"));
-            //button2.ToolTip = "Manage which Categories to Analyze";
-            //button2.LongDescription = "We choose between which Categories of Elements we want to do the Analysis of Collisions or Interferences. It is chosen whether in Active View or if in the entire Document. \nnDepending on the size of the document or file, if many Categories are chosen for the Analysis, this process may take several minutes.";
-            //button2.SetContextualHelp(contextHelp);
+            PushButton button2 = panel1.AddItem(new PushButtonData("button2", "Default Values", ExecutingAssemblyPath, "QuickClash.DefaultValues")) as PushButton;
+            button2.LargeImage = new BitmapImage(new Uri("pack://application:,,,/QuickClash;component/Resources/architech-working-(1).png"));
+            button2.ToolTip = "Set all the Clash parameter values to Default parameters";
+            button2.LongDescription = "Set all the Clash parameter values to Default parameters. Id Element, Clash, Clash Grid Location, Clash Category.";
+            button2.SetContextualHelp(contextHelp);
 
             //PushButton button3 = panel1.AddItem(new PushButtonData("button3", "Section Box", ExecutingAssemblyPath, "QuickClash.SectionBox")) as PushButton;
             //button3.LargeImage = new BitmapImage(new Uri("pack://application:,,,/QuickClash;component/Resources/3d-(1).png"));
@@ -71,11 +71,11 @@ namespace QuickClash
 
 
 
-            PushButton button8 = panel2.AddItem(new PushButtonData("button8", "Remove Filter Clash", ExecutingAssemblyPath, "QuickClash.RemoveClashFilter")) as PushButton;
-            button8.LargeImage = new BitmapImage(new Uri("pack://application:,,,/QuickClash;component/Resources/broom-(1).png"));
-            button8.ToolTip = "Unapply Clash Filter";
-            button8.LongDescription = "Unapply the colour red Clash filter in Active View.";
-            button8.SetContextualHelp(contextHelp);
+            //PushButton button8 = panel2.AddItem(new PushButtonData("button8", "Remove Filter Clash", ExecutingAssemblyPath, "QuickClash.RemoveClashFilter")) as PushButton;
+            //button8.LargeImage = new BitmapImage(new Uri("pack://application:,,,/QuickClash;component/Resources/broom-(1).png"));
+            //button8.ToolTip = "Unapply Clash Filter";
+            //button8.LongDescription = "Unapply the colour red Clash filter in Active View.";
+            //button8.SetContextualHelp(contextHelp);
 
 
 

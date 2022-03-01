@@ -17,7 +17,18 @@ namespace QuickClash
             Document doc = uidoc.Document;
             var activeView = uidoc.ActiveView;
 
-            ApplyFilter.Do(commandData);
+            ICollection<ElementId> ListFilters = activeView.GetFilters();
+
+            if (ListFilters.Count() == 0)
+            {
+                ApplyFilter.Do(commandData);
+            }
+            else
+            {
+                RemoveApplyFilter.Do(commandData);
+            }
+
+
 
             return Result.Succeeded;
         }
