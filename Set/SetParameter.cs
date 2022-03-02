@@ -60,5 +60,32 @@ namespace QuickClash
                 }
             }
         }
+        public static void DefaultValues(ExternalCommandData commandData, IList<Element> elements)
+        {
+            UIApplication uiapp = commandData.Application;
+            UIDocument uidoc = uiapp.ActiveUIDocument;
+            Document doc = uidoc.Document;
+
+            foreach (Element e in elements)
+            {
+                Parameter param = e.LookupParameter("ID Element");
+                Parameter clashParam = e.LookupParameter("Clash");
+                Parameter param4 = e.LookupParameter("Clash Grid Location");
+                Parameter param5 = e.LookupParameter("Clash Category");
+
+                Autodesk.Revit.DB.ElementId selectedId = e.Id;
+                string voidString = ("");
+
+                using (Transaction t = new Transaction(doc, "ID Element"))
+                {
+                    t.Start();
+                    param.Set(voidString);
+                    clashParam.Set(voidString);
+                    param4.Set(voidString);
+                    param5.Set(voidString);
+                    t.Commit();
+                }
+            }
+        }
     }
 }

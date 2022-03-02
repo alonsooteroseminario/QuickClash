@@ -1,4 +1,5 @@
-﻿using Autodesk.Revit.DB;
+﻿using Autodesk.Revit.ApplicationServices;
+using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using System.Collections.Generic;
 using System.Linq;
@@ -81,6 +82,31 @@ namespace QuickClash
                 t.Commit();
                 uidoc.ActiveView = COORD;
             }
+        }
+
+        public static View3D Copy(ExternalCommandData commandData)
+        {
+            UIApplication uiapp = commandData.Application;
+            UIDocument uidoc = uiapp.ActiveUIDocument;
+            Document doc = uidoc.Document;
+            var activeView = uidoc.ActiveView;
+
+            View3D viewer = null;
+
+            using (Transaction t = new Transaction(doc, "Duplicate View"))
+            {
+                t.Start();
+
+                for (int i = 1; i < 2; i++)
+                {
+                    viewer = (View3D)doc.GetElement(activeView.Duplicate(ViewDuplicateOption.WithDetailing));
+                }
+                t.Commit();
+            }
+
+            uidoc.ActiveView = viewer;
+
+            return (View3D)viewer;
         }
     }
 }

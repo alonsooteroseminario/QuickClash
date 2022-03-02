@@ -7,18 +7,26 @@ namespace QuickClash
 {
     [TransactionAttribute(TransactionMode.Manual)]
     [RegenerationAttribute(RegenerationOption.Manual)]
-    class QuickClash : IExternalCommand
+    class QuickClashLinks : IExternalCommand
     {
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
 
             //SetNoValueClashParameter.Do(commandData); // Vista Activa , "Clash" y "Clash Grid Location" = " " vacio.
 
-            Intersect.MultipleElementsToMultipleCategory(commandData);
+            //Intersect.MultipleElementsToMultipleCategory(commandData);
 
-            Intersect.MultipleElementsToMultipleFamilyInstances(commandData);// Vista Activa
+            //Intersect.MultipleElementsToMultipleFamilyInstances(commandData);// Vista Activa
 
-            Intersect.MultipleFamilyInstanceToMultipleFamilyInstances_BBox(commandData);
+            //Intersect.MultipleFamilyInstanceToMultipleFamilyInstances_BBox(commandData);
+
+            Intersect.MultipleElementsToLinksElements(commandData);
+
+            Intersect.MultipleFamilyInstanceToLinksElements(commandData);
+
+            Intersect.MultipleElementsToLinksFamilyInstance(commandData);
+
+            Intersect.MultipleFamilyInstanceToLinksFamilyInstance(commandData);
 
             SetClashGridLocation.DoActiveView(commandData);
 

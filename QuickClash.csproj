@@ -58,6 +58,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="Buttons\DefaultValues.cs" />
+    <Compile Include="Buttons\QuickClashLinks.cs" />
+    <Compile Include="Buttons\RemoveClashFilter.cs" />
+    <Compile Include="Buttons\ClashFilter.cs" />
+    <Compile Include="Buttons\SectionBoxSelection.cs" />
     <Compile Include="Check\CheckClashSolved.cs" />
     <Compile Include="Buttons\ClashComments.cs" />
     <Compile Include="Buttons\ClashManage.cs" />
@@ -103,9 +108,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Set\RemoveApplyFilter.cs" />
     <Compile Include="Set\SetClashGridLocation.cs" />
     <Compile Include="Set\SetNoValueClashParameter.cs" />
     <Compile Include="Set\SetNoValueAllParameters.cs" />
+    <Compile Include="Set\ApplyFilter.cs" />
     <Compile Include="Set\SetParameter.cs" />
     <Compile Include="Set\SetEmptyYesNoParameters.cs" />
     <Compile Include="Set\SetIDValue.cs" />
