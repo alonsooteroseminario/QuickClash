@@ -34,11 +34,11 @@ namespace QuickClash
             button2.LongDescription = "Set all the Clash parameter values to Default parameters. Id Element, Clash, Clash Grid Location, Clash Category.";
             button2.SetContextualHelp(contextHelp);
 
-            //PushButton button3 = panel1.AddItem(new PushButtonData("button3", "Section Box", ExecutingAssemblyPath, "QuickClash.SectionBox")) as PushButton;
-            //button3.LargeImage = new BitmapImage(new Uri("pack://application:,,,/QuickClash;component/Resources/3d-(1).png"));
-            //button3.ToolTip = "Choose which Section Box to Apply";
-            //button3.LongDescription = "We choose between which Categories of Elements we want to do the Analysis of Collisions or Interferences. It is chosen whether in Active View or if in the entire Document. \nDepending on the size of the document or file, if many Categories are chosen for the Analysis, this process may take several minutes.";
-            //button3.SetContextualHelp(contextHelp);
+            PushButton button3 = panel1.AddItem(new PushButtonData("button3", "Section Box", ExecutingAssemblyPath, "QuickClash.SectionBoxSelection")) as PushButton;
+            button3.LargeImage = new BitmapImage(new Uri("pack://application:,,,/QuickClash;component/Resources/3d-(1).png"));
+            button3.ToolTip = "Copy and Section Box apply";
+            button3.LongDescription = "Create a copy of the active 3D view and apply the same Section Box.";
+            button3.SetContextualHelp(contextHelp);
 
             RibbonPanel panel2 = application.CreateRibbonPanel(tabName, "Clash Review");
 

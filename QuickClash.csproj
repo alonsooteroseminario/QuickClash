@@ -62,6 +62,7 @@
     <Compile Include="Buttons\QuickClashLinks.cs" />
     <Compile Include="Buttons\RemoveClashFilter.cs" />
     <Compile Include="Buttons\ClashFilter.cs" />
+    <Compile Include="Buttons\SectionBoxSelection.cs" />
     <Compile Include="Check\CheckClashSolved.cs" />
     <Compile Include="Buttons\ClashComments.cs" />
     <Compile Include="Buttons\ClashManage.cs" />
