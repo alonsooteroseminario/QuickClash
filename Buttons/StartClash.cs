@@ -21,78 +21,97 @@ namespace QuickClash
           ref string message,
           ElementSet elements)
         {
-            try
+            UIApplication uiapp = commandData.Application;
+            UIDocument uidoc = uiapp.ActiveUIDocument;
+            Application app = uiapp.Application;
+            Document doc = uidoc.Document;
+            List<DefinitionGroup> defGroups = new List<DefinitionGroup>();
+
+            DefinitionFile sharedParameterFile = app.OpenSharedParameterFile();
+
+            foreach (DefinitionGroup dg in sharedParameterFile.Groups)
             {
-                UIApplication uiapp = commandData.Application;
-                UIDocument uidoc = uiapp.ActiveUIDocument;
-                Application app = uiapp.Application;
-                Document doc = uidoc.Document;
-                List<DefinitionGroup> defGroups = new List<DefinitionGroup>();
-                //TaskDialog.Show("Dynoscript", "Recuerda:\n\n1.- Tener los Worksets del proyecto en modo Editables. \n\n2.- Si el Modelo es muy grande algunas tareas pueden demorar varios minutos. "
-                //                + Environment.NewLine + "\n3.- Si ya probaste Quick Clash por favor déjanos tus comentarios en nuestra página : \n" + Environment.NewLine + new Uri("https://www.dynoscript.com/quickclash/")
-                //                + " \n\nSe recibe cualquier tipo de FeedBack. Muchas Gracias! :) ", TaskDialogCommonButtons.Ok);
-                DefinitionFile sharedParameterFile = app.OpenSharedParameterFile();
-                foreach (DefinitionGroup dg in sharedParameterFile.Groups)
-                {
-                    defGroups.Add(dg);
-                }
-                IList<Element> ducts = GetElements.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_DuctCurves, "ducts");
-                Element e = ducts.First();
-                Parameter param = e.LookupParameter("Clash");
-                List<string> list_dg = new List<string>();
-                for (int i = 0; i < defGroups.Count(); i++)
-                {
-                    DefinitionGroup dg = defGroups[i];
-                    list_dg.Add(dg.Name.ToString());
-                }
-                if (list_dg.Contains("ClashParameters"))
-                {
-                    if (param != null)
-                    {
-
-                    }
-                    else
-                    {
-                        ClashParameters.CreateWhenSharedParameter(commandData, true);
-                    }
-                }
-                else
-                {
-                    if (param != null)
-                    {
-
-                    }
-                    else
-                    {
-                        ClashParameters.CreateWhenSharedParameter(commandData, false);
-                    }
-                }
-
-                View.Create(commandData);
-                //SetIDValue.Do(commandData, "AllProject");
-                //SetEmptyYesNoParameters.Do(commandData);
-                FilteredElementCollector schedules = new FilteredElementCollector(doc).OfClass(typeof(ViewSchedule));
-                bool val = true;
-                foreach (var schedule in schedules)
-                {
-
-                    if (schedule.Name.ToString().Contains("OST_"))
-                    {
-                        val = false;
-                        break;
-                    }
-                }
-                if (val)
-                {
-                    ClashSchedules.Create(commandData);
-                }
-                return Result.Succeeded;
+                defGroups.Add(dg);
             }
-            catch (Exception e)
+            IList<Element> ducts = GetElements.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_DuctCurves, "ducts");
+            Parameter param = null;
+
+            IList<Element> pipes = GetElements.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_DuctCurves, "pipes");
+            Parameter param2 = null;
+
+
+            foreach (Element item in ducts)
             {
-                TaskDialog.Show("Error", e.Message.ToString());
+                if (ducts.Count() > 0)
+                {
+                    param = item.LookupParameter("Clash");
+                    break;
+                }
+            }
+            foreach (Element item in pipes)
+            {
+                if (pipes.Count() > 0)
+                {
+                    param2 = item.LookupParameter("Clash");
+                    break;
+                }
+            }
+            if (ducts.Count() == 0)
+            {
+                TaskDialog.Show("Error", "The model does not contain anyduct modeled. To start please draw a pipe. Thank you!");
                 return Result.Cancelled;
             }
+            if ( pipes.Count() == 0)
+            {
+                TaskDialog.Show("Error", "The model does not contain any pipemodeled. To start please draw a pipe. Thank you!");
+                return Result.Cancelled;
+            }
+            if (ducts.Count() == 0 && pipes.Count() == 0) {
+
+                TaskDialog.Show("Error", "The model does not contain any pipe or duct modeled. To start please draw on pipe or duct. Thank you!");
+                return Result.Cancelled;
+            }
+
+            List<string> list_dg = new List<string>();
+            for (int i = 0; i < defGroups.Count(); i++)
+            {
+                DefinitionGroup dg = defGroups[i];
+                list_dg.Add(dg.Name.ToString());
+            }
+            if (list_dg.Contains("Clash Parameters"))
+            {
+                if (param == null && param2 == null)
+                {
+                    ClashParameters.CreateWhenSharedParameter(commandData, true);
+                }
+            }
+            else
+            {
+                if (param == null && param2 == null)
+                {
+                    ClashParameters.CreateWhenSharedParameter(commandData, false);
+                }
+            }
+
+            View.Create(commandData);
+            //SetIDValue.Do(commandData, "ActiveView");
+
+            FilteredElementCollector schedules = new FilteredElementCollector(doc).OfClass(typeof(ViewSchedule));
+            bool val = true;
+            foreach (var schedule in schedules)
+            {
+
+                if (schedule.Name.ToString().Contains("OST_"))
+                {
+                    val = false;
+                    break;
+                }
+            }
+            if (val)
+            {
+                ClashSchedules.Create(commandData);
+            }
+            return Result.Succeeded;
         }
 
         public Result OnStartup(UIControlledApplication application)

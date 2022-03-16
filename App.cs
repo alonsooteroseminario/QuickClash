@@ -14,11 +14,11 @@ namespace QuickClash
         public static string ExecutingAssemblyPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
         public Result OnStartup(UIControlledApplication application)
         {
-            string tabName = "QuickClash";
+            string tabName = "Quick Clash";
             application.CreateRibbonTab(tabName);
             ContextualHelp contextHelp = new ContextualHelp(ContextualHelpType.Url, "http://www.autodesk.com");
 
-            RibbonPanel panel1 = application.CreateRibbonPanel(tabName, "QuickClash");
+            RibbonPanel panel1 = application.CreateRibbonPanel(tabName, "Quick Clash");
 
 
 
@@ -28,7 +28,7 @@ namespace QuickClash
             button.LongDescription = "We start the Quick Clash Tool by creating all the Clash Parameters or returning them to their default values if they already exist.";
             button.SetContextualHelp(contextHelp);
 
-            PushButton button2 = panel1.AddItem(new PushButtonData("button2", "Default Values", ExecutingAssemblyPath, "QuickClash.DefaultValues")) as PushButton;
+            PushButton button2 = panel1.AddItem(new PushButtonData("button2", "Default Values", ExecutingAssemblyPath, "QuickClash.DefaultActiveView")) as PushButton;
             button2.LargeImage = new BitmapImage(new Uri("pack://application:,,,/QuickClash;component/Resources/architech-working-(1).png"));
             button2.ToolTip = "Set all the Clash parameter values to Default parameters";
             button2.LongDescription = "Set all the Clash parameter values to Default parameters. Id Element, Clash, Clash Grid Location, Clash Category.";
@@ -37,8 +37,9 @@ namespace QuickClash
             PushButton button3 = panel1.AddItem(new PushButtonData("button3", "Section Box", ExecutingAssemblyPath, "QuickClash.SectionBoxSelection")) as PushButton;
             button3.LargeImage = new BitmapImage(new Uri("pack://application:,,,/QuickClash;component/Resources/3d-(1).png"));
             button3.ToolTip = "Copy and Section Box apply";
-            button3.LongDescription = "Create a copy of the active 3D view and apply the same Section Box.";
+            button3.LongDescription = "Create a copy of the active 3D view and apply Section Box on Elements selected.";
             button3.SetContextualHelp(contextHelp);
+
 
             RibbonPanel panel2 = application.CreateRibbonPanel(tabName, "Clash Review");
 

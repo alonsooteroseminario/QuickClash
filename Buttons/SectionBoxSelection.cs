@@ -24,7 +24,7 @@ namespace QuickClash
             try
             {
 
-                View3D viewer_copy = View.Copy(commandData);
+                View3D viewer_copy = View.CopySelection(commandData);
 
 
                 return Result.Succeeded;

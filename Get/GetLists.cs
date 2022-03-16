@@ -35,8 +35,10 @@ namespace QuickClash
 						//BuiltInCategory.OST_SpecialityEquipment,
 						//BuiltInCategory.OST_Sprinklers,
 						//BuiltInCategory.OST_Wire,
+                        //BuiltInCategory.OST_DuctInsulations,
+                        //BuiltInCategory.OST_PipeInsulations
 
-				};
+                };
                 return lista;
             }
             else
@@ -61,6 +63,8 @@ namespace QuickClash
                     BuiltInCategory.OST_PlumbingFixtures,
                     BuiltInCategory.OST_SpecialityEquipment,
                     BuiltInCategory.OST_Sprinklers,
+                    BuiltInCategory.OST_PipeAccessory,
+                    BuiltInCategory.OST_DuctAccessory
 					//BuiltInCategory.OST_Wire,
 				};
                 return bics_familyIns;

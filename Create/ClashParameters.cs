@@ -30,7 +30,7 @@ namespace QuickClash.Create
                     categories.Insert(MECat);
                 }
                 DefinitionFile myDefinitionFile = app.OpenSharedParameterFile();
-                DefinitionGroup myGroup = myDefinitionFile.Groups.get_Item("ClashParameters");
+                DefinitionGroup myGroup = myDefinitionFile.Groups.get_Item("Clash Parameters");
                 foreach (var param in GetLists.Params())
                 {
                     Definition myDefinition_ProductDate = myGroup.Definitions.get_Item(param);
@@ -60,7 +60,11 @@ namespace QuickClash.Create
                     categories.Insert(MECat);
                 }
                 DefinitionFile myDefinitionFile = app.OpenSharedParameterFile();
-                DefinitionGroup myGroup = myDefinitionFile.Groups.Create("ClashParameters");
+
+
+
+                //DefinitionGroup myGroup = myDefinitionFile.Groups.get_Item("Clash Parameters");
+                DefinitionGroup myGroup = myDefinitionFile.Groups.Create("Clash Parameters");
                 foreach (string paramName in listParam)
                 {
                     ExternalDefinitionCreationOptions option = new ExternalDefinitionCreationOptions(paramName, ParameterType.Text);

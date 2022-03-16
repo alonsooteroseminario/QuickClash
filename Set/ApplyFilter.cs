@@ -37,6 +37,7 @@ namespace QuickClash
             }
             List<ParameterFilterElement> lista_ParameterFilterElement1 = new List<ParameterFilterElement>();
             List<ParameterFilterElement> lista_ParameterFilterElement_no = new List<ParameterFilterElement>();
+            List<ParameterFilterElement> lista_ParameterFilterElement_solved = new List<ParameterFilterElement>();
 
             using (Transaction ta = new Transaction(doc, "create clash filter view"))
             {
@@ -46,6 +47,7 @@ namespace QuickClash
 
                 Parameter param = collector.OfClass(typeof(Duct)).FirstElement().LookupParameter("Clash");
                 Parameter param_solved = collector.OfClass(typeof(Duct)).FirstElement().LookupParameter("Clash Solved");
+
                 bool existsFilter = false;
 
                 FilteredElementCollector collector_filterview = new FilteredElementCollector(doc).OfClass(typeof(ParameterFilterElement));
@@ -68,7 +70,7 @@ namespace QuickClash
                 {
                     ParameterFilterElement parameterFilterElement = ParameterFilterElement.Create(doc, "CLASH YES FILTER", cats, new ElementParameterFilter(new FilterRule[] {
                             ParameterFilterRuleFactory.CreateEqualsRule(param.Id,"YES", true),
-                            ParameterFilterRuleFactory.CreateEqualsRule(param_solved.Id,"", true)
+                            ParameterFilterRuleFactory.CreateNotEqualsRule(param_solved.Id, "YES", true)
                     }));
                     lista_ParameterFilterElement1.Add(parameterFilterElement);
                 }
@@ -86,8 +88,29 @@ namespace QuickClash
                 }
                 if (lista_ParameterFilterElement_no.Count() == 0)
                 {
-                    ParameterFilterElement parameterFilterElement_no = ParameterFilterElement.Create(doc, "CLASH NO FILTER", cats, new ElementParameterFilter(ParameterFilterRuleFactory.CreateNotContainsRule(param.Id, "YES", true)));
+                    ParameterFilterElement parameterFilterElement_no = ParameterFilterElement.Create(doc, "CLASH NO FILTER", cats, new ElementParameterFilter(new FilterRule[]
+                    {
+                        ParameterFilterRuleFactory.CreateNotContainsRule(param.Id, "YES", true)
+                    }));
                     lista_ParameterFilterElement_no.Add(parameterFilterElement_no);
+                }
+
+                for (int i = 0; i < lista_filtros.Count(); i++)
+                {
+                    if (lista_filtros[i].Name == "CLASH SOLVED FILTER")
+                    {
+                        lista_ParameterFilterElement_solved.Add(lista_filtros[i]);
+                        i = lista_filtros.Count();
+                        break;
+                    }
+                }
+                if (lista_ParameterFilterElement_solved.Count() == 0)
+                {
+                    ParameterFilterElement parameterFilterElement_solved = ParameterFilterElement.Create(doc, "CLASH SOLVED FILTER", cats, new ElementParameterFilter(new FilterRule[]
+                    {
+                        ParameterFilterRuleFactory.CreateEqualsRule(param_solved.Id, "YES", true)
+                    }));
+                    lista_ParameterFilterElement_solved.Add(parameterFilterElement_solved);
                 }
 
 
@@ -95,8 +118,7 @@ namespace QuickClash
 
                 ParameterFilterElement ParameterFilterElement1 = lista_ParameterFilterElement1.First();
                 ParameterFilterElement ParameterFilterElement1_no = lista_ParameterFilterElement_no.First();
-
-
+                ParameterFilterElement ParameterFilterElement1_solved = lista_ParameterFilterElement_solved.First();
 
                 OverrideGraphicSettings ogs3 = new OverrideGraphicSettings();
                 ogs3.SetProjectionLineColor(new Color(250, 0, 0));
@@ -135,10 +157,12 @@ namespace QuickClash
                 }
                 activeView.AddFilter(ParameterFilterElement1.Id);
                 activeView.AddFilter(ParameterFilterElement1_no.Id);
-
+                activeView.AddFilter(ParameterFilterElement1_solved.Id);
 
                 activeView.SetFilterOverrides(ParameterFilterElement1.Id, ogs3);
                 activeView.SetFilterOverrides(ParameterFilterElement1_no.Id, ogs4);
+                activeView.SetFilterOverrides(ParameterFilterElement1_solved.Id, ogs4);
+
 
 
 
