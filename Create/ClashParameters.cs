@@ -67,8 +67,11 @@ namespace QuickClash.Create
                 DefinitionGroup myGroup = myDefinitionFile.Groups.Create("Clash Parameters");
                 foreach (string paramName in listParam)
                 {
-                    ExternalDefinitionCreationOptions option = new ExternalDefinitionCreationOptions(paramName, ParameterType.Text);
-                    option.UserModifiable = true;
+                    //ExternalDefinitionCreationOptions option = new ExternalDefinitionCreationOptions(paramName, ParameterType.Text);
+                    ExternalDefinitionCreationOptions option = new ExternalDefinitionCreationOptions(paramName, SpecTypeId.String.Text)
+                    {
+                        UserModifiable = true
+                    };
                     switch (paramName)
                     {
                         case "Clash":

@@ -1,5 +1,4 @@
-﻿using Autodesk.Revit.ApplicationServices;
-using Autodesk.Revit.DB;
+﻿using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using Autodesk.Revit.UI.Selection;
 using System.Collections.Generic;
@@ -153,7 +152,7 @@ namespace QuickClash
                 double Max_Z = double.MinValue;
                 foreach (var elem in lista_SelectElements)
                 {
-                    
+
 
                     BoundingBoxXYZ box = elem.get_BoundingBox(null);
                     if (box.Max.X > Max_X)
@@ -198,7 +197,7 @@ namespace QuickClash
 
                 t.Commit();
             }
-            
+
             uidoc.ActiveView = viewer;
             viewer.DisplayStyle = DisplayStyle.Shading;
             viewer.DetailLevel = ViewDetailLevel.Fine;

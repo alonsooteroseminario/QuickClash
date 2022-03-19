@@ -2,7 +2,6 @@
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace QuickClash
 {
@@ -12,13 +11,8 @@ namespace QuickClash
     {
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
-            UIApplication uiapp = commandData.Application;
-            UIDocument uidoc = uiapp.ActiveUIDocument;
-            Document doc = uidoc.Document;
-            var activeView = uidoc.ActiveView;
 
             List<BuiltInCategory> UI_list1 = GetLists.BuiltCategories(false);
-            //List<BuiltInCategory> UI_list3 = GetLists.BuiltCategories(false);
 
             List<Element> allElements = new List<Element>();
 
@@ -82,31 +76,6 @@ namespace QuickClash
                     allElements.Add(elem);
                 }
             }
-            //using (Transaction t = new Transaction(doc, "Delete parameter"))
-            //{
-            //    t.Start();
-            //    Parameter parameter1 = allElements.First().LookupParameter("Clash");
-            //    Parameter parameter2 = allElements.First().LookupParameter("Clash Category");
-            //    Parameter parameter3 = allElements.First().LookupParameter("Clash Comments");
-            //    Parameter parameter4 = allElements.First().LookupParameter("Clash Grid Location");
-            //    Parameter parameter5 = allElements.First().LookupParameter("Clash Solved");
-            //    Parameter parameter6 = allElements.First().LookupParameter("Done");
-            //    Parameter parameter7 = allElements.First().LookupParameter("ID Element");
-            //    Parameter parameter8 = allElements.First().LookupParameter("Percent Done");
-            //    Parameter parameter9 = allElements.First().LookupParameter("Zone");
-
-            //    doc.Delete(parameter1.Id);
-            //    doc.Delete(parameter2.Id);
-            //    doc.Delete(parameter3.Id);
-            //    doc.Delete(parameter4.Id);
-            //    doc.Delete(parameter5.Id);
-            //    doc.Delete(parameter6.Id);
-            //    doc.Delete(parameter7.Id);
-            //    doc.Delete(parameter8.Id);
-            //    doc.Delete(parameter9.Id);
-
-            //    t.Commit();
-            //}
             SetParameter.DefaultValues(commandData, allElements);
 
             return Result.Succeeded;

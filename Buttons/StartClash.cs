@@ -61,12 +61,13 @@ namespace QuickClash
                 TaskDialog.Show("Error", "The model does not contain anyduct modeled. To start please draw a pipe. Thank you!");
                 return Result.Cancelled;
             }
-            if ( pipes.Count() == 0)
+            if (pipes.Count() == 0)
             {
                 TaskDialog.Show("Error", "The model does not contain any pipemodeled. To start please draw a pipe. Thank you!");
                 return Result.Cancelled;
             }
-            if (ducts.Count() == 0 && pipes.Count() == 0) {
+            if (ducts.Count() == 0 && pipes.Count() == 0)
+            {
 
                 TaskDialog.Show("Error", "The model does not contain any pipe or duct modeled. To start please draw on pipe or duct. Thank you!");
                 return Result.Cancelled;

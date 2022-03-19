@@ -38,10 +38,6 @@ namespace QuickClash
             ElementCategoryFilter DUCategoryfilter5 = new ElementCategoryFilter(BuiltInCategory.OST_FlexDuctCurves);
             ElementCategoryFilter DUCategoryfilter6 = new ElementCategoryFilter(BuiltInCategory.OST_FlexPipeCurves);
 
-
-
-
-
             LogicalAndFilter DUInstancesFilter = new LogicalAndFilter(elemFilter, DUCategoryfilter);
             LogicalAndFilter DUInstancesFilter2 = new LogicalAndFilter(elemFilter2, DUCategoryfilter2);
             LogicalAndFilter DUInstancesFilter3 = new LogicalAndFilter(elemFilter3, DUCategoryfilter3);
@@ -65,9 +61,6 @@ namespace QuickClash
             IList<Element> flexducts = DUcoll5.WherePasses(DUInstancesFilter5).ToElements();
             FilteredElementCollector DUcoll6 = new FilteredElementCollector(doc);
             IList<Element> flexpipes = DUcoll6.WherePasses(DUInstancesFilter6).ToElements();
-
-
-
 
             if (builtCategory == "family_instances_all")
             {
@@ -101,6 +94,10 @@ namespace QuickClash
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param></param>
         public static IList<Element> ElementsByBuiltCategoryActiveView(ExternalCommandData commandData, BuiltInCategory bic, string builtCategory)
         {
             UIApplication uiapp = commandData.Application;
@@ -152,10 +149,6 @@ namespace QuickClash
             IList<Element> flexducts = DUcoll5.WherePasses(DUInstancesFilter5).ToElements();
             FilteredElementCollector DUcoll6 = new FilteredElementCollector(doc, activeView.Id);
             IList<Element> flexpipes = DUcoll6.WherePasses(DUInstancesFilter6).ToElements();
-
-
-
-
 
 
             if (builtCategory == "family_instances_all")

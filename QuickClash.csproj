@@ -121,11 +121,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Set\RemoveApplyFilter.cs" />
+    <Compile Include="Set\SetRemoveApplyFilter.cs" />
     <Compile Include="Set\SetClashGridLocation.cs" />
     <Compile Include="Set\SetNoValueClashParameter.cs" />
     <Compile Include="Set\SetNoValueAllParameters.cs" />
-    <Compile Include="Set\ApplyFilter.cs" />
+    <Compile Include="Set\SetApplyFilter.cs" />
     <Compile Include="Set\SetParameter.cs" />
     <Compile Include="Set\SetEmptyYesNoParameters.cs" />
     <Compile Include="Set\SetIDValue.cs" />

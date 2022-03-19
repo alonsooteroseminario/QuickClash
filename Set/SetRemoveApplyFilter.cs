@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace QuickClash
 {
-    public static class RemoveApplyFilter
+    public static class SetRemoveApplyFilter
     {
         /// <summary>
         /// 
@@ -47,7 +47,6 @@ namespace QuickClash
 
                 Parameter param = collector.OfClass(typeof(Duct)).FirstElement().LookupParameter("Clash");
                 Parameter param_solved = collector.OfClass(typeof(Duct)).FirstElement().LookupParameter("Clash Solved");
-                bool existsFilter = false;
 
                 FilteredElementCollector collector_filterview = new FilteredElementCollector(doc).OfClass(typeof(ParameterFilterElement));
                 List<ParameterFilterElement> lista_filtros = new List<ParameterFilterElement>();
@@ -61,7 +60,6 @@ namespace QuickClash
                     {
                         lista_ParameterFilterElement1.Add(lista_filtros[i]);
                         i = lista_filtros.Count();
-                        existsFilter = true;
                         break;
                     }
                 }
@@ -131,7 +129,6 @@ namespace QuickClash
                 ogs4.SetSurfaceForegroundPatternId(solidFillPattern.Id);
                 ogs4.SetHalftone(true);
 
-                bool existsFilterActiveView = false;
                 FilteredElementCollector collector_filterActiveview = new FilteredElementCollector(doc, activeView.Id).OfClass(typeof(ParameterFilterElement));
                 List<ParameterFilterElement> lista_filtrosActiveView = new List<ParameterFilterElement>();
                 foreach (ParameterFilterElement e in collector_filterActiveview)
@@ -145,7 +142,6 @@ namespace QuickClash
                         if (lista_filtrosActiveView[i].Name == "CLASH YES FILTER")
                         {
                             i = lista_filtrosActiveView.Count();
-                            existsFilterActiveView = true;
                             break;
                         }
                     }

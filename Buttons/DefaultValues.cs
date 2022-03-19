@@ -16,10 +16,8 @@ namespace QuickClash
             UIApplication uiapp = commandData.Application;
             UIDocument uidoc = uiapp.ActiveUIDocument;
             Document doc = uidoc.Document;
-            var activeView = uidoc.ActiveView;
 
             List<BuiltInCategory> UI_list1 = GetLists.BuiltCategories(false);
-            //List<BuiltInCategory> UI_list3 = GetLists.BuiltCategories(false);
 
             List<Element> allElements = new List<Element>();
 
