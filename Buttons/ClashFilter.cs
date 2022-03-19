@@ -14,21 +14,18 @@ namespace QuickClash
         {
             UIApplication uiapp = commandData.Application;
             UIDocument uidoc = uiapp.ActiveUIDocument;
-            Document doc = uidoc.Document;
             var activeView = uidoc.ActiveView;
 
             ICollection<ElementId> ListFilters = activeView.GetFilters();
 
             if (ListFilters.Count() == 0)
             {
-                ApplyFilter.Do(commandData);
+                SetApplyFilter.Do(commandData);
             }
             else
             {
-                RemoveApplyFilter.Do(commandData);
+                SetRemoveApplyFilter.Do(commandData);
             }
-
-
 
             return Result.Succeeded;
         }

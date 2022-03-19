@@ -48,8 +48,8 @@ namespace QuickClash
             IList<Element> salida = null;
 
             IList<Element> family_instances_all = MEcoll.WherePasses(MEInstancesFilter).ToElements();
-            FilteredElementCollector DUcoll = new FilteredElementCollector(doc);
 
+            FilteredElementCollector DUcoll = new FilteredElementCollector(doc);
             IList<Element> ducts = DUcoll.WherePasses(DUInstancesFilter).ToElements();
             FilteredElementCollector DUcoll2 = new FilteredElementCollector(doc);
             IList<Element> pipes = DUcoll2.WherePasses(DUInstancesFilter2).ToElements();
@@ -61,8 +61,6 @@ namespace QuickClash
             IList<Element> flexducts = DUcoll5.WherePasses(DUInstancesFilter5).ToElements();
             FilteredElementCollector DUcoll6 = new FilteredElementCollector(doc);
             IList<Element> flexpipes = DUcoll6.WherePasses(DUInstancesFilter6).ToElements();
-
-
 
             if (builtCategory == "family_instances_all")
             {
@@ -96,6 +94,10 @@ namespace QuickClash
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param></param>
         public static IList<Element> ElementsByBuiltCategoryActiveView(ExternalCommandData commandData, BuiltInCategory bic, string builtCategory)
         {
             UIApplication uiapp = commandData.Application;
@@ -116,6 +118,7 @@ namespace QuickClash
             ElementClassFilter elemFilter5 = new ElementClassFilter(typeof(FlexDuct));
             ElementClassFilter elemFilter6 = new ElementClassFilter(typeof(FlexPipe));
 
+
             ElementCategoryFilter DUCategoryfilter = new ElementCategoryFilter(BuiltInCategory.OST_DuctCurves);
             ElementCategoryFilter DUCategoryfilter2 = new ElementCategoryFilter(BuiltInCategory.OST_PipeCurves);
             ElementCategoryFilter DUCategoryfilter3 = new ElementCategoryFilter(BuiltInCategory.OST_Conduit);
@@ -133,8 +136,8 @@ namespace QuickClash
             IList<Element> salida = null;
 
             IList<Element> family_instances_all = MEcoll.WherePasses(MEInstancesFilter).ToElements();
-            FilteredElementCollector DUcoll = new FilteredElementCollector(doc, activeView.Id);
 
+            FilteredElementCollector DUcoll = new FilteredElementCollector(doc, activeView.Id);
             IList<Element> ducts = DUcoll.WherePasses(DUInstancesFilter).ToElements();
             FilteredElementCollector DUcoll2 = new FilteredElementCollector(doc, activeView.Id);
             IList<Element> pipes = DUcoll2.WherePasses(DUInstancesFilter2).ToElements();
@@ -146,7 +149,6 @@ namespace QuickClash
             IList<Element> flexducts = DUcoll5.WherePasses(DUInstancesFilter5).ToElements();
             FilteredElementCollector DUcoll6 = new FilteredElementCollector(doc, activeView.Id);
             IList<Element> flexpipes = DUcoll6.WherePasses(DUInstancesFilter6).ToElements();
-
 
 
             if (builtCategory == "family_instances_all")

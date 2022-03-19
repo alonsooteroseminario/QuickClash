@@ -1,10 +1,8 @@
-﻿using Autodesk.Revit.ApplicationServices;
-using Autodesk.Revit.DB;
+﻿using Autodesk.Revit.DB;
 using Autodesk.Revit.DB.Electrical;
 using Autodesk.Revit.DB.Mechanical;
 using Autodesk.Revit.DB.Plumbing;
 using Autodesk.Revit.UI;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -1740,31 +1738,31 @@ namespace QuickClash
 
                 foreach (RevitLinkInstance link in lista_links)
                 {
-                        var docLink = link.GetLinkDocument();
-                        var activeLinkViewId = link.Id;
-                        ExclusionFilter filter4 = new ExclusionFilter(collectoreID);
-                        FilteredElementCollector collector4 = new FilteredElementCollector(docLink);
-                        collector4.OfClass(typeof(FamilyInstance));
-                        collector4.WherePasses(new ElementIntersectsSolidFilter(solid)).ToElements(); // Apply intersection filter to find matches
-                        collector4.WherePasses(filter4);
+                    var docLink = link.GetLinkDocument();
+                    var activeLinkViewId = link.Id;
+                    ExclusionFilter filter4 = new ExclusionFilter(collectoreID);
+                    FilteredElementCollector collector4 = new FilteredElementCollector(docLink);
+                    collector4.OfClass(typeof(FamilyInstance));
+                    collector4.WherePasses(new ElementIntersectsSolidFilter(solid)).ToElements(); // Apply intersection filter to find matches
+                    collector4.WherePasses(filter4);
 
-                        if (collector4.Count() > 0)
+                    if (collector4.Count() > 0)
+                    {
+                        Parameter param = e.LookupParameter("Clash Category");
+                        Parameter paramID = e.LookupParameter("ID Element");
+                        string elemcategory = collector4.First().Category.Name.ToString() + " / ID: " + collector4.First().Id.ToString();
+                        using (Transaction t = new Transaction(doc, "Clash Category"))
                         {
-                            Parameter param = e.LookupParameter("Clash Category");
-                            Parameter paramID = e.LookupParameter("ID Element");
-                            string elemcategory = collector4.First().Category.Name.ToString() + " / ID: " + collector4.First().Id.ToString();
-                            using (Transaction t = new Transaction(doc, "Clash Category"))
-                            {
-                                t.Start();
-                                param.Set(elemcategory);
-                                t.Commit();
-                            }
-                            if (!clash_yesA.Contains(e))
-                            {
-                                clash_yesA.Add(e);
-                            }
+                            t.Start();
+                            param.Set(elemcategory);
+                            t.Commit();
                         }
-            
+                        if (!clash_yesA.Contains(e))
+                        {
+                            clash_yesA.Add(e);
+                        }
+                    }
+
                 }
             }
 
@@ -1814,12 +1812,12 @@ namespace QuickClash
 
             foreach (Element i in familyinstance)
             {
-                    if (!allElements.Contains(i))
-                    {
-                        allElements.Add(i);
-                    }
+                if (!allElements.Contains(i))
+                {
+                    allElements.Add(i);
+                }
             }
-            
+
             List<Element> clash_yesA = new List<Element>();
 
             foreach (Element e in allElements)
@@ -2079,32 +2077,32 @@ namespace QuickClash
                 foreach (RevitLinkInstance link in lista_links)
                 {
 
-                    
-                        var docLink = link.GetLinkDocument();
-                        var activeLinkViewId = link.Id;
-                        ExclusionFilter filter4 = new ExclusionFilter(collectoreID);
-                        FilteredElementCollector collector4 = new FilteredElementCollector(docLink);
-                        collector4.OfClass(typeof(FamilyInstance));
-                        //collector4.WherePasses(new ElementIntersectsSolidFilter(solid)).ToElements(); // Apply intersection filter to find matches
-                        collector4.WherePasses(new ElementIntersectsElementFilter(e)).ToElements(); // Apply intersection filter to find matches
-                        collector4.WherePasses(filter4);
-                        if (collector4.Count() > 0)
+
+                    var docLink = link.GetLinkDocument();
+                    var activeLinkViewId = link.Id;
+                    ExclusionFilter filter4 = new ExclusionFilter(collectoreID);
+                    FilteredElementCollector collector4 = new FilteredElementCollector(docLink);
+                    collector4.OfClass(typeof(FamilyInstance));
+                    //collector4.WherePasses(new ElementIntersectsSolidFilter(solid)).ToElements(); // Apply intersection filter to find matches
+                    collector4.WherePasses(new ElementIntersectsElementFilter(e)).ToElements(); // Apply intersection filter to find matches
+                    collector4.WherePasses(filter4);
+                    if (collector4.Count() > 0)
+                    {
+                        Parameter param = e.LookupParameter("Clash Category");
+                        Parameter paramID = e.LookupParameter("ID Element");
+                        string elemcategory = collector4.First().Category.Name.ToString() + " / ID: " + collector4.First().Id.ToString();
+                        using (Transaction t = new Transaction(doc, "Clash Category"))
                         {
-                            Parameter param = e.LookupParameter("Clash Category");
-                            Parameter paramID = e.LookupParameter("ID Element");
-                            string elemcategory = collector4.First().Category.Name.ToString() + " / ID: " + collector4.First().Id.ToString();
-                            using (Transaction t = new Transaction(doc, "Clash Category"))
-                            {
-                                t.Start();
-                                param.Set(elemcategory);
-                                t.Commit();
-                            }
-                            if (!clash_yesA.Contains(e))
-                            {
-                                clash_yesA.Add(e);
-                            }
+                            t.Start();
+                            param.Set(elemcategory);
+                            t.Commit();
                         }
-                    
+                        if (!clash_yesA.Contains(e))
+                        {
+                            clash_yesA.Add(e);
+                        }
+                    }
+
                 }
             }
 

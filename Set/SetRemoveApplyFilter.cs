@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace QuickClash
 {
-    public static class RemoveApplyFilter
+    public static class SetRemoveApplyFilter
     {
         /// <summary>
         /// 
@@ -37,6 +37,7 @@ namespace QuickClash
             }
             List<ParameterFilterElement> lista_ParameterFilterElement1 = new List<ParameterFilterElement>();
             List<ParameterFilterElement> lista_ParameterFilterElement_no = new List<ParameterFilterElement>();
+            List<ParameterFilterElement> lista_ParameterFilterElement_solved = new List<ParameterFilterElement>();
 
             using (Transaction ta = new Transaction(doc, "create clash filter view"))
             {
@@ -46,7 +47,6 @@ namespace QuickClash
 
                 Parameter param = collector.OfClass(typeof(Duct)).FirstElement().LookupParameter("Clash");
                 Parameter param_solved = collector.OfClass(typeof(Duct)).FirstElement().LookupParameter("Clash Solved");
-                bool existsFilter = false;
 
                 FilteredElementCollector collector_filterview = new FilteredElementCollector(doc).OfClass(typeof(ParameterFilterElement));
                 List<ParameterFilterElement> lista_filtros = new List<ParameterFilterElement>();
@@ -60,7 +60,6 @@ namespace QuickClash
                     {
                         lista_ParameterFilterElement1.Add(lista_filtros[i]);
                         i = lista_filtros.Count();
-                        existsFilter = true;
                         break;
                     }
                 }
@@ -90,12 +89,30 @@ namespace QuickClash
                     lista_ParameterFilterElement_no.Add(parameterFilterElement_no);
                 }
 
+                for (int i = 0; i < lista_filtros.Count(); i++)
+                {
+                    if (lista_filtros[i].Name == "CLASH SOLVED FILTER")
+                    {
+                        lista_ParameterFilterElement_solved.Add(lista_filtros[i]);
+                        i = lista_filtros.Count();
+                        break;
+                    }
+                }
+                if (lista_ParameterFilterElement_solved.Count() == 0)
+                {
+                    ParameterFilterElement parameterFilterElement_solved = ParameterFilterElement.Create(doc, "CLASH SOLVED FILTER", cats, new ElementParameterFilter(new FilterRule[]
+                    {
+                        ParameterFilterRuleFactory.CreateEqualsRule(param_solved.Id, "YES", true)
+                    }));
+                    lista_ParameterFilterElement_solved.Add(parameterFilterElement_solved);
+                }
+
 
 
 
                 ParameterFilterElement ParameterFilterElement1 = lista_ParameterFilterElement1.First();
                 ParameterFilterElement ParameterFilterElement1_no = lista_ParameterFilterElement_no.First();
-
+                ParameterFilterElement ParameterFilterElement1_solved = lista_ParameterFilterElement_solved.First();
 
 
                 OverrideGraphicSettings ogs3 = new OverrideGraphicSettings();
@@ -112,7 +129,6 @@ namespace QuickClash
                 ogs4.SetSurfaceForegroundPatternId(solidFillPattern.Id);
                 ogs4.SetHalftone(true);
 
-                bool existsFilterActiveView = false;
                 FilteredElementCollector collector_filterActiveview = new FilteredElementCollector(doc, activeView.Id).OfClass(typeof(ParameterFilterElement));
                 List<ParameterFilterElement> lista_filtrosActiveView = new List<ParameterFilterElement>();
                 foreach (ParameterFilterElement e in collector_filterActiveview)
@@ -126,7 +142,6 @@ namespace QuickClash
                         if (lista_filtrosActiveView[i].Name == "CLASH YES FILTER")
                         {
                             i = lista_filtrosActiveView.Count();
-                            existsFilterActiveView = true;
                             break;
                         }
                     }
@@ -137,7 +152,7 @@ namespace QuickClash
 
                 activeView.RemoveFilter(ParameterFilterElement1.Id);
                 activeView.RemoveFilter(ParameterFilterElement1_no.Id);
-
+                activeView.RemoveFilter(ParameterFilterElement1_solved.Id);
 
                 ta.Commit();
             }

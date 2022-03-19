@@ -1,12 +1,8 @@
 #region Namespaces
-using Autodesk.Revit.ApplicationServices;
 using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
-using QuickClash.Create;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 #endregion
 
@@ -23,10 +19,7 @@ namespace QuickClash
         {
             try
             {
-
-                View3D viewer_copy = View.Copy(commandData);
-
-
+                View3D viewer_copy = View.CopySelection(commandData);
                 return Result.Succeeded;
             }
             catch (Exception e)
