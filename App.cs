@@ -16,7 +16,7 @@ namespace QuickClash
         {
             string tabName = "Quick Clash";
             application.CreateRibbonTab(tabName);
-            ContextualHelp contextHelp = new ContextualHelp(ContextualHelpType.Url, "http://www.autodesk.com");
+            ContextualHelp contextHelp = new ContextualHelp(ContextualHelpType.Url, "http://www.weclash.xyz");
 
             RibbonPanel panel1 = application.CreateRibbonPanel(tabName, "Quick Clash");
 

@@ -70,69 +70,69 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
-    <Compile Include="Buttons\DefaultActiveView.cs" />
-    <Compile Include="Buttons\DefaultValues.cs" />
-    <Compile Include="Buttons\QuickClashLinks.cs" />
-    <Compile Include="Buttons\RemoveClashFilter.cs" />
-    <Compile Include="Buttons\ClashFilter.cs" />
-    <Compile Include="Buttons\SectionBoxSelection.cs" />
-    <Compile Include="Check\CheckClashSolved.cs" />
-    <Compile Include="Buttons\ClashComments.cs" />
-    <Compile Include="Buttons\ClashManage.cs" />
-    <Compile Include="Buttons\CleanClash.cs" />
-    <Compile Include="Create\3DClashSectionBoxView.cs" />
-    <Compile Include="Create\3DClashSectionBoxView_ZONE.cs" />
-    <Compile Include="Create\ClashFilterMultipleElementsInMultipleViews_UI.cs" />
-    <Compile Include="Create\3DClashSectionBoxView_ELEMENT.cs" />
-    <Compile Include="Create\3DClashSectionBoxView_LEVELS.cs" />
-    <Compile Include="Create\ClashFilterMultipleElementsInView_UI.cs" />
-    <Compile Include="Create\ClashSOLVEDFilterMultipleElementsInMultipleViews_UI.cs" />
-    <Compile Include="Create\ClashSOLVEDFilterMultipleElementsInView_UI.cs" />
-    <Compile Include="Create\ClashSOLVEDFilterMultipleElementsInView.cs" />
-    <Compile Include="Create\ClashSchedules.cs" />
-    <Compile Include="Create\ClashFilterMultipleElementsInView.cs" />
-    <Compile Include="Forms\Form1.cs">
+    <Compile Include="Core\Buttons\DefaultActiveView.cs" />
+    <Compile Include="Core\Buttons\DefaultValues.cs" />
+    <Compile Include="Core\Buttons\QuickClashLinks.cs" />
+    <Compile Include="Core\Buttons\RemoveClashFilter.cs" />
+    <Compile Include="Core\Buttons\ClashFilter.cs" />
+    <Compile Include="Core\Buttons\SectionBoxSelection.cs" />
+    <Compile Include="Core\Check\CheckClashSolved.cs" />
+    <Compile Include="Core\Buttons\ClashComments.cs" />
+    <Compile Include="Core\Buttons\ClashManage.cs" />
+    <Compile Include="Core\Buttons\CleanClash.cs" />
+    <Compile Include="Core\Create\3DClashSectionBoxView.cs" />
+    <Compile Include="Core\Create\3DClashSectionBoxView_ZONE.cs" />
+    <Compile Include="Core\Create\ClashFilterMultipleElementsInMultipleViews_UI.cs" />
+    <Compile Include="Core\Create\3DClashSectionBoxView_ELEMENT.cs" />
+    <Compile Include="Core\Create\3DClashSectionBoxView_LEVELS.cs" />
+    <Compile Include="Core\Create\ClashFilterMultipleElementsInView_UI.cs" />
+    <Compile Include="Core\Create\ClashSOLVEDFilterMultipleElementsInMultipleViews_UI.cs" />
+    <Compile Include="Core\Create\ClashSOLVEDFilterMultipleElementsInView_UI.cs" />
+    <Compile Include="Core\Create\ClashSOLVEDFilterMultipleElementsInView.cs" />
+    <Compile Include="Core\Create\ClashSchedules.cs" />
+    <Compile Include="Core\Create\ClashFilterMultipleElementsInView.cs" />
+    <Compile Include="UI\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Form1.Designer.cs">
+    <Compile Include="UI\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Form2.cs">
+    <Compile Include="UI\Form2.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Form2.Designer.cs">
+    <Compile Include="UI\Form2.Designer.cs">
       <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Form3.cs">
+    <Compile Include="UI\Form3.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Form3.Designer.cs">
+    <Compile Include="UI\Form3.Designer.cs">
       <DependentUpon>Form3.cs</DependentUpon>
     </Compile>
-    <Compile Include="Get\GetElements.cs" />
-    <Compile Include="Get\GetAllClashElements_OnlyActiveView.cs" />
-    <Compile Include="Get\GetIntersections.cs" />
-    <Compile Include="Get\GetAllNOClashElements_OnlyActiveView.cs" />
-    <Compile Include="Intersect\Intersect.cs" />
-    <Compile Include="Buttons\QuickClash.cs" />
-    <Compile Include="Buttons\SectionBox.cs" />
+    <Compile Include="Core\Get\GetElements.cs" />
+    <Compile Include="Core\Get\GetAllClashElements_OnlyActiveView.cs" />
+    <Compile Include="Core\Get\GetIntersections.cs" />
+    <Compile Include="Core\Get\GetAllNOClashElements_OnlyActiveView.cs" />
+    <Compile Include="Core\Intersect\Intersect.cs" />
+    <Compile Include="Core\Buttons\QuickClash.cs" />
+    <Compile Include="Core\Buttons\SectionBox.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Set\SetRemoveApplyFilter.cs" />
-    <Compile Include="Set\SetClashGridLocation.cs" />
-    <Compile Include="Set\SetNoValueClashParameter.cs" />
-    <Compile Include="Set\SetNoValueAllParameters.cs" />
-    <Compile Include="Set\SetApplyFilter.cs" />
-    <Compile Include="Set\SetParameter.cs" />
-    <Compile Include="Set\SetEmptyYesNoParameters.cs" />
-    <Compile Include="Set\SetIDValue.cs" />
-    <Compile Include="Create\ClashParameters.cs" />
-    <Compile Include="Get\GetLists.cs" />
-    <Compile Include="Buttons\StartClash.cs" />
-    <Compile Include="Create\3DView.cs" />
+    <Compile Include="Core\Set\SetRemoveApplyFilter.cs" />
+    <Compile Include="Core\Set\SetClashGridLocation.cs" />
+    <Compile Include="Core\Set\SetNoValueClashParameter.cs" />
+    <Compile Include="Core\Set\SetNoValueAllParameters.cs" />
+    <Compile Include="Core\Set\SetApplyFilter.cs" />
+    <Compile Include="Core\Set\SetParameter.cs" />
+    <Compile Include="Core\Set\SetEmptyYesNoParameters.cs" />
+    <Compile Include="Core\Set\SetIDValue.cs" />
+    <Compile Include="Core\Create\ClashParameters.cs" />
+    <Compile Include="Core\Get\GetLists.cs" />
+    <Compile Include="Core\Buttons\StartClash.cs" />
+    <Compile Include="Core\Create\3DView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -142,13 +142,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Forms\Form1.resx">
+    <EmbeddedResource Include="UI\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Form2.resx">
+    <EmbeddedResource Include="UI\Form2.resx">
       <DependentUpon>Form2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Form3.resx">
+    <EmbeddedResource Include="UI\Form3.resx">
       <DependentUpon>Form3.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
