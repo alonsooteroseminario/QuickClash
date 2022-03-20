@@ -136,13 +136,13 @@
     <None Include="Resources\clone-repo.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\debug-folder.PNG" />
+    <None Include="Resources\debug-folder.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\open-visualstudio.PNG" />
+    <None Include="Resources\open-visualstudio.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\path-tocopy.PNG" />
+    <None Include="Resources\path-tocopy.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

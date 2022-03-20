@@ -3,6 +3,7 @@ QuickClash Revit Add-in for Clash Detection
 
 
 > Software Open Source. Revit Add-in Tool to fix and coordinate as fast as possible your BIM model.
+>
 > Include:
 > + Start Clash : Start the execution of the Addin. What happens when you run it is that all the Clash Parameters are created: "Clash", "Clash Solved", "Element ID", etc; along with a view called "COORD" to start using the Clash Detection tool on it.
 > + Default Values : Return to the initial default values of the clash parameters of the Elements of the active view.
