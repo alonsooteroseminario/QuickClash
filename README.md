@@ -14,14 +14,24 @@ QuickClash Revit Add-in for Clash Detection
 
 ## Steps to try it in your own Revit:
 
-### 1. Clone it or Download it in your machine.
+#### 1. Clone it or Download it in your machine.
 
-### 2. if you downloaded it then Unzip it the files.
+![image](./QuickClash/Resources/clone-repo.png)
 
-### 3. Open "QuickClash.sln" file with Visual Studio 2019.
+#### 2. if you downloaded it then Unzip it the files.
 
-### 4. Build solution.
+#### 3. Open "QuickClash.sln" file with Visual Studio 2019.
 
-### 5. After built the solution, in the project path enter to the folder "\bin\Debug" and Copy QuickClash.dll and QuickClash.addin files into this path: C:\Users\{{username}}\AppData\Roaming\Autodesk\Revit\Addins\2021
+![image](./QuickClash/Resources/open-visualstudio.png)
 
-### 6. Now you can open Revit and try it in the tab "Quick Clash"
+#### 4. Build solution.
+
+![image](./QuickClash/Resources/build-solution.png)
+
+#### 5. After built the solution, in the project path enter to the folder "\bin\Debug" and Copy "QuickClash.dll" and "QuickClash.addin" files into this path: C:\Users\username\AppData\Roaming\Autodesk\Revit\Addins\2021
+
+![image](./QuickClash/Resources/debug-folder.png)
+
+![image](./QuickClash/Resources/path-tocopy.png)
+
+#### 6. Now you can open Revit and try it in the tab "Quick Clash"

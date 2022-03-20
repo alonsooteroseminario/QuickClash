@@ -129,6 +129,21 @@
   <ItemGroup>
     <Resource Include="Resources\pipes-angles-%281%29.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\build-solution.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\clone-repo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\debug-folder.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\open-visualstudio.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\path-tocopy.PNG" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if $(ConfigurationName) == Debug mkdir "$(AppData)\Autodesk\REVIT\Addins\2021\$(TargetName)\"
