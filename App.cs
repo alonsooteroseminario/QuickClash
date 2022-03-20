@@ -48,32 +48,11 @@ namespace QuickClash
             button4.SetContextualHelp(contextHelp);
 
 
-            //PushButton button5 = panel2.AddItem(new PushButtonData("button5", "Quick Clash Links", ExecutingAssemblyPath, "QuickClash.QuickClashLinks")) as PushButton;
-            //button5.LargeImage = new BitmapImage(new Uri("pack://application:,,,/QuickClash;component/Resources/pipes-angles-(1).png"));
-            //button5.ToolTip = "Quick Clash Colision with Links Models";
-            //button5.LongDescription = "Quick Collision Analysis of all Categories against all Categories of Linked Models in Active View.";
-            //button5.SetContextualHelp(contextHelp);
-
-
-            //PushButton button6 = panel2.AddItem(new PushButtonData("button6", "Clash Comments", ExecutingAssemblyPath, "QuickClash.ClashComments")) as PushButton;
-            //button6.LargeImage = new BitmapImage(new Uri("pack://application:,,,/QuickClash;component/Resources/edit-(1).png"));
-            //button6.ToolTip = "Comment on the Items pending revision";
-            //button6.LongDescription = "The comment will be written in the Elements with CLASH of the Active View.";
-            //button6.SetContextualHelp(contextHelp);
-
-
             PushButton button7 = panel2.AddItem(new PushButtonData("button7", "Filter Clash", ExecutingAssemblyPath, "QuickClash.ClashFilter")) as PushButton;
             button7.LargeImage = new BitmapImage(new Uri("pack://application:,,,/QuickClash;component/Resources/broom-(1).png"));
             button7.ToolTip = "Apply Clash Filter";
             button7.LongDescription = "Apply a colour red Clash filter to indentified the elements interferences in Active View.";
             button7.SetContextualHelp(contextHelp);
-
-
-            //PushButton button8 = panel2.AddItem(new PushButtonData("button8", "Remove Filter Clash", ExecutingAssemblyPath, "QuickClash.RemoveClashFilter")) as PushButton;
-            //button8.LargeImage = new BitmapImage(new Uri("pack://application:,,,/QuickClash;component/Resources/broom-(1).png"));
-            //button8.ToolTip = "Unapply Clash Filter";
-            //button8.LongDescription = "Unapply the colour red Clash filter in Active View.";
-            //button8.SetContextualHelp(contextHelp);
 
             return Result.Succeeded;
         }
