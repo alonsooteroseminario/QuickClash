@@ -7,7 +7,7 @@ namespace QuickClash
     public static class SetNoValueAllParameters
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param></param>
         public static void Do(ExternalCommandData commandData)
@@ -110,7 +110,6 @@ namespace QuickClash
                         familyInstanceclash_no.Add(elem);
                     }
                 }
-
             }
 
             foreach (Element e in familyInstanceclash)

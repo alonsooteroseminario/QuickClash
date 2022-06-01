@@ -9,7 +9,7 @@ namespace QuickClash
     public static class SetRemoveApplyFilter
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param></param>
         public static void Do(ExternalCommandData commandData)
@@ -44,7 +44,6 @@ namespace QuickClash
                 ta.Start();
                 FilteredElementCollector collector = new FilteredElementCollector(doc);
 
-
                 Parameter param = collector.OfClass(typeof(Duct)).FirstElement().LookupParameter("Clash");
                 Parameter param_solved = collector.OfClass(typeof(Duct)).FirstElement().LookupParameter("Clash Solved");
 
@@ -71,8 +70,6 @@ namespace QuickClash
                     }));
                     lista_ParameterFilterElement1.Add(parameterFilterElement);
                 }
-
-
 
                 for (int i = 0; i < lista_filtros.Count(); i++)
                 {
@@ -107,20 +104,15 @@ namespace QuickClash
                     lista_ParameterFilterElement_solved.Add(parameterFilterElement_solved);
                 }
 
-
-
-
                 ParameterFilterElement ParameterFilterElement1 = lista_ParameterFilterElement1.First();
                 ParameterFilterElement ParameterFilterElement1_no = lista_ParameterFilterElement_no.First();
                 ParameterFilterElement ParameterFilterElement1_solved = lista_ParameterFilterElement_solved.First();
-
 
                 OverrideGraphicSettings ogs3 = new OverrideGraphicSettings();
                 ogs3.SetProjectionLineColor(new Color(250, 0, 0));
                 ogs3.SetSurfaceForegroundPatternColor(new Color(250, 0, 0));
                 ogs3.SetSurfaceForegroundPatternVisible(true);
                 ogs3.SetSurfaceForegroundPatternId(solidFillPattern.Id);
-
 
                 OverrideGraphicSettings ogs4 = new OverrideGraphicSettings();
                 ogs4.SetProjectionLineColor(new Color(192, 192, 192));
@@ -145,10 +137,7 @@ namespace QuickClash
                             break;
                         }
                     }
-
-
                 }
-
 
                 activeView.RemoveFilter(ParameterFilterElement1.Id);
                 activeView.RemoveFilter(ParameterFilterElement1_no.Id);

@@ -48,7 +48,6 @@ namespace QuickClash
                     {
                         views_COORD.Add(ve);
                     }
-
                 }
 
                 if (views_COORD.Count() == 0)
@@ -125,7 +124,6 @@ namespace QuickClash
                 lista_SelectElements.Add(e);
             }
 
-
             View3D viewer = null;
 
             using (Transaction t = new Transaction(doc, "Duplicate View"))
@@ -152,8 +150,6 @@ namespace QuickClash
                 double Max_Z = double.MinValue;
                 foreach (var elem in lista_SelectElements)
                 {
-
-
                     BoundingBoxXYZ box = elem.get_BoundingBox(null);
                     if (box.Max.X > Max_X)
                     {
@@ -180,7 +176,6 @@ namespace QuickClash
                     {
                         Min_Z = box.Min.Z;
                     }
-
                 }
 
                 XYZ Max = new XYZ(Max_X, Max_Y, Max_Z);
@@ -191,7 +186,6 @@ namespace QuickClash
                     Min = Min,
                     Max = Max
                 };
-
 
                 viewer.SetSectionBox(myBox);
 

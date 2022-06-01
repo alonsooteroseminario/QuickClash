@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace QuickClash.Create
 {
-    class ClashSchedules
+    internal class ClashSchedules
     {
         public static void Create(ExternalCommandData commandData)
         {

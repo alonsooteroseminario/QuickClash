@@ -7,7 +7,7 @@ namespace QuickClash
     public static class SetParameter
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param></param>
         public static void Do(ExternalCommandData commandData, IList<Element> elements)
@@ -31,12 +31,11 @@ namespace QuickClash
                     //param2.Set("NO");
                     t.Commit();
                 }
-
             }
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param></param>
         public static void Id(ExternalCommandData commandData, IList<Element> elements)
@@ -60,6 +59,7 @@ namespace QuickClash
                 }
             }
         }
+
         public static void DefaultValues(ExternalCommandData commandData, IList<Element> elements)
         {
             UIApplication uiapp = commandData.Application;

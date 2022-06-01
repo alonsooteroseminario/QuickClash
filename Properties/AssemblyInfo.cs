@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Autodesk Inc.")]
 [assembly: AssemblyProduct("QuickClash Revit C# .NET Add-In")]
-[assembly: AssemblyCopyright("Copyright (C) 2020 by Jeremy Tammik, Autodesk Inc.")]
+[assembly: AssemblyCopyright("Copyright (C) 2020 by Luis Otero, WeClash.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

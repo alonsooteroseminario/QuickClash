@@ -8,7 +8,7 @@ namespace QuickClash
     public static class SetClashGridLocation
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param></param>
         public static void DoActiveView(ExternalCommandData commandData)
@@ -300,7 +300,6 @@ namespace QuickClash
                         distanceMin = distance;
                         intersection = kp.Key;
                     }
-
                 }
                 double distanceInMeter = distanceMin / 3.281;
                 Parameter param = e.LookupParameter("Clash Grid Location");

@@ -9,7 +9,6 @@ namespace QuickClash
     {
         public static void Do(ExternalCommandData commandData, List<Element> clash_no_)
         {
-
             UIApplication uiApp = commandData.Application;
             UIDocument uidoc = uiApp.ActiveUIDocument;
             Document doc = uiApp.ActiveUIDocument.Document;
@@ -110,7 +109,6 @@ namespace QuickClash
                 string vacio = "";
                 using (Transaction t = new Transaction(doc, "Set CLASH = vacio "))
                 {
-
                     t.Start();
 
                     param2.Set(vacio);
@@ -128,7 +126,6 @@ namespace QuickClash
                     activeView.Name = activeView.Name.ToString() + " - RESUELTO";
                     t.Commit();
                 }
-
             }
         }
     }

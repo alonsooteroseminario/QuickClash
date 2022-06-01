@@ -23,7 +23,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;REVIT2022;2022</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <StartAction>Program</StartAction>
@@ -41,19 +41,20 @@
     <StartProgram>$(ProgramW6432)\Autodesk\Revit 2022\Revit.exe</StartProgram>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AdWindows, Version=3.1.7.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Revit_All_Main_Versions_API_x64.2022.1.0\lib\net48\AdWindows.dll</HintPath>
+    <Reference Include="AdWindows, Version=4.0.0.6, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Revit_All_Main_Versions_API_x64.2023.0.0\lib\net48\AdWindows.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
     </Reference>
     <Reference Include="PresentationCore" />
-    <Reference Include="RevitAPI, Version=22.0.0.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>packages\Revit_All_Main_Versions_API_x64.2022.1.0\lib\net48\RevitAPI.dll</HintPath>
+    <Reference Include="PresentationFramework" />
+    <Reference Include="RevitAPI, Version=23.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>packages\Revit_All_Main_Versions_API_x64.2023.0.0\lib\net48\RevitAPI.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
     </Reference>
-    <Reference Include="RevitAPIUI, Version=22.0.0.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>packages\Revit_All_Main_Versions_API_x64.2022.1.0\lib\net48\RevitAPIUI.dll</HintPath>
+    <Reference Include="RevitAPIUI, Version=23.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>packages\Revit_All_Main_Versions_API_x64.2023.0.0\lib\net48\RevitAPIUI.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
     </Reference>
@@ -61,25 +62,29 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
-    <Reference Include="UIFramework, Version=22.0.0.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>packages\Revit_All_Main_Versions_API_x64.2022.1.0\lib\net48\UIFramework.dll</HintPath>
+    <Reference Include="UIFramework, Version=23.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>packages\Revit_All_Main_Versions_API_x64.2023.0.0\lib\net48\UIFramework.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
-    <Compile Include="Core\Buttons\DefaultActiveView.cs" />
-    <Compile Include="Core\Buttons\RemoveClashFilter.cs" />
-    <Compile Include="Core\Buttons\ClashFilter.cs" />
-    <Compile Include="Core\Buttons\SectionBoxSelection.cs" />
+    <Compile Include="Commands\ClashManage.cs" />
+    <Compile Include="Commands\DefaultActiveView.cs" />
+    <Compile Include="Commands\QuickClashLinks.cs" />
+    <Compile Include="Commands\RemoveClashFilter.cs" />
+    <Compile Include="Commands\ClashFilter.cs" />
+    <Compile Include="Commands\SectionBoxSelection.cs" />
     <Compile Include="Core\Check\CheckClashSolved.cs" />
-    <Compile Include="Core\Create\ClashSchedules.cs" />
+    <Compile Include="Core\Create\CreateClashSchedules.cs" />
     <Compile Include="Core\Get\GetElements.cs" />
     <Compile Include="Core\Get\GetIntersections.cs" />
     <Compile Include="Core\Intersect\Intersect.cs" />
-    <Compile Include="Core\Buttons\QuickClash.cs" />
+    <Compile Include="Commands\QuickClash.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -93,11 +98,14 @@
     <Compile Include="Core\Set\SetParameter.cs" />
     <Compile Include="Core\Set\SetEmptyYesNoParameters.cs" />
     <Compile Include="Core\Set\SetIDValue.cs" />
-    <Compile Include="Core\Create\ClashParameters.cs" />
+    <Compile Include="Core\Create\CreateClashParameters.cs" />
     <Compile Include="Core\Get\GetLists.cs" />
-    <Compile Include="Core\Buttons\StartClash.cs" />
-    <Compile Include="Core\Create\3DView.cs" />
+    <Compile Include="Commands\StartClash.cs" />
+    <Compile Include="Core\Create\Create3DView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\ManageWindow.xaml.cs">
+      <DependentUpon>ManageWindow.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -144,11 +152,20 @@
   <ItemGroup>
     <None Include="Resources\path-tocopy.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Tests\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Views\ManageWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName) == Debug mkdir "$(AppData)\Autodesk\REVIT\Addins\2021\$(TargetName)\"
-if $(ConfigurationName) == Debug copy "$(ProjectDir)$(OutputPath)*.dll" "$(AppData)\Autodesk\REVIT\Addins\2021\$(TargetName)\"
-if $(ConfigurationName) == Debug copy "$(ProjectDir)$(OutputPath)*.addin" "$(AppData)\Autodesk\REVIT\Addins\2021"
+    <PostBuildEvent>if $(ConfigurationName) == Debug mkdir "$(AppData)\Autodesk\REVIT\Addins\2022\$(TargetName)\"
+if $(ConfigurationName) == Debug copy "$(ProjectDir)$(OutputPath)*.dll" "$(AppData)\Autodesk\REVIT\Addins\2022\$(TargetName)\"
+if $(ConfigurationName) == Debug copy "$(ProjectDir)$(OutputPath)*.addin" "$(AppData)\Autodesk\REVIT\Addins\2022"
 </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

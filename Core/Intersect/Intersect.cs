@@ -10,21 +10,10 @@ namespace QuickClash
 {
     public static class Intersect
     {
-        // Element vs Element
 
-        /// <summary>
-        /// 'true' para solo Active View y 'false' para todo el Documento
-        /// </summary>
-        /// <param>List of BuiltCategories.</param>
-        public static void MultipleElementsToMultipleCategory(ExternalCommandData commandData)
+        public static List<Element> Get_allElements(ExternalCommandData commandData)
         {
-            UIApplication uiapp = commandData.Application;
-            UIDocument uidoc = uiapp.ActiveUIDocument;
-            Document doc = uidoc.Document;
-            var activeView = uidoc.ActiveView;
-
             List<BuiltInCategory> UI_list1 = GetLists.BuiltCategories(false);
-            List<BuiltInCategory> UI_list3 = GetLists.BuiltCategories(false);
 
             List<Element> allElements = new List<Element>();
 
@@ -80,6 +69,26 @@ namespace QuickClash
                 }
             }
 
+            return allElements;
+        }
+
+        // Element vs Element
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param></param>
+        public static void MultipleElementsToMultipleCategory(ExternalCommandData commandData)
+        {
+            UIApplication uiapp = commandData.Application;
+            UIDocument uidoc = uiapp.ActiveUIDocument;
+            Document doc = uidoc.Document;
+            Autodesk.Revit.DB.View activeView = uidoc.ActiveView;
+
+            List<BuiltInCategory> UI_list3 = GetLists.BuiltCategories(false);
+
+            List<Element> allElements = Get_allElements(commandData);
+
             List<Element> clash_yesA = new List<Element>();
 
             foreach (Element e in allElements)
@@ -95,7 +104,6 @@ namespace QuickClash
                     {
                         break;
                     }
-
                 }
 
                 ICollection<ElementId> collectoreID = new List<ElementId>();
@@ -108,12 +116,15 @@ namespace QuickClash
                         ElementClassFilter DUFilter4 = new ElementClassFilter(typeof(CableTray));
                         ElementCategoryFilter DU2Categoryfilter4 = new ElementCategoryFilter(BuiltInCategory.OST_CableTray);
                         LogicalAndFilter DU2InstancesFilter4 = new LogicalAndFilter(DUFilter4, DU2Categoryfilter4);
+
                         ExclusionFilter filter4 = new ExclusionFilter(collectoreID);
+
                         FilteredElementCollector collector4 = new FilteredElementCollector(doc, activeView.Id);
                         collector4.OfClass(typeof(CableTray));
                         collector4.WherePasses(DU2InstancesFilter4);
                         collector4.WherePasses(new ElementIntersectsSolidFilter(solid)).ToElements(); // Apply intersection filter to find matches
                         collector4.WherePasses(filter4);
+
                         if (collector4.Count() > 0)
                         {
                             Parameter param = e.LookupParameter("Clash Category");
@@ -383,88 +394,31 @@ namespace QuickClash
                 }
             }
 
-            SetClashGridLocation.DoAllDocument(commandData);
         }
-
 
         // Element vs. FamilyInstance
 
         /// <summary>
-        /// 'true' para solo Active View y 'false' para todo el Documento
+        /// 
         /// </summary>
-        /// <param>List of BuiltCategories.</param>
+        /// <param></param>
         public static void MultipleElementsToMultipleFamilyInstances(ExternalCommandData commandData)
         {
             UIApplication uiapp = commandData.Application;
             UIDocument uidoc = uiapp.ActiveUIDocument;
             Document doc = uidoc.Document;
             var activeView = uidoc.ActiveView;
-            List<BuiltInCategory> UI_list1 = GetLists.BuiltCategories(false);
             List<BuiltInCategory> UI_list4 = GetLists.BuiltCategories(true);
 
-            List<Element> allElements = new List<Element>();
-
-            foreach (BuiltInCategory bic in UI_list1)
-            {
-                if (bic == BuiltInCategory.OST_CableTray)
-                {
-                    IList<Element> cabletrays = GetElements.ElementsByBuiltCategoryActiveView(commandData, bic, "cabletrays");
-                    foreach (Element i in cabletrays)
-                    {
-                        allElements.Add(i);
-                    }
-                }
-                if (bic == BuiltInCategory.OST_Conduit)
-                {
-                    IList<Element> conduits = GetElements.ElementsByBuiltCategoryActiveView(commandData, bic, "conduits");
-                    foreach (Element i in conduits)
-                    {
-                        allElements.Add(i);
-                    }
-                }
-                if (bic == BuiltInCategory.OST_DuctCurves)
-                {
-                    IList<Element> ducts = GetElements.ElementsByBuiltCategoryActiveView(commandData, bic, "ducts");
-                    foreach (Element i in ducts)
-                    {
-                        allElements.Add(i);
-                    }
-                }
-                if (bic == BuiltInCategory.OST_PipeCurves)
-                {
-                    IList<Element> pipes = GetElements.ElementsByBuiltCategoryActiveView(commandData, bic, "pipes");
-                    foreach (Element i in pipes)
-                    {
-                        allElements.Add(i);
-                    }
-                }
-                if (bic == BuiltInCategory.OST_FlexDuctCurves)
-                {
-                    IList<Element> flexducts = GetElements.ElementsByBuiltCategoryActiveView(commandData, bic, "flexducts");
-                    foreach (Element i in flexducts)
-                    {
-                        allElements.Add(i);
-                    }
-                }
-                if (bic == BuiltInCategory.OST_FlexPipeCurves)
-                {
-                    IList<Element> flexpipes = GetElements.ElementsByBuiltCategoryActiveView(commandData, bic, "flexpipes");
-                    foreach (Element i in flexpipes)
-                    {
-                        allElements.Add(i);
-                    }
-                }
-            }
+            List<Element> allElements = Get_allElements(commandData);
 
             List<Element> clash_yesA = new List<Element>();
 
             List<Element> clash_yesA_element = new List<Element>();
             List<Element> clash_yesA_familyinstance = new List<Element>();
 
-
             foreach (Element e in allElements)
             {
-
                 ElementId eID = e.Id;
 
                 GeometryElement geomElement = e.get_Geometry(new Options());
@@ -543,17 +497,14 @@ namespace QuickClash
                 }
             }
 
-            SetClashGridLocation.UI(commandData, clash_yesA_element, clash_yesA_familyinstance);
-
         }
-
 
         //FamilyIntance vs Familyinstance
 
         /// <summary>
-        /// 'true' para solo Active View y 'false' para todo el Documento
+        /// 
         /// </summary>
-        /// <param>List of BuiltCategories.</param>
+        /// <param></param>
         public static void MultipleFamilyInstanceToMultipleFamilyInstances_BBox(ExternalCommandData commandData) // Family Instance vs Family Instance
         {
             UIApplication uiapp = commandData.Application;
@@ -572,7 +523,6 @@ namespace QuickClash
                 {
                     clash_familyinstance.Add(elem);
                 }
-
             }
             List<Element> clash_yesA = new List<Element>();
 
@@ -636,7 +586,6 @@ namespace QuickClash
             UIDocument uidoc = uiapp.ActiveUIDocument;
             Document doc = uidoc.Document;
 
-            List<BuiltInCategory> UI_list1 = GetLists.BuiltCategories(false);
             List<BuiltInCategory> UI_list3 = GetLists.BuiltCategories(false);
 
             IList<Element> linkInstances = new FilteredElementCollector(doc).OfClass(typeof(RevitLinkInstance)).ToElements();
@@ -648,60 +597,7 @@ namespace QuickClash
                 lista_links.Add(link);
             }
 
-
-            List<Element> allElements = new List<Element>();
-
-            foreach (BuiltInCategory bic in UI_list1)
-            {
-                if (bic == BuiltInCategory.OST_CableTray)
-                {
-                    IList<Element> cabletrays = GetElements.ElementsByBuiltCategoryActiveView(commandData, bic, "cabletrays");
-                    foreach (Element i in cabletrays)
-                    {
-                        allElements.Add(i);
-                    }
-                }
-                if (bic == BuiltInCategory.OST_Conduit)
-                {
-                    IList<Element> conduits = GetElements.ElementsByBuiltCategoryActiveView(commandData, bic, "conduits");
-                    foreach (Element i in conduits)
-                    {
-                        allElements.Add(i);
-                    }
-                }
-                if (bic == BuiltInCategory.OST_DuctCurves)
-                {
-                    IList<Element> ducts = GetElements.ElementsByBuiltCategoryActiveView(commandData, bic, "ducts");
-                    foreach (Element i in ducts)
-                    {
-                        allElements.Add(i);
-                    }
-                }
-                if (bic == BuiltInCategory.OST_PipeCurves)
-                {
-                    IList<Element> pipes = GetElements.ElementsByBuiltCategoryActiveView(commandData, bic, "pipes");
-                    foreach (Element i in pipes)
-                    {
-                        allElements.Add(i);
-                    }
-                }
-                if (bic == BuiltInCategory.OST_FlexDuctCurves)
-                {
-                    IList<Element> flexducts = GetElements.ElementsByBuiltCategoryActiveView(commandData, bic, "flexducts");
-                    foreach (Element i in flexducts)
-                    {
-                        allElements.Add(i);
-                    }
-                }
-                if (bic == BuiltInCategory.OST_FlexPipeCurves)
-                {
-                    IList<Element> flexpipes = GetElements.ElementsByBuiltCategoryActiveView(commandData, bic, "flexpipes");
-                    foreach (Element i in flexpipes)
-                    {
-                        allElements.Add(i);
-                    }
-                }
-            }
+            List<Element> allElements = Get_allElements(commandData);
 
             List<Element> clash_yesA = new List<Element>();
 
@@ -718,12 +614,10 @@ namespace QuickClash
                     {
                         break;
                     }
-
                 }
 
                 ICollection<ElementId> collectoreID = new List<ElementId>();
                 collectoreID.Add(eID);
-
 
                 foreach (RevitLinkInstance link in lista_links)
                 {
@@ -912,17 +806,13 @@ namespace QuickClash
                 }
             }
 
-            //SetClashGridLocation.DoAllDocument(commandData);
         }
+
         public static void MultipleElementsToLinksFamilyInstance(ExternalCommandData commandData)
         {
             UIApplication uiapp = commandData.Application;
             UIDocument uidoc = uiapp.ActiveUIDocument;
             Document doc = uidoc.Document;
-            var activeView = uidoc.ActiveView;
-
-            List<BuiltInCategory> UI_list1 = GetLists.BuiltCategories(false);
-            List<BuiltInCategory> UI_list3 = GetLists.BuiltCategories(true);
 
             IList<Element> linkInstances = new FilteredElementCollector(doc).OfClass(typeof(RevitLinkInstance)).ToElements();
 
@@ -933,60 +823,7 @@ namespace QuickClash
                 lista_links.Add(link);
             }
 
-
-            List<Element> allElements = new List<Element>();
-
-            foreach (BuiltInCategory bic in UI_list1)
-            {
-                if (bic == BuiltInCategory.OST_CableTray)
-                {
-                    IList<Element> cabletrays = GetElements.ElementsByBuiltCategoryActiveView(commandData, bic, "cabletrays");
-                    foreach (Element i in cabletrays)
-                    {
-                        allElements.Add(i);
-                    }
-                }
-                if (bic == BuiltInCategory.OST_Conduit)
-                {
-                    IList<Element> conduits = GetElements.ElementsByBuiltCategoryActiveView(commandData, bic, "conduits");
-                    foreach (Element i in conduits)
-                    {
-                        allElements.Add(i);
-                    }
-                }
-                if (bic == BuiltInCategory.OST_DuctCurves)
-                {
-                    IList<Element> ducts = GetElements.ElementsByBuiltCategoryActiveView(commandData, bic, "ducts");
-                    foreach (Element i in ducts)
-                    {
-                        allElements.Add(i);
-                    }
-                }
-                if (bic == BuiltInCategory.OST_PipeCurves)
-                {
-                    IList<Element> pipes = GetElements.ElementsByBuiltCategoryActiveView(commandData, bic, "pipes");
-                    foreach (Element i in pipes)
-                    {
-                        allElements.Add(i);
-                    }
-                }
-                if (bic == BuiltInCategory.OST_FlexDuctCurves)
-                {
-                    IList<Element> flexducts = GetElements.ElementsByBuiltCategoryActiveView(commandData, bic, "flexducts");
-                    foreach (Element i in flexducts)
-                    {
-                        allElements.Add(i);
-                    }
-                }
-                if (bic == BuiltInCategory.OST_FlexPipeCurves)
-                {
-                    IList<Element> flexpipes = GetElements.ElementsByBuiltCategoryActiveView(commandData, bic, "flexpipes");
-                    foreach (Element i in flexpipes)
-                    {
-                        allElements.Add(i);
-                    }
-                }
-            }
+            List<Element> allElements = Get_allElements(commandData);
 
             List<Element> clash_yesA = new List<Element>();
 
@@ -1003,12 +840,10 @@ namespace QuickClash
                     {
                         break;
                     }
-
                 }
 
                 ICollection<ElementId> collectoreID = new List<ElementId>();
                 collectoreID.Add(eID);
-
 
                 foreach (RevitLinkInstance link in lista_links)
                 {
@@ -1036,7 +871,6 @@ namespace QuickClash
                             clash_yesA.Add(e);
                         }
                     }
-
                 }
             }
 
@@ -1051,8 +885,8 @@ namespace QuickClash
                 }
             }
 
-            //SetClashGridLocation.DoAllDocument(commandData);
         }
+
         public static void MultipleFamilyInstanceToLinksElements(ExternalCommandData commandData)
         {
             UIApplication uiapp = commandData.Application;
@@ -1083,7 +917,6 @@ namespace QuickClash
                 }
             }
 
-
             foreach (Element i in familyinstance)
             {
                 if (!allElements.Contains(i))
@@ -1102,7 +935,6 @@ namespace QuickClash
                 {
                     eID
                 };
-
 
                 foreach (RevitLinkInstance link in lista_links)
                 {
@@ -1297,8 +1129,8 @@ namespace QuickClash
                 }
             }
 
-            //SetClashGridLocation.DoAllDocument(commandData);
         }
+
         public static void MultipleFamilyInstanceToLinksFamilyInstance(ExternalCommandData commandData)
         {
             UIApplication uiapp = commandData.Application;
@@ -1306,7 +1138,6 @@ namespace QuickClash
             Document doc = uidoc.Document;
 
             List<BuiltInCategory> UI_list1 = GetLists.BuiltCategories(true);
-            List<BuiltInCategory> UI_list3 = GetLists.BuiltCategories(true);
 
             IList<Element> linkInstances = new FilteredElementCollector(doc).OfClass(typeof(RevitLinkInstance)).ToElements();
 
@@ -1316,7 +1147,6 @@ namespace QuickClash
             {
                 lista_links.Add(link);
             }
-
 
             List<Element> allElements = new List<Element>();
             List<Element> familyinstance = new List<Element>();
@@ -1329,7 +1159,6 @@ namespace QuickClash
                     familyinstance.Add(item);
                 }
             }
-
 
             foreach (Element i in familyinstance)
             {
@@ -1347,11 +1176,8 @@ namespace QuickClash
                 ICollection<ElementId> collectoreID = new List<ElementId>();
                 collectoreID.Add(eID);
 
-
                 foreach (RevitLinkInstance link in lista_links)
                 {
-
-
                     var docLink = link.GetLinkDocument();
                     var activeLinkViewId = link.Id;
                     ExclusionFilter filter4 = new ExclusionFilter(collectoreID);
@@ -1376,7 +1202,6 @@ namespace QuickClash
                             clash_yesA.Add(e);
                         }
                     }
-
                 }
             }
 
@@ -1391,8 +1216,6 @@ namespace QuickClash
                 }
             }
 
-            //SetClashGridLocation.DoAllDocument(commandData);
         }
-
     }
 }

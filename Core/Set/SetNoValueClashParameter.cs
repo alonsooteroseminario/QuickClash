@@ -7,12 +7,11 @@ namespace QuickClash
     public static class SetNoValueClashParameter
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param></param>
         public static void Do(ExternalCommandData commandData)
         {
-
             UIApplication uiApp = commandData.Application;
             UIDocument uidoc = uiApp.ActiveUIDocument;
             Document doc = uiApp.ActiveUIDocument.Document;
@@ -107,7 +106,6 @@ namespace QuickClash
                         familyInstance_clash_no.Add(elem);
                     }
                 }
-
             }
 
             foreach (Element e in familyInstance_clash)

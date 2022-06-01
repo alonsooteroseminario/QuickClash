@@ -6,7 +6,7 @@ namespace QuickClash
     public static class GetLists
     {
         /// <summary>
-        /// Devuelve la lista de valores del diccionario ingresado como parámetro, 'false' para Elementos y 'true' para Family Instance 
+        /// Devuelve la lista de valores del diccionario ingresado como parámetro, 'false' para Elementos y 'true' para Family Instance
         /// </summary>
         /// <param>List of BuiltCategories.</param>
         public static List<BuiltInCategory> BuiltCategories(bool familyInstance)
@@ -37,13 +37,12 @@ namespace QuickClash
 						//BuiltInCategory.OST_Wire,
                         //BuiltInCategory.OST_DuctInsulations,
                         //BuiltInCategory.OST_PipeInsulations
-
                 };
                 return lista;
             }
             else
             {
-                List<BuiltInCategory> bics_familyIns = new List<BuiltInCategory>() { 
+                List<BuiltInCategory> bics_familyIns = new List<BuiltInCategory>() {
 					//BuiltInCategory.OST_CableTray,
 				    BuiltInCategory.OST_CableTrayFitting,
 				    //BuiltInCategory.OST_Conduit,
@@ -70,6 +69,7 @@ namespace QuickClash
                 return bics_familyIns;
             }
         }
+
         public static List<string> Params()
         {
             List<string> listParam = new List<string>()
@@ -86,8 +86,5 @@ namespace QuickClash
                     };
             return listParam;
         }
-
-
-
     }
 }

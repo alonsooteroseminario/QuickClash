@@ -13,7 +13,6 @@ namespace QuickClash
             string coordC;
             Dictionary<string, XYZ> intersectionPoints = new Dictionary<string, XYZ>();
 
-
             ICollection<ElementId> grids = new FilteredElementCollector(_doc).WherePasses(new ElementCategoryFilter(BuiltInCategory.OST_Grids)).WhereElementIsNotElementType().ToElementIds();
 
             ICollection<ElementId> refgrid = new FilteredElementCollector(_doc).WherePasses(new ElementCategoryFilter(BuiltInCategory.OST_Grids)).WhereElementIsNotElementType().ToElementIds();
@@ -35,16 +34,13 @@ namespace QuickClash
                     coordB = g2.Name;
                     Curve c2 = g2.Curve;
 
-
                     SetComparisonResult result = c.Intersect(c2, out IntersectionResultArray results);
 
                     if (result != SetComparisonResult.Overlap)
                     { }
-
                     else if (results == null || results.Size != 1)
 
                     { }
-
                     else if (results.Size > 0)
                     {
                         for (int i = 0; i < results.Size; i++)
@@ -57,12 +53,10 @@ namespace QuickClash
                             XYZ point = iresult.XYZPoint;
 
                             intersectionPoints.Add(coordinate, point);
-
                         }
                     }
                     continue;
                 }
-
             }
             return intersectionPoints;
         }

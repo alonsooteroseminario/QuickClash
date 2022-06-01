@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace QuickClash.Create
 {
-    class ClashParameters
+    internal class ClashParameters
     {
         public static void CreateWhenSharedParameter(ExternalCommandData commandData, bool exists)
         {
@@ -61,8 +61,6 @@ namespace QuickClash.Create
                 }
                 DefinitionFile myDefinitionFile = app.OpenSharedParameterFile();
 
-
-
                 //DefinitionGroup myGroup = myDefinitionFile.Groups.get_Item("Clash Parameters");
                 DefinitionGroup myGroup = myDefinitionFile.Groups.Create("Clash Parameters");
                 foreach (string paramName in listParam)
@@ -77,27 +75,35 @@ namespace QuickClash.Create
                         case "Clash":
                             option.Description = "Determina si el elemento tiene interferencia con otro. ";
                             break;
+
                         case "Clash  Category":
                             option.Description = "La Categoría del Elemento contra el que existe la interferencia. ";
                             break;
+
                         case "Clash Comments":
                             option.Description = "Comentario sobre la interferencia. ";
                             break;
+
                         case "Clash Grid Location":
                             option.Description = "Zona más cerca de la interferencia. ";
                             break;
+
                         case "Clash Solved":
                             option.Description = "Interferencia resuelta. Sí está activo en un Elemento, ese Elemento no será detectado con interferencias en el análisis. ";
                             break;
+
                         case "Done":
                             option.Description = "Tarea resuelta. ";
                             break;
+
                         case "ID Element":
                             option.Description = "Número de ID del Elemento";
                             break;
+
                         case "Percent Done":
                             option.Description = "Porcentaje de Tarea resuelta. ";
                             break;
+
                         case "Zone":
                             option.Description = "Zona General. ";
                             break;

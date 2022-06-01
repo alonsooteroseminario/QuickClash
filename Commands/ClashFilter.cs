@@ -8,7 +8,7 @@ namespace QuickClash
 {
     [TransactionAttribute(TransactionMode.Manual)]
     [RegenerationAttribute(RegenerationOption.Manual)]
-    class ClashFilter : IExternalCommand
+    internal class ClashFilter : IExternalCommand
     {
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
@@ -29,6 +29,5 @@ namespace QuickClash
 
             return Result.Succeeded;
         }
-
     }
 }

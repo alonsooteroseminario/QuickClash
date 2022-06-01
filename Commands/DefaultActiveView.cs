@@ -7,11 +7,10 @@ namespace QuickClash
 {
     [TransactionAttribute(TransactionMode.Manual)]
     [RegenerationAttribute(RegenerationOption.Manual)]
-    class DefaultActiveView : IExternalCommand
+    internal class DefaultActiveView : IExternalCommand
     {
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
-
             List<BuiltInCategory> UI_list1 = GetLists.BuiltCategories(false);
 
             List<Element> allElements = new List<Element>();
@@ -80,6 +79,5 @@ namespace QuickClash
 
             return Result.Succeeded;
         }
-
     }
 }

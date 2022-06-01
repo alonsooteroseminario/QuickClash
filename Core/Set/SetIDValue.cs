@@ -7,7 +7,7 @@ namespace QuickClash
     public static class SetIDValue
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param></param>
         public static void Do(ExternalCommandData commandData, string activeViewVerified)
@@ -69,7 +69,6 @@ namespace QuickClash
                 IList<Element> ligthting_fixtures = GetElements.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_LightingFixtures, "family_instances_all");
                 IList<Element> plumbing_fixtures = GetElements.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_PlumbingFixtures, "family_instances_all");
                 IList<Element> sprinklers = GetElements.ElementsByBuiltCategory(commandData, BuiltInCategory.OST_Sprinklers, "family_instances_all");
-
 
                 SetParameter.Id(commandData, ducts);
                 SetParameter.Id(commandData, pipes);

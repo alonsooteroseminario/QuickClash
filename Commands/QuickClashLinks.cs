@@ -6,23 +6,21 @@ namespace QuickClash
 {
     [TransactionAttribute(TransactionMode.Manual)]
     [RegenerationAttribute(RegenerationOption.Manual)]
-    class QuickClash : IExternalCommand
+    internal class QuickClashLinks : IExternalCommand
     {
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
+            Intersect.MultipleElementsToLinksElements(commandData);
 
-            Intersect.MultipleElementsToMultipleCategory(commandData);
+            Intersect.MultipleElementsToLinksFamilyInstance(commandData);
 
-            Intersect.MultipleElementsToMultipleFamilyInstances(commandData);
+            Intersect.MultipleFamilyInstanceToLinksElements(commandData);
 
-            Intersect.MultipleFamilyInstanceToMultipleFamilyInstances_BBox(commandData);
+            Intersect.MultipleFamilyInstanceToLinksFamilyInstance(commandData);
 
             SetClashGridLocation.DoActiveView(commandData);
 
-            SetIDValue.Do(commandData, "ActiveView");
-
             return Result.Succeeded;
         }
-
     }
 }

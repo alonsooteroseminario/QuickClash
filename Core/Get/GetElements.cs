@@ -10,7 +10,7 @@ namespace QuickClash
     public static class GetElements
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param></param>
         public static IList<Element> ElementsByBuiltCategory(ExternalCommandData commandData, BuiltInCategory bic, string builtCategory)
@@ -91,11 +91,10 @@ namespace QuickClash
                 salida = flexpipes;
             }
             return salida;
-
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param></param>
         public static IList<Element> ElementsByBuiltCategoryActiveView(ExternalCommandData commandData, BuiltInCategory bic, string builtCategory)
@@ -104,7 +103,6 @@ namespace QuickClash
             UIDocument uidoc = uiapp.ActiveUIDocument;
             Document doc = uidoc.Document;
             var activeView = uidoc.ActiveView;
-
 
             ElementClassFilter familyFilter = new ElementClassFilter(typeof(FamilyInstance));
             ElementCategoryFilter MECategoryfilter = new ElementCategoryFilter(bic);
@@ -117,7 +115,6 @@ namespace QuickClash
             ElementClassFilter elemFilter4 = new ElementClassFilter(typeof(CableTray));
             ElementClassFilter elemFilter5 = new ElementClassFilter(typeof(FlexDuct));
             ElementClassFilter elemFilter6 = new ElementClassFilter(typeof(FlexPipe));
-
 
             ElementCategoryFilter DUCategoryfilter = new ElementCategoryFilter(BuiltInCategory.OST_DuctCurves);
             ElementCategoryFilter DUCategoryfilter2 = new ElementCategoryFilter(BuiltInCategory.OST_PipeCurves);
@@ -150,7 +147,6 @@ namespace QuickClash
             FilteredElementCollector DUcoll6 = new FilteredElementCollector(doc, activeView.Id);
             IList<Element> flexpipes = DUcoll6.WherePasses(DUInstancesFilter6).ToElements();
 
-
             if (builtCategory == "family_instances_all")
             {
                 salida = family_instances_all;
@@ -180,8 +176,6 @@ namespace QuickClash
                 salida = flexpipes;
             }
             return salida;
-
         }
-
     }
 }
