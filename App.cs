@@ -54,11 +54,7 @@ namespace QuickClash
 
 
 
-            PushButton button3 = panel2.AddItem(new PushButtonData("button3", "Selection Box", ExecutingAssemblyPath, "QuickClash.SectionBoxSelection")) as PushButton;
-            button3.LargeImage = new BitmapImage(new Uri("pack://application:,,,/QuickClash;component/Resources/3d-(1).png"));
-            button3.ToolTip = "Copy and Section Box apply";
-            button3.LongDescription = "Create a copy of the active 3D view and apply Section Box on Elements selected.";
-            button3.SetContextualHelp(contextHelp);
+
 
             PushButton button7 = panel2.AddItem(new PushButtonData("button7", "Filter Clash", ExecutingAssemblyPath, "QuickClash.ClashFilter")) as PushButton;
             button7.LargeImage = new BitmapImage(new Uri("pack://application:,,,/QuickClash;component/Resources/broom-(1).png"));
@@ -66,11 +62,27 @@ namespace QuickClash
             button7.LongDescription = "Apply a colour red Clash filter to indentified the elements interferences in Active View.";
             button7.SetContextualHelp(contextHelp);
 
-            PushButton button8 = panel2.AddItem(new PushButtonData("button8", "Manage Clash", ExecutingAssemblyPath, "QuickClash.ClashManage")) as PushButton;
-            button8.LargeImage = new BitmapImage(new Uri("pack://application:,,,/QuickClash;component/Resources/check-list-(1).png"));
+
+            RibbonPanel panel3 = application.CreateRibbonPanel(tabName, "Create");
+
+            PushButton button3 = panel3.AddItem(new PushButtonData("button3", "Selection Box", ExecutingAssemblyPath, "QuickClash.SectionBoxSelection")) as PushButton;
+            button3.LargeImage = new BitmapImage(new Uri("pack://application:,,,/QuickClash;component/Resources/3d-(1).png"));
+            button3.ToolTip = "Copy and Section Box apply";
+            button3.LongDescription = "Create a copy of the active 3D view and apply Section Box on Elements selected.";
+            button3.SetContextualHelp(contextHelp);
+
+
+            PushButton button8 = panel3.AddItem(new PushButtonData("button8", "Zones Views", ExecutingAssemblyPath, "QuickClash.ZonesViews")) as PushButton;
+            button8.LargeImage = new BitmapImage(new Uri("pack://application:,,,/QuickClash;component/Resources/3d-(1).png"));
             button8.ToolTip = "";
             button8.LongDescription = "";
             button8.SetContextualHelp(contextHelp);
+
+            PushButton button9 = panel3.AddItem(new PushButtonData("button9", "Elements Views", ExecutingAssemblyPath, "QuickClash.ElementsViews")) as PushButton;
+            button9.LargeImage = new BitmapImage(new Uri("pack://application:,,,/QuickClash;component/Resources/3d-(1).png"));
+            button9.ToolTip = "";
+            button9.LongDescription = "";
+            button9.SetContextualHelp(contextHelp);
 
             return Result.Succeeded;
         }

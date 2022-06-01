@@ -10,17 +10,11 @@
     <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="430" Margin="10,10,0,0" VerticalAlignment="Top" Width="780">
         <Grid Background="White">
             <DataGrid HorizontalAlignment="Left" Height="366" Margin="10,10,0,0" VerticalAlignment="Top" Width="757">
-                <DataGrid.Columns>
-                    <DataGridCheckBoxColumn Width="50" Header="Accept"/>
-                    <DataGridTextColumn Width="150" Header="Element Type" IsReadOnly="True"/>
-                    <DataGridTextColumn Width="150" Header="Element Name" IsReadOnly="True"/>
-                    <DataGridTextColumn Width="150" Header="Direction" IsReadOnly="True"/>
-                    <DataGridTextColumn Width="*" Header="Moving Size" IsReadOnly="True"/>
 
-                </DataGrid.Columns>
             </DataGrid>
             <Button Content="Accept" HorizontalAlignment="Left" Margin="10,381,0,0" VerticalAlignment="Top" Width="350" Height="36"/>
             <Button Content="Cancel" HorizontalAlignment="Left" Margin="417,381,0,0" VerticalAlignment="Top" Width="350" Height="36"/>
+            
 
         </Grid>
     </Border>

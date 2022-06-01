@@ -188,13 +188,13 @@ namespace QuickClash
                 };
 
                 viewer.SetSectionBox(myBox);
+                viewer.DisplayStyle = DisplayStyle.Shading;
+                viewer.DetailLevel = ViewDetailLevel.Fine;
 
                 t.Commit();
             }
 
             uidoc.ActiveView = viewer;
-            viewer.DisplayStyle = DisplayStyle.Shading;
-            viewer.DetailLevel = ViewDetailLevel.Fine;
 
             return (View3D)viewer;
         }

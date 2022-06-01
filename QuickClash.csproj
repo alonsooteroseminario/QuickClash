@@ -73,6 +73,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="Commands\ElementsViews.cs" />
+    <Compile Include="Commands\ZonesViews.cs" />
     <Compile Include="Commands\ClashManage.cs" />
     <Compile Include="Commands\DefaultActiveView.cs" />
     <Compile Include="Commands\QuickClashLinks.cs" />
@@ -81,6 +83,7 @@
     <Compile Include="Commands\SectionBoxSelection.cs" />
     <Compile Include="Core\Check\CheckClashSolved.cs" />
     <Compile Include="Core\Create\CreateClashSchedules.cs" />
+    <Compile Include="Core\Get\GetAllClashElements.cs" />
     <Compile Include="Core\Get\GetElements.cs" />
     <Compile Include="Core\Get\GetIntersections.cs" />
     <Compile Include="Core\Intersect\Intersect.cs" />
