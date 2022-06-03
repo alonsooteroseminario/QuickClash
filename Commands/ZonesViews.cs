@@ -41,9 +41,9 @@ namespace QuickClash
                     List<Element> clash_elements_zone_no = new List<Element>();
                     List<ElementId> clash_elements_zone_ids = new List<ElementId>();
 
-                    string intersc = kp.Value.ToString(); 
+                    string intersc = kp.Value.ToString();
 
-                    string intersec_key = kp.Key.ToString(); 
+                    string intersec_key = kp.Key.ToString();
 
                     foreach (Element elem in clash_elements)
                     {
@@ -59,7 +59,6 @@ namespace QuickClash
 
                     if (clash_elements_zone.Count() > 1)
                     {
-
                         ViewFamilyType viewFamilyType = (from v in new FilteredElementCollector(doc).
                                                          OfClass(typeof(ViewFamilyType)).
                                                          Cast<ViewFamilyType>()
@@ -159,8 +158,8 @@ namespace QuickClash
                             var SectionBox = clashview.GetSectionBox();
                             var vMax = SectionBox.Max + SectionBox.Transform.Origin;
                             var vMin = SectionBox.Min + SectionBox.Transform.Origin;
-                            var bbMax = elem_bb.Max; 
-                            var bbMin = elem_bb.Min; 
+                            var bbMax = elem_bb.Max;
+                            var bbMin = elem_bb.Min;
 
                             double Max_X = elem_bb.Max.X;
 
@@ -184,13 +183,10 @@ namespace QuickClash
 
                             clashview.SetSectionBox(myBox);
 
-
                             clashview.DisplayStyle = DisplayStyle.Shading;
                             clashview.DetailLevel = ViewDetailLevel.Fine;
 
-
                             string number = (tresDclashview.Count() + 1).ToString();
-
 
                             clashview.Name = number + ".- Zone    " + intersec_key + "     " + " Section Box    ";
 
@@ -199,7 +195,6 @@ namespace QuickClash
                             clashview.SetSectionBox(myBox);
                             tresDclashview.Add(clashview);
                             t.Commit();
-
                         }
                     }
                 }

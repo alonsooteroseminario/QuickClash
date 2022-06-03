@@ -42,26 +42,17 @@ namespace QuickClash
             button4.LongDescription = "Quick Collision Analysis of all Categories against all Categories in Active View.";
             button4.SetContextualHelp(contextHelp);
 
-
             PushButton button5 = panel2.AddItem(new PushButtonData("button5", "Quick Clash Links", ExecutingAssemblyPath, "QuickClash.QuickClashLinks")) as PushButton;
             button5.LargeImage = new BitmapImage(new Uri("pack://application:,,,/QuickClash;component/Resources/pipes-angles-(1).png"));
             button5.ToolTip = "Quick Clash Colision with Links Models";
             button5.LongDescription = "Quick Collision Analysis of all Categories against all Categories of Links Models in Active View.";
             button5.SetContextualHelp(contextHelp);
 
-
-
-
-
-
-
-
             PushButton button7 = panel2.AddItem(new PushButtonData("button7", "Filter Clash", ExecutingAssemblyPath, "QuickClash.ClashFilter")) as PushButton;
             button7.LargeImage = new BitmapImage(new Uri("pack://application:,,,/QuickClash;component/Resources/broom-(1).png"));
             button7.ToolTip = "Apply Clash Filter";
             button7.LongDescription = "Apply a colour red Clash filter to indentified the elements interferences in Active View.";
             button7.SetContextualHelp(contextHelp);
-
 
             RibbonPanel panel3 = application.CreateRibbonPanel(tabName, "Create");
 
@@ -70,7 +61,6 @@ namespace QuickClash
             button3.ToolTip = "Copy and Section Box apply";
             button3.LongDescription = "Create a copy of the active 3D view and apply Section Box on Elements selected.";
             button3.SetContextualHelp(contextHelp);
-
 
             PushButton button8 = panel3.AddItem(new PushButtonData("button8", "Zones Views", ExecutingAssemblyPath, "QuickClash.ZonesViews")) as PushButton;
             button8.LargeImage = new BitmapImage(new Uri("pack://application:,,,/QuickClash;component/Resources/3d-(1).png"));

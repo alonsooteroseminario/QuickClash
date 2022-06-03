@@ -10,7 +10,6 @@ namespace QuickClash
 {
     public static class Intersect
     {
-
         public static List<Element> Get_allElements(ExternalCommandData commandData)
         {
             List<BuiltInCategory> UI_list1 = GetLists.BuiltCategories(false);
@@ -75,7 +74,7 @@ namespace QuickClash
         // Element vs Element
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param></param>
         public static void MultipleElementsToMultipleCategory(ExternalCommandData commandData)
@@ -393,13 +392,12 @@ namespace QuickClash
                     t.Commit();
                 }
             }
-
         }
 
         // Element vs. FamilyInstance
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param></param>
         public static void MultipleElementsToMultipleFamilyInstances(ExternalCommandData commandData)
@@ -496,13 +494,12 @@ namespace QuickClash
                     t.Commit();
                 }
             }
-
         }
 
         //FamilyIntance vs Familyinstance
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param></param>
         public static void MultipleFamilyInstanceToMultipleFamilyInstances_BBox(ExternalCommandData commandData) // Family Instance vs Family Instance
@@ -577,7 +574,6 @@ namespace QuickClash
                 }
             }
         }
-
 
         //Elements vs Links Elements
         public static void MultipleElementsToLinksElements(ExternalCommandData commandData)
@@ -805,7 +801,6 @@ namespace QuickClash
                     t.Commit();
                 }
             }
-
         }
 
         public static void MultipleElementsToLinksFamilyInstance(ExternalCommandData commandData)
@@ -884,7 +879,6 @@ namespace QuickClash
                     t.Commit();
                 }
             }
-
         }
 
         public static void MultipleFamilyInstanceToLinksElements(ExternalCommandData commandData)
@@ -1128,7 +1122,6 @@ namespace QuickClash
                     t.Commit();
                 }
             }
-
         }
 
         public static void MultipleFamilyInstanceToLinksFamilyInstance(ExternalCommandData commandData)
@@ -1215,7 +1208,6 @@ namespace QuickClash
                     t.Commit();
                 }
             }
-
         }
     }
 }

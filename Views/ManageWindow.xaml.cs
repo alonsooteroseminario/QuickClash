@@ -1,19 +1,8 @@
 ﻿using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace QuickClash.Views
 {
@@ -25,12 +14,41 @@ namespace QuickClash.Views
         private UIDocument uidoc;
         private Document doc;
         private Window window;
-        public ManageWindow(UIDocument uiDocument, Window win)
+        ExternalCommandData _commandData;
+
+        public ManageWindow(ExternalCommandData commandData, UIDocument uiDocument, Window win)
         {
             InitializeComponent();
             uidoc = uiDocument;
             doc = uidoc.Document;
             window = win;
+            _commandData = commandData;
+
+            IList<Element> linkInstances = new FilteredElementCollector(doc).OfClass(typeof(RevitLinkInstance)).ToElements();
+
+            List<Element> lista_links = new List<Element>();
+
+            foreach (RevitLinkInstance link in linkInstances)
+            {
+                lista_links.Add(link);
+            }
+            datagrid.ItemsSource = lista_links;
+
+
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Intersect.MultipleElementsToLinksElements(_commandData);
+
+            Intersect.MultipleElementsToLinksFamilyInstance(_commandData);
+
+            Intersect.MultipleFamilyInstanceToLinksElements(_commandData);
+
+            Intersect.MultipleFamilyInstanceToLinksFamilyInstance(_commandData);
+
+            SetClashGridLocation.DoActiveView(_commandData);
+        }
+
     }
 }

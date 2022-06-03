@@ -21,7 +21,6 @@ namespace QuickClash
 
             var activeView = uidoc.ActiveView;
 
-
             List<Element> clash_elements = new List<Element>();
 
             foreach (Element e in GetAllClashElements.Get(commandData))
