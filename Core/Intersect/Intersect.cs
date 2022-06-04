@@ -575,23 +575,20 @@ namespace QuickClash
             }
         }
 
+
+
+
+
+
+
         //Elements vs Links Elements
-        public static void MultipleElementsToLinksElements(ExternalCommandData commandData)
+        public static void MultipleElementsToLinksElements(ExternalCommandData commandData, List<Element> lista_links)
         {
             UIApplication uiapp = commandData.Application;
             UIDocument uidoc = uiapp.ActiveUIDocument;
             Document doc = uidoc.Document;
 
             List<BuiltInCategory> UI_list3 = GetLists.BuiltCategories(false);
-
-            IList<Element> linkInstances = new FilteredElementCollector(doc).OfClass(typeof(RevitLinkInstance)).ToElements();
-
-            List<Element> lista_links = new List<Element>();
-
-            foreach (RevitLinkInstance link in linkInstances)
-            {
-                lista_links.Add(link);
-            }
 
             List<Element> allElements = Get_allElements(commandData);
 
@@ -803,20 +800,11 @@ namespace QuickClash
             }
         }
 
-        public static void MultipleElementsToLinksFamilyInstance(ExternalCommandData commandData)
+        public static void MultipleElementsToLinksFamilyInstance(ExternalCommandData commandData, List<Element> lista_links)
         {
             UIApplication uiapp = commandData.Application;
             UIDocument uidoc = uiapp.ActiveUIDocument;
             Document doc = uidoc.Document;
-
-            IList<Element> linkInstances = new FilteredElementCollector(doc).OfClass(typeof(RevitLinkInstance)).ToElements();
-
-            List<Element> lista_links = new List<Element>();
-
-            foreach (RevitLinkInstance link in linkInstances)
-            {
-                lista_links.Add(link);
-            }
 
             List<Element> allElements = Get_allElements(commandData);
 
@@ -881,7 +869,7 @@ namespace QuickClash
             }
         }
 
-        public static void MultipleFamilyInstanceToLinksElements(ExternalCommandData commandData)
+        public static void MultipleFamilyInstanceToLinksElements(ExternalCommandData commandData, List<Element> lista_links)
         {
             UIApplication uiapp = commandData.Application;
             UIDocument uidoc = uiapp.ActiveUIDocument;
@@ -889,15 +877,6 @@ namespace QuickClash
 
             List<BuiltInCategory> UI_list1 = GetLists.BuiltCategories(true);
             List<BuiltInCategory> UI_list3 = GetLists.BuiltCategories(false);
-
-            IList<Element> linkInstances = new FilteredElementCollector(doc).OfClass(typeof(RevitLinkInstance)).ToElements();
-
-            List<Element> lista_links = new List<Element>();
-
-            foreach (RevitLinkInstance link in linkInstances)
-            {
-                lista_links.Add(link);
-            }
 
             List<Element> allElements = new List<Element>();
             List<Element> familyinstance = new List<Element>();
@@ -1124,22 +1103,13 @@ namespace QuickClash
             }
         }
 
-        public static void MultipleFamilyInstanceToLinksFamilyInstance(ExternalCommandData commandData)
+        public static void MultipleFamilyInstanceToLinksFamilyInstance(ExternalCommandData commandData, List<Element> lista_links)
         {
             UIApplication uiapp = commandData.Application;
             UIDocument uidoc = uiapp.ActiveUIDocument;
             Document doc = uidoc.Document;
 
             List<BuiltInCategory> UI_list1 = GetLists.BuiltCategories(true);
-
-            IList<Element> linkInstances = new FilteredElementCollector(doc).OfClass(typeof(RevitLinkInstance)).ToElements();
-
-            List<Element> lista_links = new List<Element>();
-
-            foreach (RevitLinkInstance link in linkInstances)
-            {
-                lista_links.Add(link);
-            }
 
             List<Element> allElements = new List<Element>();
             List<Element> familyinstance = new List<Element>();

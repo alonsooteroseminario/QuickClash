@@ -14,7 +14,9 @@ namespace QuickClash.Views
         private UIDocument uidoc;
         private Document doc;
         private Window window;
-        ExternalCommandData _commandData;
+        private ExternalCommandData _commandData;
+        private List<Element> _lista_links;
+        private List<Element> _lista_links_filtered;
 
         public ManageWindow(ExternalCommandData commandData, UIDocument uiDocument, Window win)
         {
@@ -33,22 +35,40 @@ namespace QuickClash.Views
                 lista_links.Add(link);
             }
             datagrid.ItemsSource = lista_links;
-
-
+            _lista_links = lista_links;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Intersect.MultipleElementsToLinksElements(_commandData);
+            List<Element> lista_links_filtered = new List<Element>();
 
-            Intersect.MultipleElementsToLinksFamilyInstance(_commandData);
+            for (int i = 0; i < datagrid.Items.Count; i++)
+            {
+                CheckBox mycheckbox = datagrid.Columns[0].GetCellContent(datagrid.Items[i]) as CheckBox;
+                if (!(bool)mycheckbox.IsChecked)
+                {
+                    lista_links_filtered.Add(_lista_links[i]);
+                }
+            }
 
-            Intersect.MultipleFamilyInstanceToLinksElements(_commandData);
+            _lista_links_filtered = lista_links_filtered;
 
-            Intersect.MultipleFamilyInstanceToLinksFamilyInstance(_commandData);
+            window.Close();
+
+            Intersect.MultipleElementsToLinksElements(_commandData, lista_links_filtered);
+
+            Intersect.MultipleElementsToLinksFamilyInstance(_commandData, lista_links_filtered);
+
+            Intersect.MultipleFamilyInstanceToLinksElements(_commandData, lista_links_filtered);
+
+            Intersect.MultipleFamilyInstanceToLinksFamilyInstance(_commandData, lista_links_filtered);
 
             SetClashGridLocation.DoActiveView(_commandData);
         }
 
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            window.Close();
+        }
     }
 }
