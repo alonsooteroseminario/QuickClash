@@ -387,9 +387,9 @@ namespace QuickClash
                 Parameter param = elem.LookupParameter("Clash");
                 using (Transaction t = new Transaction(doc, "Clash YES"))
                 {
-                    t.Start();
-                    param.Set("YES");
-                    t.Commit();
+                    _ = t.Start();
+                    _ = param.Set("YES");
+                    _ = t.Commit();
                 }
             }
         }
@@ -405,7 +405,7 @@ namespace QuickClash
             UIApplication uiapp = commandData.Application;
             UIDocument uidoc = uiapp.ActiveUIDocument;
             Document doc = uidoc.Document;
-            var activeView = uidoc.ActiveView;
+            Autodesk.Revit.DB.View activeView = uidoc.ActiveView;
             List<BuiltInCategory> UI_list4 = GetLists.BuiltCategories(true);
 
             List<Element> allElements = Get_allElements(commandData);
@@ -425,7 +425,10 @@ namespace QuickClash
                 foreach (GeometryObject geomObj in geomElement)
                 {
                     solid = geomObj as Solid;
-                    if (solid != null) break;
+                    if (solid != null)
+                    {
+                        break;
+                    }
                 }
 
                 IList<BuiltInCategory> bics_fi = UI_list4;
@@ -489,9 +492,9 @@ namespace QuickClash
                 Parameter param = elem.LookupParameter("Clash");
                 using (Transaction t = new Transaction(doc, "Clash YES"))
                 {
-                    t.Start();
-                    param.Set("YES");
-                    t.Commit();
+                    _ = t.Start();
+                    _ = param.Set("YES");
+                    _ = t.Commit();
                 }
             }
         }
@@ -507,7 +510,7 @@ namespace QuickClash
             UIApplication uiapp = commandData.Application;
             UIDocument uidoc = uiapp.ActiveUIDocument;
             Document doc = uiapp.ActiveUIDocument.Document;
-            var activeView = uidoc.ActiveView;
+            Autodesk.Revit.DB.View activeView = uidoc.ActiveView;
             List<BuiltInCategory> bics_finst = GetLists.BuiltCategories(true);
             List<BuiltInCategory> bics_finst_2 = GetLists.BuiltCategories(true);
 
@@ -552,9 +555,9 @@ namespace QuickClash
                                     string elemcategory = elementss.First().Category.Name.ToString() + " / ID: " + elementss.First().Id.ToString();
                                     using (Transaction t = new Transaction(doc, "Clash Category"))
                                     {
-                                        t.Start();
-                                        param.Set(elemcategory);
-                                        t.Commit();
+                                        _ = t.Start();
+                                        _ = param.Set(elemcategory);
+                                        _ = t.Commit();
                                     }
                                 }
                             }
@@ -568,18 +571,12 @@ namespace QuickClash
                 Parameter param = elem.LookupParameter("Clash");
                 using (Transaction t = new Transaction(doc, "Clash YES"))
                 {
-                    t.Start();
-                    param.Set("YES");
-                    t.Commit();
+                    _ = t.Start();
+                    _ = param.Set("YES");
+                    _ = t.Commit();
                 }
             }
         }
-
-
-
-
-
-
 
         //Elements vs Links Elements
         public static void MultipleElementsToLinksElements(ExternalCommandData commandData, List<Element> lista_links)
@@ -609,8 +606,10 @@ namespace QuickClash
                     }
                 }
 
-                ICollection<ElementId> collectoreID = new List<ElementId>();
-                collectoreID.Add(eID);
+                ICollection<ElementId> collectoreID = new List<ElementId>
+                {
+                    eID
+                };
 
                 foreach (RevitLinkInstance link in lista_links)
                 {
@@ -623,10 +622,10 @@ namespace QuickClash
                             LogicalAndFilter DU2InstancesFilter4 = new LogicalAndFilter(DUFilter4, DU2Categoryfilter4);
                             ExclusionFilter filter4 = new ExclusionFilter(collectoreID);
                             FilteredElementCollector collector4 = new FilteredElementCollector(link.GetLinkDocument());
-                            collector4.OfClass(typeof(CableTray));
-                            collector4.WherePasses(DU2InstancesFilter4);
-                            collector4.WherePasses(new ElementIntersectsSolidFilter(solid)).ToElements(); // Apply intersection filter to find matches
-                            collector4.WherePasses(filter4);
+                            _ = collector4.OfClass(typeof(CableTray));
+                            _ = collector4.WherePasses(DU2InstancesFilter4);
+                            _ = collector4.WherePasses(new ElementIntersectsSolidFilter(solid)).ToElements();
+                            _ = collector4.WherePasses(filter4);
                             if (collector4.Count() > 0)
                             {
                                 Parameter param = e.LookupParameter("Clash Category");
@@ -634,9 +633,9 @@ namespace QuickClash
                                 string elemcategory = collector4.First().Category.Name.ToString() + " / ID: " + collector4.First().Id.ToString();
                                 using (Transaction t = new Transaction(doc, "Clash Category"))
                                 {
-                                    t.Start();
-                                    param.Set(elemcategory);
-                                    t.Commit();
+                                    _ = t.Start();
+                                    _ = param.Set(elemcategory);
+                                    _ = t.Commit();
                                 }
                                 if (!clash_yesA.Contains(e))
                                 {
@@ -793,9 +792,9 @@ namespace QuickClash
                 Parameter param = elem.LookupParameter("Clash");
                 using (Transaction t = new Transaction(doc, "Clash YES"))
                 {
-                    t.Start();
-                    param.Set("YES");
-                    t.Commit();
+                    _ = t.Start();
+                    _ = param.Set("YES");
+                    _ = t.Commit();
                 }
             }
         }
@@ -830,13 +829,13 @@ namespace QuickClash
 
                 foreach (RevitLinkInstance link in lista_links)
                 {
-                    var docLink = link.GetLinkDocument();
-                    var activeLinkViewId = link.Id;
+                    Document docLink = link.GetLinkDocument();
+                    ElementId activeLinkViewId = link.Id;
                     ExclusionFilter filter4 = new ExclusionFilter(collectoreID);
                     FilteredElementCollector collector4 = new FilteredElementCollector(docLink);
-                    collector4.OfClass(typeof(FamilyInstance));
-                    collector4.WherePasses(new ElementIntersectsSolidFilter(solid)).ToElements(); // Apply intersection filter to find matches
-                    collector4.WherePasses(filter4);
+                    _ = collector4.OfClass(typeof(FamilyInstance));
+                    _ = collector4.WherePasses(new ElementIntersectsSolidFilter(solid)).ToElements();
+                    _ = collector4.WherePasses(filter4);
 
                     if (collector4.Count() > 0)
                     {
@@ -845,9 +844,9 @@ namespace QuickClash
                         string elemcategory = collector4.First().Category.Name.ToString() + " / ID: " + collector4.First().Id.ToString();
                         using (Transaction t = new Transaction(doc, "Clash Category"))
                         {
-                            t.Start();
-                            param.Set(elemcategory);
-                            t.Commit();
+                            _ = t.Start();
+                            _ = param.Set(elemcategory);
+                            _ = t.Commit();
                         }
                         if (!clash_yesA.Contains(e))
                         {
@@ -862,9 +861,9 @@ namespace QuickClash
                 Parameter param = elem.LookupParameter("Clash");
                 using (Transaction t = new Transaction(doc, "Clash YES"))
                 {
-                    t.Start();
-                    param.Set("YES");
-                    t.Commit();
+                    _ = t.Start();
+                    _ = param.Set("YES");
+                    _ = t.Commit();
                 }
             }
         }
@@ -881,10 +880,10 @@ namespace QuickClash
             List<Element> allElements = new List<Element>();
             List<Element> familyinstance = new List<Element>();
 
-            foreach (var bic in UI_list1)
+            foreach (BuiltInCategory bic in UI_list1)
             {
                 IList<Element> familyInstances = GetElements.ElementsByBuiltCategoryActiveView(commandData, bic, "family_instances_all");
-                foreach (var item in familyInstances)
+                foreach (Element item in familyInstances)
                 {
                     familyinstance.Add(item);
                 }
@@ -1096,9 +1095,9 @@ namespace QuickClash
                 Parameter param = elem.LookupParameter("Clash");
                 using (Transaction t = new Transaction(doc, "Clash YES"))
                 {
-                    t.Start();
-                    param.Set("YES");
-                    t.Commit();
+                    _ = t.Start();
+                    _ = param.Set("YES");
+                    _ = t.Commit();
                 }
             }
         }
@@ -1114,10 +1113,10 @@ namespace QuickClash
             List<Element> allElements = new List<Element>();
             List<Element> familyinstance = new List<Element>();
 
-            foreach (var bic in UI_list1)
+            foreach (BuiltInCategory bic in UI_list1)
             {
                 IList<Element> familyInstances = GetElements.ElementsByBuiltCategoryActiveView(commandData, bic, "family_instances_all");
-                foreach (var item in familyInstances)
+                foreach (Element item in familyInstances)
                 {
                     familyinstance.Add(item);
                 }
@@ -1136,8 +1135,10 @@ namespace QuickClash
             foreach (Element e in allElements)
             {
                 ElementId eID = e.Id;
-                ICollection<ElementId> collectoreID = new List<ElementId>();
-                collectoreID.Add(eID);
+                ICollection<ElementId> collectoreID = new List<ElementId>
+                {
+                    eID
+                };
 
                 foreach (RevitLinkInstance link in lista_links)
                 {
@@ -1173,9 +1174,9 @@ namespace QuickClash
                 Parameter param = elem.LookupParameter("Clash");
                 using (Transaction t = new Transaction(doc, "Clash YES"))
                 {
-                    t.Start();
-                    param.Set("YES");
-                    t.Commit();
+                    _ = t.Start();
+                    _ = param.Set("YES");
+                    _ = t.Commit();
                 }
             }
         }

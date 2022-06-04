@@ -9,8 +9,8 @@ using System;
 
 namespace QuickClash
 {
-    [TransactionAttribute(TransactionMode.Manual)]
-    [RegenerationAttribute(RegenerationOption.Manual)]
+    [Transaction(TransactionMode.Manual)]
+    [Regeneration(RegenerationOption.Manual)]
     internal class SectionBoxSelection : IExternalCommand
     {
         public Result Execute(
@@ -25,29 +25,20 @@ namespace QuickClash
             }
             catch (Exception e)
             {
-                TaskDialog.Show("Error", e.Message.ToString());
+                _ = TaskDialog.Show("Error", e.Message.ToString());
+                LogProgress.UpDate(e.Message);
                 return Result.Cancelled;
             }
         }
 
         public Result OnStartup(UIControlledApplication application)
         {
-            if (application is null)
-            {
-                throw new ArgumentNullException(nameof(application));
-            }
-
-            return Result.Succeeded;
+            return application is null ? throw new ArgumentNullException(nameof(application)) : Result.Succeeded;
         }
 
         public Result OnShutdown(UIControlledApplication application)
         {
-            if (application is null)
-            {
-                throw new ArgumentNullException(nameof(application));
-            }
-
-            return Result.Succeeded;
+            return application is null ? throw new ArgumentNullException(nameof(application)) : Result.Succeeded;
         }
     }
 }

@@ -11,12 +11,11 @@ namespace QuickClash.Views
     /// </summary>
     public partial class ManageWindow : UserControl
     {
-        private UIDocument uidoc;
-        private Document doc;
-        private Window window;
-        private ExternalCommandData _commandData;
-        private List<Element> _lista_links;
-        private List<Element> _lista_links_filtered;
+        private readonly UIDocument uidoc;
+        private readonly Document doc;
+        private readonly Window window;
+        private readonly ExternalCommandData _commandData;
+        private readonly List<Element> _lista_links;
 
         public ManageWindow(ExternalCommandData commandData, UIDocument uiDocument, Window win)
         {
@@ -50,8 +49,6 @@ namespace QuickClash.Views
                     lista_links_filtered.Add(_lista_links[i]);
                 }
             }
-
-            _lista_links_filtered = lista_links_filtered;
 
             window.Close();
 

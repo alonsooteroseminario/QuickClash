@@ -13,8 +13,8 @@ using System.Linq;
 
 namespace QuickClash
 {
-    [TransactionAttribute(TransactionMode.Manual)]
-    [RegenerationAttribute(RegenerationOption.Manual)]
+    [Transaction(TransactionMode.Manual)]
+    [Regeneration(RegenerationOption.Manual)]
     internal class StartClash : IExternalCommand
     {
         public bool Tests = false;
@@ -31,11 +31,11 @@ namespace QuickClash
 
             using (Transaction trans = new Transaction(doc, "Elements Tests"))
             {
-                trans.Start();
+                _ = trans.Start();
                 if (Tests)
                 {
                 }
-                trans.Commit();
+                _ = trans.Commit();
             }
 
             try
@@ -73,16 +73,19 @@ namespace QuickClash
                 if (ducts.Count() == 0)
                 {
                     TaskDialog.Show("Error", "The model does not contain anyduct modeled. To start please draw a pipe. Thank you!");
+                    LogProgress.UpDate("The model does not contain anyduct modeled. To start please draw a pipe. Thank you!");
                     return Result.Cancelled;
                 }
                 if (pipes.Count() == 0)
                 {
                     TaskDialog.Show("Error", "The model does not contain any pipemodeled. To start please draw a pipe. Thank you!");
+                    LogProgress.UpDate("The model does not contain any pipemodeled. To start please draw a pipe. Thank you!");
                     return Result.Cancelled;
                 }
                 if (ducts.Count() == 0 && pipes.Count() == 0)
                 {
                     TaskDialog.Show("Error", "The model does not contain any pipe or duct modeled. To start please draw on pipe or duct. Thank you!");
+                    LogProgress.UpDate("The model does not contain any pipe or duct modeled. To start please draw on pipe or duct. Thank you!");
                     return Result.Cancelled;
                 }
 
@@ -127,29 +130,20 @@ namespace QuickClash
             }
             catch (Exception e)
             {
-                TaskDialog.Show("Error", e.Message);
+                _ = TaskDialog.Show("Error", e.Message);
+                LogProgress.UpDate(e.Message);
                 return Result.Failed;
             }
         }
 
         public Result OnStartup(UIControlledApplication application)
         {
-            if (application is null)
-            {
-                throw new ArgumentNullException(nameof(application));
-            }
-
-            return Result.Succeeded;
+            return application is null ? throw new ArgumentNullException(nameof(application)) : Result.Succeeded;
         }
 
         public Result OnShutdown(UIControlledApplication application)
         {
-            if (application is null)
-            {
-                throw new ArgumentNullException(nameof(application));
-            }
-
-            return Result.Succeeded;
+            return application is null ? throw new ArgumentNullException(nameof(application)) : Result.Succeeded;
         }
     }
 }

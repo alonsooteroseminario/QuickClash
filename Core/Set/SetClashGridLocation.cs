@@ -103,9 +103,9 @@ namespace QuickClash
                 string param_value = intersection;
                 using (Transaction t = new Transaction(doc, "Set Clash grid location to element"))
                 {
-                    t.Start();
-                    param.Set(param_value);
-                    t.Commit();
+                    _ = t.Start();
+                    _ = param.Set(param_value);
+                    _ = t.Commit();
                 }
             }
             foreach (ElementId eid in clashID_familyinstance)
@@ -130,9 +130,9 @@ namespace QuickClash
                 string param_value = intersection;
                 using (Transaction t = new Transaction(doc, "Set Clash grid location to element"))
                 {
-                    t.Start();
-                    param.Set(param_value);
-                    t.Commit();
+                    _ = t.Start();
+                    _ = param.Set(param_value);
+                    _ = t.Commit();
                 }
             }
         }
@@ -165,7 +165,7 @@ namespace QuickClash
             };
             foreach (IList<Element> elems in elements)
             {
-                foreach (var elem in elems)
+                foreach (Element elem in elems)
                 {
                     if (elem.LookupParameter("Clash").AsString() == "YES")
                     {
@@ -228,9 +228,9 @@ namespace QuickClash
                 string param_value = intersection;
                 using (Transaction t = new Transaction(doc, "Set Clash grid location to element"))
                 {
-                    t.Start();
-                    param.Set(param_value);
-                    t.Commit();
+                    _ = t.Start();
+                    _ = param.Set(param_value);
+                    _ = t.Commit();
                 }
             }
             foreach (ElementId eid in clashID_familyinstance)
@@ -255,9 +255,9 @@ namespace QuickClash
                 string param_value = intersection;
                 using (Transaction t = new Transaction(doc, "Set Clash grid location to element"))
                 {
-                    t.Start();
-                    param.Set(param_value);
-                    t.Commit();
+                    _ = t.Start();
+                    _ = param.Set(param_value);
+                    _ = t.Commit();
                 }
             }
         }
@@ -306,9 +306,9 @@ namespace QuickClash
                 string param_value = intersection;
                 using (Transaction t = new Transaction(doc, "Set Clash grid location to element"))
                 {
-                    t.Start();
-                    param.Set(param_value);
-                    t.Commit();
+                    _ = t.Start();
+                    _ = param.Set(param_value);
+                    _ = t.Commit();
                 }
             }
             foreach (ElementId eid in clashID_familyinstance)
@@ -333,9 +333,9 @@ namespace QuickClash
                 string param_value = intersection;
                 using (Transaction t = new Transaction(doc, "Set Clash grid location to element"))
                 {
-                    t.Start();
-                    param.Set(param_value);
-                    t.Commit();
+                    _ = t.Start();
+                    _ = param.Set(param_value);
+                    _ = t.Commit();
                 }
             }
         }

@@ -21,25 +21,25 @@ namespace QuickClash.Create
                 foreach (BuiltInCategory bic in bics)
                 {
                     Category MECat = doc.Settings.Categories.get_Item(bic);
-                    categories.Insert(MECat);
+                    _ = categories.Insert(MECat);
                 }
                 List<BuiltInCategory> bics_familyInstance = GetLists.BuiltCategories(true);
-                foreach (var bic_familyInstanc in bics_familyInstance)
+                foreach (BuiltInCategory bic_familyInstanc in bics_familyInstance)
                 {
                     Category MECat = doc.Settings.Categories.get_Item(bic_familyInstanc);
-                    categories.Insert(MECat);
+                    _ = categories.Insert(MECat);
                 }
                 DefinitionFile myDefinitionFile = app.OpenSharedParameterFile();
                 DefinitionGroup myGroup = myDefinitionFile.Groups.get_Item("Clash Parameters");
-                foreach (var param in GetLists.Params())
+                foreach (string param in GetLists.Params())
                 {
                     Definition myDefinition_ProductDate = myGroup.Definitions.get_Item(param);
                     InstanceBinding instanceBinding = app.Create.NewInstanceBinding(categories);
                     using (Transaction t = new Transaction(doc, "CreateClashParameter"))
                     {
-                        t.Start();
-                        doc.ParameterBindings.Insert(myDefinition_ProductDate, instanceBinding, BuiltInParameterGroup.PG_CONSTRAINTS);
-                        t.Commit();
+                        _ = t.Start();
+                        _ = doc.ParameterBindings.Insert(myDefinition_ProductDate, instanceBinding, BuiltInParameterGroup.PG_CONSTRAINTS);
+                        _ = t.Commit();
                     }
                 }
             }
@@ -51,22 +51,38 @@ namespace QuickClash.Create
                 foreach (BuiltInCategory bic in bics)
                 {
                     Category MECat = doc.Settings.Categories.get_Item(bic);
-                    categories.Insert(MECat);
+                    _ = categories.Insert(MECat);
                 }
                 List<BuiltInCategory> bics_familyInstance = GetLists.BuiltCategories(true);
-                foreach (var bic_familyInstanc in bics_familyInstance)
+                foreach (BuiltInCategory bic_familyInstanc in bics_familyInstance)
                 {
                     Category MECat = doc.Settings.Categories.get_Item(bic_familyInstanc);
-                    categories.Insert(MECat);
+                    _ = categories.Insert(MECat);
                 }
                 DefinitionFile myDefinitionFile = app.OpenSharedParameterFile();
-
-                //DefinitionGroup myGroup = myDefinitionFile.Groups.get_Item("Clash Parameters");
                 DefinitionGroup myGroup = myDefinitionFile.Groups.Create("Clash Parameters");
+
                 foreach (string paramName in listParam)
                 {
-                    //ExternalDefinitionCreationOptions option = new ExternalDefinitionCreationOptions(paramName, ParameterType.Text);
+                    #if REVIT2018
+                    ExternalDefinitionCreationOptions option = new ExternalDefinitionCreationOptions(paramName, ParameterType.Text);
+                    #endif
+                    #if REVIT2019
+                    ExternalDefinitionCreationOptions option = new ExternalDefinitionCreationOptions(paramName, ParameterType.Text);
+                    #endif
+                    #if REVIT2020
+                    ExternalDefinitionCreationOptions option = new ExternalDefinitionCreationOptions(paramName, ParameterType.Text);
+                    #endif
+                    #if REVIT2021
+                    ExternalDefinitionCreationOptions option = new ExternalDefinitionCreationOptions(paramName, ParameterType.Text);
+                    #endif
+                    #if REVIT2022
                     ExternalDefinitionCreationOptions option = new ExternalDefinitionCreationOptions(paramName, SpecTypeId.String.Text)
+                    #endif
+                    #if REVIT2023
+                    ExternalDefinitionCreationOptions option = new ExternalDefinitionCreationOptions(paramName, SpecTypeId.String.Text)
+                    #endif
+
                     {
                         UserModifiable = true
                     };
@@ -107,14 +123,17 @@ namespace QuickClash.Create
                         case "Zone":
                             option.Description = "Zona General. ";
                             break;
+
+                        default:
+                            break;
                     }
                     Definition myDefinition_ProductDate = myGroup.Definitions.Create(option);
                     InstanceBinding instanceBinding = app.Create.NewInstanceBinding(categories);
                     using (Transaction t = new Transaction(doc, "CreateClashParameter"))
                     {
-                        t.Start();
-                        doc.ParameterBindings.Insert(myDefinition_ProductDate, instanceBinding, BuiltInParameterGroup.PG_CONSTRAINTS);
-                        t.Commit();
+                        _ = t.Start();
+                        _ = doc.ParameterBindings.Insert(myDefinition_ProductDate, instanceBinding, BuiltInParameterGroup.PG_CONSTRAINTS);
+                        _ = t.Commit();
                     }
                 }
             }

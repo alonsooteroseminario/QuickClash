@@ -26,16 +26,18 @@ namespace QuickClash
             IList<Element> clash = new List<Element>();
             IList<Element> clash_no = new List<Element>();
 
-            List<IList<Element>> elements = new List<IList<Element>>();
-            elements.Add(ducts);
-            elements.Add(pipes);
-            elements.Add(conduits);
-            elements.Add(cabletrays);
-            elements.Add(flexducts);
-            elements.Add(flexpipes);
+            List<IList<Element>> elements = new List<IList<Element>>
+            {
+                ducts,
+                pipes,
+                conduits,
+                cabletrays,
+                flexducts,
+                flexpipes
+            };
             foreach (IList<Element> elems in elements)
             {
-                foreach (var item in elems)
+                foreach (Element item in elems)
                 {
                     if (item.LookupParameter("Clash").AsString() == "YES")
                     {
@@ -58,12 +60,12 @@ namespace QuickClash
 
                 using (Transaction t = new Transaction(doc, "Set No value to Clash elements in Active View"))
                 {
-                    t.Start();
-                    param.Set(param_value);
-                    param2.Set(0);
-                    param3.Set(param_value);
-                    param4.Set(param_value);
-                    t.Commit();
+                    _ = t.Start();
+                    _ = param.Set(param_value);
+                    _ = param2.Set(0);
+                    _ = param3.Set(param_value);
+                    _ = param4.Set(param_value);
+                    _ = t.Commit();
                 }
             }
 
@@ -77,12 +79,12 @@ namespace QuickClash
 
                 using (Transaction t = new Transaction(doc, "Set No value to Clash elements in Active View"))
                 {
-                    t.Start();
-                    param.Set(param_value);
-                    param2.Set(0);
-                    param3.Set(param_value);
-                    param4.Set(param_value);
-                    t.Commit();
+                    _ = t.Start();
+                    _ = param.Set(param_value);
+                    _ = param2.Set(0);
+                    _ = param3.Set(param_value);
+                    _ = param4.Set(param_value);
+                    _ = t.Commit();
                 }
             }
 
@@ -122,12 +124,12 @@ namespace QuickClash
 
                 using (Transaction t = new Transaction(doc, "Set No value to Clash elements in Active View"))
                 {
-                    t.Start();
-                    param.Set(param_value);
-                    param2.Set(0);
-                    param3.Set(param_value);
-                    param4.Set(param_value);
-                    t.Commit();
+                    _ = t.Start();
+                    _ = param.Set(param_value);
+                    _ = param2.Set(0);
+                    _ = param3.Set(param_value);
+                    _ = param4.Set(param_value);
+                    _ = t.Commit();
                 }
             }
 
@@ -141,12 +143,12 @@ namespace QuickClash
 
                 using (Transaction t = new Transaction(doc, "Set No value to Clash elements in Active View"))
                 {
-                    t.Start();
-                    param.Set(param_value);
-                    param2.Set(0);
-                    param3.Set(param_value);
-                    param4.Set(param_value);
-                    t.Commit();
+                    _ = t.Start();
+                    _ = param.Set(param_value);
+                    _ = param2.Set(0);
+                    _ = param3.Set(param_value);
+                    _ = param4.Set(param_value);
+                    _ = t.Commit();
                 }
             }
         }

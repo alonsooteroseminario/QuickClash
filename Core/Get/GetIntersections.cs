@@ -25,7 +25,7 @@ namespace QuickClash
 
                 Curve c = g.Curve;
 
-                refgrid.Remove(eid);
+                _ = refgrid.Remove(eid);
 
                 foreach (ElementId eid2 in refgrid)
                 {

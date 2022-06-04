@@ -12,7 +12,7 @@ namespace QuickClash
             UIApplication uiApp = commandData.Application;
             UIDocument uidoc = uiApp.ActiveUIDocument;
             Document doc = uiApp.ActiveUIDocument.Document;
-            var activeView = uidoc.ActiveView;
+            Autodesk.Revit.DB.View activeView = uidoc.ActiveView;
 
             List<Element> clashsolved_yes = new List<Element>();
             List<Element> clashsolved_no = new List<Element>();
@@ -33,10 +33,10 @@ namespace QuickClash
                     Parameter param2 = e.LookupParameter("Clash");
                     using (Transaction t = new Transaction(doc, "parametersME"))
                     {
-                        t.Start();
+                        _ = t.Start();
                         if (param.AsInteger() == 1 && param2.AsString() == "YES")
                         {
-                            param2.Set("");
+                            _ = param2.Set("");
                             clashsolved_yes.Add(e);
                         }
                         else if (param.AsInteger() == 1 && !(param2.AsString() == "YES"))
@@ -51,7 +51,7 @@ namespace QuickClash
                         {
                             clash_yes.Add(e);
                         }
-                        t.Commit();
+                        _ = t.Commit();
                     }
                 }
             }
@@ -80,7 +80,7 @@ namespace QuickClash
 
                     using (Transaction t = new Transaction(doc, "parameters elems"))
                     {
-                        t.Start();
+                        _ = t.Start();
                         if (param.AsInteger() == 1 && param2.AsString() == "YES")
                         {
                             param2.Set("");
@@ -98,7 +98,7 @@ namespace QuickClash
                         {
                             clash_yes.Add(e);
                         }
-                        t.Commit();
+                        _ = t.Commit();
                     }
                 }
             }
@@ -109,22 +109,22 @@ namespace QuickClash
                 string vacio = "";
                 using (Transaction t = new Transaction(doc, "Set CLASH = vacio "))
                 {
-                    t.Start();
+                    _ = t.Start();
 
-                    param2.Set(vacio);
+                    _ = param2.Set(vacio);
 
-                    t.Commit();
+                    _ = t.Commit();
                 }
             }
 
             if (clash_yes.Count() < 1)
             {
-                TaskDialog.Show("Dynoscript", "NO HAY INTERFERENCIAS!! en esta vista activa \n\n Muy bien! :)");
+                _ = TaskDialog.Show("Dynoscript", "NO HAY INTERFERENCIAS!! en esta vista activa \n\n Muy bien! :)");
                 using (Transaction t = new Transaction(doc, "Cambiar nombre Comentado"))
                 {
-                    t.Start();
+                    _ = t.Start();
                     activeView.Name = activeView.Name.ToString() + " - RESUELTO";
-                    t.Commit();
+                    _ = t.Commit();
                 }
             }
         }

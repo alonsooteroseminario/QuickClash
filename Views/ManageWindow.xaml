@@ -9,20 +9,20 @@
 
     <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="430" Margin="10,10,0,0" VerticalAlignment="Top" Width="780">
         <Grid Background="White">
-            <DataGrid 
-            Name="datagrid" 
+            <DataGrid
+            Name="datagrid"
             Margin="0,0,10.333,50.333"
             AutoGenerateColumns="False" HorizontalAlignment="Right" Width="757" Height="345" VerticalAlignment="Bottom">
                 <DataGrid.Columns>
 
-                    <DataGridCheckBoxColumn Header = "Check to exclude" Binding="{Binding Path=Status, UpdateSourceTrigger=PropertyChanged}"/>
-                    <DataGridTextColumn Header = "Link Project Name" Binding="{Binding Name}"/>
+                    <DataGridCheckBoxColumn Header = "Check to exclude" Binding="{Binding Path=Status, UpdateSourceTrigger=PropertyChanged}" />
+                    <DataGridTextColumn Header = "Link Project Name" Binding="{Binding Name}" />
                 </DataGrid.Columns>
             </DataGrid>
 
             <Button Content="Accept" HorizontalAlignment="Left" Margin="10,381,0,0" VerticalAlignment="Top" Width="350" Height="36" Click="Button_Click" />
             <Button Content="Cancel" HorizontalAlignment="Left" Margin="417,382,0,0" VerticalAlignment="Top" Width="350" Height="36" Click="Button_Click_1" />
-            <Label Content="Pick the Links to be Excluded:" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Width="757" Height="27"/>
+            <Label Content="Pick the Links to be Excluded:" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Width="757" Height="27" />
         </Grid>
     </Border>
 </UserControl>

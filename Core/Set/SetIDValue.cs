@@ -17,7 +17,7 @@ namespace QuickClash
                 UIApplication uiApp = commandData.Application;
                 UIDocument uidoc = uiApp.ActiveUIDocument;
                 Document doc = uiApp.ActiveUIDocument.Document;
-                var activeView = uidoc.ActiveView;
+                Autodesk.Revit.DB.View activeView = uidoc.ActiveView;
                 IList<Element> ducts = GetElements.ElementsByBuiltCategoryActiveView(commandData, BuiltInCategory.OST_DuctCurves, "ducts");
                 IList<Element> pipes = GetElements.ElementsByBuiltCategoryActiveView(commandData, BuiltInCategory.OST_PipeCurves, "pipes");
                 IList<Element> conduits = GetElements.ElementsByBuiltCategoryActiveView(commandData, BuiltInCategory.OST_Conduit, "conduits");

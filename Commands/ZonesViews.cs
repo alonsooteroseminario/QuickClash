@@ -8,33 +8,32 @@ using System.Windows;
 
 namespace QuickClash
 {
-    [TransactionAttribute(TransactionMode.Manual)]
-    [RegenerationAttribute(RegenerationOption.Manual)]
+    [Transaction(TransactionMode.Manual)]
+    [Regeneration(RegenerationOption.Manual)]
     internal class ZonesViews : IExternalCommand
     {
         public static Window RevitCommandWindow { get; set; }
 
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
-            UIApplication uiapp = commandData.Application;
-            UIDocument uidoc = uiapp.ActiveUIDocument;
-            Document doc = uidoc.Document;
-
-            var activeView = uidoc.ActiveView;
-
-            Dictionary<string, XYZ> intersectionPoints = GetIntersections.Do(doc);
-
-            List<View3D> tresDclashview = new List<View3D>();
-
-            List<Element> clash_elements = new List<Element>();
-
-            foreach (Element e in GetAllClashElements.Get(commandData))
-            {
-                clash_elements.Add(e);
-            }
-
             try
             {
+                UIApplication uiapp = commandData.Application;
+                UIDocument uidoc = uiapp.ActiveUIDocument;
+                Document doc = uidoc.Document;
+
+                Autodesk.Revit.DB.View activeView = uidoc.ActiveView;
+
+                Dictionary<string, XYZ> intersectionPoints = GetIntersections.Do(doc);
+
+                List<View3D> tresDclashview = new List<View3D>();
+
+                List<Element> clash_elements = new List<Element>();
+
+                foreach (Element e in GetAllClashElements.Get(commandData))
+                {
+                    clash_elements.Add(e);
+                }
                 foreach (KeyValuePair<string, XYZ> kp in intersectionPoints)
                 {
                     List<Element> clash_elements_zone = new List<Element>();
@@ -67,7 +66,7 @@ namespace QuickClash
 
                         using (Transaction t = new Transaction(doc, "Create clash 3d view"))
                         {
-                            t.Start();
+                            _ = t.Start();
 
                             View3D clashview = View3D.CreateIsometric(doc, viewFamilyType.Id);
 
@@ -146,20 +145,21 @@ namespace QuickClash
                             XYZ Max1 = new XYZ(lista_Max_X1.First(), lista_Max_Y1.First(), lista_Max_Z1.First());
                             XYZ Min1 = new XYZ(lista_Min_X1.First(), lista_Min_Y1.First(), lista_Min_Z1.First());
 
-                            BoundingBoxXYZ bb_zone = new BoundingBoxXYZ();
-
-                            bb_zone.Min = Min1;
-                            bb_zone.Max = Max1;
+                            BoundingBoxXYZ bb_zone = new BoundingBoxXYZ
+                            {
+                                Min = Min1,
+                                Max = Max1
+                            };
 
                             BoundingBoxXYZ elem_bb = bb_zone;
 
                             double offset = 2;
 
-                            var SectionBox = clashview.GetSectionBox();
-                            var vMax = SectionBox.Max + SectionBox.Transform.Origin;
-                            var vMin = SectionBox.Min + SectionBox.Transform.Origin;
-                            var bbMax = elem_bb.Max;
-                            var bbMin = elem_bb.Min;
+                            BoundingBoxXYZ SectionBox = clashview.GetSectionBox();
+                            XYZ vMax = SectionBox.Max + SectionBox.Transform.Origin;
+                            XYZ vMin = SectionBox.Min + SectionBox.Transform.Origin;
+                            XYZ bbMax = elem_bb.Max;
+                            XYZ bbMin = elem_bb.Min;
 
                             double Max_X = elem_bb.Max.X;
 
@@ -176,10 +176,11 @@ namespace QuickClash
                             XYZ Max = new XYZ(Max_X + offset, Max_Y + offset, Max_Z + offset);
                             XYZ Min = new XYZ(Min_X - offset, Min_Y - offset, Min_Z - offset);
 
-                            BoundingBoxXYZ myBox = new BoundingBoxXYZ();
-
-                            myBox.Min = Min;
-                            myBox.Max = Max;
+                            BoundingBoxXYZ myBox = new BoundingBoxXYZ
+                            {
+                                Min = Min,
+                                Max = Max
+                            };
 
                             clashview.SetSectionBox(myBox);
 
@@ -194,18 +195,19 @@ namespace QuickClash
 
                             clashview.SetSectionBox(myBox);
                             tresDclashview.Add(clashview);
-                            t.Commit();
+                            _ = t.Commit();
                         }
                     }
                 }
-                uidoc.ActiveView = tresDclashview.First();
+                uidoc.ActiveView = tresDclashview.First(); 
+                return Result.Succeeded;
             }
             catch (Exception ex)
             {
-                throw;
+                _ = TaskDialog.Show("Error", ex.Message.ToString());
+                LogProgress.UpDate(ex.Message);
+                return Result.Cancelled;
             }
-
-            return Result.Succeeded;
         }
     }
 }

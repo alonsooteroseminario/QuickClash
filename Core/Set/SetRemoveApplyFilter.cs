@@ -17,7 +17,7 @@ namespace QuickClash
             UIApplication uiapp = commandData.Application;
             UIDocument uidoc = uiapp.ActiveUIDocument;
             Document doc = uidoc.Document;
-            var activeView = uidoc.ActiveView;
+            Autodesk.Revit.DB.View activeView = uidoc.ActiveView;
 
             FilteredElementCollector elements = new FilteredElementCollector(doc);
             FillPatternElement solidFillPattern = elements.OfClass(typeof(FillPatternElement)).Cast<FillPatternElement>().First(a => a.GetFillPattern().IsSolidFill);
@@ -41,7 +41,7 @@ namespace QuickClash
 
             using (Transaction ta = new Transaction(doc, "create clash filter view"))
             {
-                ta.Start();
+                _ = ta.Start();
                 FilteredElementCollector collector = new FilteredElementCollector(doc);
 
                 Parameter param = collector.OfClass(typeof(Duct)).FirstElement().LookupParameter("Clash");
@@ -65,8 +65,8 @@ namespace QuickClash
                 if (lista_ParameterFilterElement1.Count() == 0)
                 {
                     ParameterFilterElement parameterFilterElement = ParameterFilterElement.Create(doc, "CLASH YES FILTER", cats, new ElementParameterFilter(new FilterRule[] {
-                            ParameterFilterRuleFactory.CreateEqualsRule(param.Id,"YES", true),
-                            ParameterFilterRuleFactory.CreateEqualsRule(param_solved.Id,"", true)
+                            ParameterFilterRuleFactory.CreateEqualsRule(param.Id,"YES"),
+                            ParameterFilterRuleFactory.CreateEqualsRule(param_solved.Id,"")
                     }));
                     lista_ParameterFilterElement1.Add(parameterFilterElement);
                 }
@@ -82,7 +82,8 @@ namespace QuickClash
                 }
                 if (lista_ParameterFilterElement_no.Count() == 0)
                 {
-                    ParameterFilterElement parameterFilterElement_no = ParameterFilterElement.Create(doc, "CLASH NO FILTER", cats, new ElementParameterFilter(ParameterFilterRuleFactory.CreateNotContainsRule(param.Id, "YES", true)));
+                    ParameterFilterElement parameterFilterElement_no = ParameterFilterElement.Create(doc, "CLASH NO FILTER", cats, new ElementParameterFilter(
+                        ParameterFilterRuleFactory.CreateNotContainsRule(param.Id, "YES")));
                     lista_ParameterFilterElement_no.Add(parameterFilterElement_no);
                 }
 
@@ -99,7 +100,7 @@ namespace QuickClash
                 {
                     ParameterFilterElement parameterFilterElement_solved = ParameterFilterElement.Create(doc, "CLASH SOLVED FILTER", cats, new ElementParameterFilter(new FilterRule[]
                     {
-                        ParameterFilterRuleFactory.CreateEqualsRule(param_solved.Id, "YES", true)
+                        ParameterFilterRuleFactory.CreateEqualsRule(param_solved.Id, "YES")
                     }));
                     lista_ParameterFilterElement_solved.Add(parameterFilterElement_solved);
                 }
@@ -109,17 +110,17 @@ namespace QuickClash
                 ParameterFilterElement ParameterFilterElement1_solved = lista_ParameterFilterElement_solved.First();
 
                 OverrideGraphicSettings ogs3 = new OverrideGraphicSettings();
-                ogs3.SetProjectionLineColor(new Color(250, 0, 0));
-                ogs3.SetSurfaceForegroundPatternColor(new Color(250, 0, 0));
-                ogs3.SetSurfaceForegroundPatternVisible(true);
-                ogs3.SetSurfaceForegroundPatternId(solidFillPattern.Id);
+                _ = ogs3.SetProjectionLineColor(new Color(250, 0, 0));
+                _ = ogs3.SetSurfaceForegroundPatternColor(new Color(250, 0, 0));
+                _ = ogs3.SetSurfaceForegroundPatternVisible(true);
+                _ = ogs3.SetSurfaceForegroundPatternId(solidFillPattern.Id);
 
                 OverrideGraphicSettings ogs4 = new OverrideGraphicSettings();
-                ogs4.SetProjectionLineColor(new Color(192, 192, 192));
-                ogs4.SetSurfaceForegroundPatternColor(new Color(192, 192, 192));
-                ogs4.SetSurfaceForegroundPatternVisible(true);
-                ogs4.SetSurfaceForegroundPatternId(solidFillPattern.Id);
-                ogs4.SetHalftone(true);
+                _ = ogs4.SetProjectionLineColor(new Color(192, 192, 192));
+                _ = ogs4.SetSurfaceForegroundPatternColor(new Color(192, 192, 192));
+                _ = ogs4.SetSurfaceForegroundPatternVisible(true);
+                _ = ogs4.SetSurfaceForegroundPatternId(solidFillPattern.Id);
+                _ = ogs4.SetHalftone(true);
 
                 FilteredElementCollector collector_filterActiveview = new FilteredElementCollector(doc, activeView.Id).OfClass(typeof(ParameterFilterElement));
                 List<ParameterFilterElement> lista_filtrosActiveView = new List<ParameterFilterElement>();
@@ -143,7 +144,7 @@ namespace QuickClash
                 activeView.RemoveFilter(ParameterFilterElement1_no.Id);
                 activeView.RemoveFilter(ParameterFilterElement1_solved.Id);
 
-                ta.Commit();
+                _ = ta.Commit();
             }
         }
     }

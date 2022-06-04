@@ -15,11 +15,11 @@ namespace QuickClash.Create
             List<BuiltInCategory> bics_familyInstance = GetLists.BuiltCategories(true);
             List<BuiltInCategory> bics = GetLists.BuiltCategories(false);
             List<BuiltInCategory> bics_All = new List<BuiltInCategory>();
-            foreach (var item in bics_familyInstance)
+            foreach (BuiltInCategory item in bics_familyInstance)
             {
                 bics_All.Add(item);
             }
-            foreach (var item in bics)
+            foreach (BuiltInCategory item in bics)
             {
                 bics_All.Add(item);
             }
@@ -28,11 +28,11 @@ namespace QuickClash.Create
                 ViewSchedule clashSchedule = null;
                 using (Transaction transaction = new Transaction(doc, "Creating CLASH Schedule"))
                 {
-                    transaction.Start();
-                    clashSchedule = Autodesk.Revit.DB.ViewSchedule.CreateSchedule(doc, new ElementId(bic));
+                    _ = transaction.Start();
+                    clashSchedule = ViewSchedule.CreateSchedule(doc, new ElementId(bic));
                     doc.Regenerate();
                     ScheduleDefinition definition = clashSchedule.Definition;
-                    IList<SchedulableField> schedulableFields = definition.GetSchedulableFields(); // [a,b,c,s,d,f,....]
+                    IList<SchedulableField> schedulableFields = definition.GetSchedulableFields();
                     clashSchedule.Name = "CLASH " + bic.ToString() + " SCHEDULE";
                     List<SchedulableField> listashparam = new List<SchedulableField>();
                     List<ScheduleFieldId> fieldIds = new List<ScheduleFieldId>();
@@ -69,18 +69,18 @@ namespace QuickClash.Create
                     ScheduleField foundField = clashSchedule.Definition.GetField(fieldIds.FirstOrDefault());
                     if (null != clashSchedule)
                     {
-                        transaction.Commit();
+                        _ = transaction.Commit();
                     }
                     else
                     {
-                        transaction.RollBack();
+                        _ = transaction.RollBack();
                     }
                     using (Transaction ta = new Transaction(doc, "Add filter"))
                     {
-                        ta.Start();
+                        _ = ta.Start();
                         ScheduleFilter filter = new ScheduleFilter(foundField.FieldId, ScheduleFilterType.Contains, "YES");
                         clashSchedule.Definition.AddFilter(filter);
-                        ta.Commit();
+                        _ = ta.Commit();
                     }
                 }
             }

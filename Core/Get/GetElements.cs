@@ -102,7 +102,7 @@ namespace QuickClash
             UIApplication uiapp = commandData.Application;
             UIDocument uidoc = uiapp.ActiveUIDocument;
             Document doc = uidoc.Document;
-            var activeView = uidoc.ActiveView;
+            Autodesk.Revit.DB.View activeView = uidoc.ActiveView;
 
             ElementClassFilter familyFilter = new ElementClassFilter(typeof(FamilyInstance));
             ElementCategoryFilter MECategoryfilter = new ElementCategoryFilter(bic);

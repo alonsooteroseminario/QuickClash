@@ -26,7 +26,7 @@ namespace QuickClash
 
             using (Transaction t = new Transaction(doc, "Create COORD view"))
             {
-                t.Start();
+                _ = t.Start();
 
                 View3D COORD = View3D.CreateIsometric(doc, viewFamilyType.Id);
 
@@ -74,11 +74,11 @@ namespace QuickClash
                 List<Element> riv = new List<Element>();
                 FilteredElementCollector links = new FilteredElementCollector(doc, COORD.Id);
                 ElementCategoryFilter linkFilter = new ElementCategoryFilter(BuiltInCategory.OST_RvtLinks);
-                links.WhereElementIsNotElementType();
-                links.WherePasses(linkFilter);
+                _ = links.WhereElementIsNotElementType();
+                _ = links.WherePasses(linkFilter);
                 riv.AddRange(links.ToElements());
 
-                t.Commit();
+                _ = t.Commit();
                 uidoc.ActiveView = COORD;
             }
         }
@@ -88,24 +88,24 @@ namespace QuickClash
             UIApplication uiapp = commandData.Application;
             UIDocument uidoc = uiapp.ActiveUIDocument;
             Document doc = uidoc.Document;
-            var activeView = uidoc.ActiveView;
+            Autodesk.Revit.DB.View activeView = uidoc.ActiveView;
 
             View3D viewer = null;
 
             using (Transaction t = new Transaction(doc, "Duplicate View"))
             {
-                t.Start();
+                _ = t.Start();
 
                 for (int i = 1; i < 2; i++)
                 {
                     viewer = (View3D)doc.GetElement(activeView.Duplicate(ViewDuplicateOption.WithDetailing));
                 }
-                t.Commit();
+                _ = t.Commit();
             }
 
             uidoc.ActiveView = viewer;
 
-            return (View3D)viewer;
+            return viewer;
         }
 
         public static View3D CopySelection(ExternalCommandData commandData)
@@ -113,9 +113,8 @@ namespace QuickClash
             UIApplication uiapp = commandData.Application;
             UIDocument uidoc = uiapp.ActiveUIDocument;
             Document doc = uidoc.Document;
-            var activeView = uidoc.ActiveView;
+            Autodesk.Revit.DB.View activeView = uidoc.ActiveView;
 
-            // Select element input
             List<Element> lista_SelectElements = new List<Element>();
             IList<Reference> references = uidoc.Selection.PickObjects(ObjectType.Element, "Select the Element you want to analyze");
             foreach (Reference reference in references)
@@ -128,19 +127,18 @@ namespace QuickClash
 
             using (Transaction t = new Transaction(doc, "Duplicate View"))
             {
-                t.Start();
+                _ = t.Start();
 
                 for (int i = 1; i < 2; i++)
                 {
                     viewer = (View3D)doc.GetElement(activeView.Duplicate(ViewDuplicateOption.WithDetailing));
                 }
-                t.Commit();
+                _ = t.Commit();
             }
 
-            //apply section box to selection
             using (Transaction t = new Transaction(doc, "Create Section Box"))
             {
-                t.Start();
+                _ = t.Start();
                 double Min_Z = double.MaxValue;
                 double Min_X = double.MaxValue;
                 double Min_Y = double.MaxValue;
@@ -148,7 +146,7 @@ namespace QuickClash
                 double Max_X = double.MinValue;
                 double Max_Y = double.MinValue;
                 double Max_Z = double.MinValue;
-                foreach (var elem in lista_SelectElements)
+                foreach (Element elem in lista_SelectElements)
                 {
                     BoundingBoxXYZ box = elem.get_BoundingBox(null);
                     if (box.Max.X > Max_X)
@@ -191,12 +189,12 @@ namespace QuickClash
                 viewer.DisplayStyle = DisplayStyle.Shading;
                 viewer.DetailLevel = ViewDetailLevel.Fine;
 
-                t.Commit();
+                _ = t.Commit();
             }
 
             uidoc.ActiveView = viewer;
 
-            return (View3D)viewer;
+            return viewer;
         }
     }
 }

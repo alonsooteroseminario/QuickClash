@@ -23,13 +23,13 @@ namespace QuickClash
 
                 using (Transaction t = new Transaction(doc, "set parameter"))
                 {
-                    t.Start();
+                    _ = t.Start();
                     //param.Set("YES");
                     //param.Set("NO");
 
                     //param2.Set("YES");
                     //param2.Set("NO");
-                    t.Commit();
+                    _ = t.Commit();
                 }
             }
         }
@@ -48,14 +48,14 @@ namespace QuickClash
             {
                 Parameter param = e.LookupParameter("ID Element");
 
-                Autodesk.Revit.DB.ElementId selectedId = e.Id;
+                ElementId selectedId = e.Id;
                 string idString = selectedId.IntegerValue.ToString();
 
                 using (Transaction t = new Transaction(doc, "ID Element"))
                 {
-                    t.Start();
-                    param.Set(idString);
-                    t.Commit();
+                    _ = t.Start();
+                    _ = param.Set(idString);
+                    _ = t.Commit();
                 }
             }
         }
@@ -73,17 +73,17 @@ namespace QuickClash
                 Parameter param4 = e.LookupParameter("Clash Grid Location");
                 Parameter param5 = e.LookupParameter("Clash Category");
 
-                Autodesk.Revit.DB.ElementId selectedId = e.Id;
-                string voidString = ("");
+                ElementId selectedId = e.Id;
+                string voidString = "";
 
                 using (Transaction t = new Transaction(doc, "ID Element"))
                 {
-                    t.Start();
-                    param.Set(voidString);
-                    clashParam.Set(voidString);
-                    param4.Set(voidString);
-                    param5.Set(voidString);
-                    t.Commit();
+                    _ = t.Start();
+                    _ = param.Set(voidString);
+                    _ = clashParam.Set(voidString);
+                    _ = param4.Set(voidString);
+                    _ = param5.Set(voidString);
+                    _ = t.Commit();
                 }
             }
         }

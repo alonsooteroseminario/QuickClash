@@ -75,7 +75,6 @@
     <Compile Include="App.cs" />
     <Compile Include="Commands\ElementsViews.cs" />
     <Compile Include="Commands\ZonesViews.cs" />
-    <Compile Include="Commands\ClashManage.cs" />
     <Compile Include="Commands\DefaultActiveView.cs" />
     <Compile Include="Commands\QuickClashLinks.cs" />
     <Compile Include="Commands\RemoveClashFilter.cs" />
@@ -88,6 +87,7 @@
     <Compile Include="Core\Get\GetIntersections.cs" />
     <Compile Include="Core\Intersect\Intersect.cs" />
     <Compile Include="Commands\QuickClash.cs" />
+    <Compile Include="LogStep\LogProgress.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
