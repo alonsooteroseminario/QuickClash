@@ -65,8 +65,8 @@ namespace QuickClash
                 if (lista_ParameterFilterElement1.Count() == 0)
                 {
                     ParameterFilterElement parameterFilterElement = ParameterFilterElement.Create(doc, "CLASH YES FILTER", cats, new ElementParameterFilter(new FilterRule[] {
-                            ParameterFilterRuleFactory.CreateEqualsRule(param.Id,"YES"),
-                            ParameterFilterRuleFactory.CreateEqualsRule(param_solved.Id,"")
+                            ParameterFilterRuleFactory.CreateEqualsRule(param.Id,"YES", true),
+                            ParameterFilterRuleFactory.CreateEqualsRule(param_solved.Id,"", true)
                     }));
                     lista_ParameterFilterElement1.Add(parameterFilterElement);
                 }
@@ -83,7 +83,7 @@ namespace QuickClash
                 if (lista_ParameterFilterElement_no.Count() == 0)
                 {
                     ParameterFilterElement parameterFilterElement_no = ParameterFilterElement.Create(doc, "CLASH NO FILTER", cats, new ElementParameterFilter(
-                        ParameterFilterRuleFactory.CreateNotContainsRule(param.Id, "YES")));
+                        ParameterFilterRuleFactory.CreateNotContainsRule(param.Id, "YES", true)));
                     lista_ParameterFilterElement_no.Add(parameterFilterElement_no);
                 }
 
@@ -100,7 +100,7 @@ namespace QuickClash
                 {
                     ParameterFilterElement parameterFilterElement_solved = ParameterFilterElement.Create(doc, "CLASH SOLVED FILTER", cats, new ElementParameterFilter(new FilterRule[]
                     {
-                        ParameterFilterRuleFactory.CreateEqualsRule(param_solved.Id, "YES")
+                        ParameterFilterRuleFactory.CreateEqualsRule(param_solved.Id, "YES", true)
                     }));
                     lista_ParameterFilterElement_solved.Add(parameterFilterElement_solved);
                 }

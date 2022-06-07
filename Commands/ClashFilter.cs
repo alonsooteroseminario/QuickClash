@@ -38,7 +38,6 @@ namespace QuickClash
                 LogProgress.UpDate(e.Message);
                 return Result.Failed;
             }
-
         }
     }
 }

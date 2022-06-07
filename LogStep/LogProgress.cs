@@ -17,7 +17,7 @@ namespace QuickClash
 
             string version = SetVersion();
 
-            string path = path_AppData + "\\Autodesk\\Revit\\Addins\\" + version + "\\Quick_Clash\\LogProgress.txt";
+            string path = path_AppData + "\\Autodesk\\Revit\\Addins\\" + version + "\\QuickClash\\LogProgress.txt";
 
             using (StreamWriter sw = File.CreateText(path))
             {
@@ -25,7 +25,7 @@ namespace QuickClash
             }
         }
 
-        private static string SetVersion()
+        public static string SetVersion()
         {
 #if REVIT2019
             string version = "2019";

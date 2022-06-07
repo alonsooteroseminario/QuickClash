@@ -199,7 +199,7 @@ namespace QuickClash
                         }
                     }
                 }
-                uidoc.ActiveView = tresDclashview.First(); 
+                uidoc.ActiveView = tresDclashview.First();
                 return Result.Succeeded;
             }
             catch (Exception ex)

@@ -64,24 +64,24 @@ namespace QuickClash.Create
 
                 foreach (string paramName in listParam)
                 {
-                    #if REVIT2018
+#if REVIT2018
                     ExternalDefinitionCreationOptions option = new ExternalDefinitionCreationOptions(paramName, ParameterType.Text);
-                    #endif
-                    #if REVIT2019
+#endif
+#if REVIT2019
                     ExternalDefinitionCreationOptions option = new ExternalDefinitionCreationOptions(paramName, ParameterType.Text);
-                    #endif
-                    #if REVIT2020
+#endif
+#if REVIT2020
                     ExternalDefinitionCreationOptions option = new ExternalDefinitionCreationOptions(paramName, ParameterType.Text);
-                    #endif
-                    #if REVIT2021
+#endif
+#if REVIT2021
                     ExternalDefinitionCreationOptions option = new ExternalDefinitionCreationOptions(paramName, ParameterType.Text);
-                    #endif
-                    #if REVIT2022
+#endif
+#if REVIT2022
                     ExternalDefinitionCreationOptions option = new ExternalDefinitionCreationOptions(paramName, SpecTypeId.String.Text)
-                    #endif
-                    #if REVIT2023
+#endif
+#if REVIT2023
                     ExternalDefinitionCreationOptions option = new ExternalDefinitionCreationOptions(paramName, SpecTypeId.String.Text)
-                    #endif
+#endif
 
                     {
                         UserModifiable = true
