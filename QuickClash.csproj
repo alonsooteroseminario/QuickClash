@@ -166,9 +166,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName) == Debug mkdir "$(AppData)\Autodesk\REVIT\Addins\2022\$(TargetName)\"
-if $(ConfigurationName) == Debug copy "$(ProjectDir)$(OutputPath)*.dll" "$(AppData)\Autodesk\REVIT\Addins\2022\$(TargetName)\"
-if $(ConfigurationName) == Debug copy "$(ProjectDir)$(OutputPath)*.addin" "$(AppData)\Autodesk\REVIT\Addins\2022"
+    <PostBuildEvent>copy "$(ProjectDir)$(OutputPath)*.dll" "$(ProgramData)\Autodesk\Revit\Addins\2022"
+copy "$(ProjectDir)$(OutputPath)*.addin" "$(ProgramData)\Autodesk\Revit\Addins\2022"
 </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

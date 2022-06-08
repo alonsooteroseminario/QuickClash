@@ -14,12 +14,11 @@ If you would like to uninstall QuickClash, you only need to go to "Add and remov
 
 #### Support Information :
 
-Please, contact us with suggestions for improvements or bugs at contact@weclash.xyz or via LinkedIn at https://www.linkedin.com/company/weclash
+Please, contact us with suggestions for improvements or bugs at contact@weclash.xyz
 
 #### Additional Information :
 
 https://weclash.xyz
-https://www.linkedin.com/company/weclash
 
 #### Known Issues :
 
@@ -41,7 +40,7 @@ QuickClash Revit Add-in for Clash Detection
 
 ## Author: LAOS
 
-## Steps to try it in your own Revit:
+## Steps to try it in your own Machine:
 
 #### 1. Clone it or Download it in your machine.
 
@@ -55,6 +54,4 @@ QuickClash Revit Add-in for Clash Detection
 
 ![image](/Resources/build-solution.png)
 
-#### 5. After built the solution, in the project path enter to the folder "\bin\Debug" and Copy "QuickClash.dll" and "QuickClash.addin" files into this path: C:\Users\{username}\AppData\Roaming\Autodesk\Revit\Addins\2022
-
-#### 6. Now you can open Revit and try it in the tab "Quick Clash"
+#### 5. Now you can open Revit and try it in the tab "Quick Clash"
