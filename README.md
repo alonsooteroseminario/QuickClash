@@ -6,12 +6,6 @@ QuickClash is a Tool to fix and coordinate your BIM model and make clash detecti
 The best solution for 3D coordination in very tied spaces like Mechanical Rooms or areas with little space and a high level of coordination like hospitals.
 You first need to start the Add-in workflow by creating the custom instance parameters, after that, you will be able to run the clash detection for everything against everything in every active View and the analysis will be applied only to the Elements in the currently active View.
 
-
-#### Installation/Uninstallation :
-
-Please close Revit to run the installer. QuickClash installer will create installation files in the following folders: C:\Users\{username}\AppData\Roaming\Autodesk\Revit\Addins\2022 . This folder may change to match your selected Revit version.( Ex. Revit 2019, 2020, 2021)
-If you would like to uninstall QuickClash, you only need to go to "Add and remove programs" in Windows and look for NonicaTab. All toolbar scripts and icons set by the user will be lost during uninstallation.
-
 #### Support Information :
 
 Please, contact us with suggestions for improvements or bugs at contact@weclash.xyz
