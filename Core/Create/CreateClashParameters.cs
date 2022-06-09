@@ -64,60 +64,75 @@ namespace QuickClash.Create
 
                 foreach (string paramName in listParam)
                 {
-#if REVIT2018
-                    ExternalDefinitionCreationOptions option = new ExternalDefinitionCreationOptions(paramName, ParameterType.Text);
-#endif
-#if REVIT2019
-                    ExternalDefinitionCreationOptions option = new ExternalDefinitionCreationOptions(paramName, ParameterType.Text);
-#endif
-#if REVIT2020
-                    ExternalDefinitionCreationOptions option = new ExternalDefinitionCreationOptions(paramName, ParameterType.Text);
-#endif
-#if REVIT2021
-                    ExternalDefinitionCreationOptions option = new ExternalDefinitionCreationOptions(paramName, ParameterType.Text);
-#endif
-#if REVIT2022
+                    #if REVIT2018
+                    ExternalDefinitionCreationOptions option = new ExternalDefinitionCreationOptions(paramName, ParameterType.Text)                    
+                    {
+                        UserModifiable = true
+                    };;
+                    #endif
+                    #if REVIT2019
+                    ExternalDefinitionCreationOptions option = new ExternalDefinitionCreationOptions(paramName, ParameterType.Text)
+                    {
+                        UserModifiable = true
+                    };;
+                    #endif
+                    #if REVIT2020
+                    ExternalDefinitionCreationOptions option = new ExternalDefinitionCreationOptions(paramName, ParameterType.Text)                    
+                    {
+                        UserModifiable = true
+                    };;
+                    #endif
+                    #if REVIT2021
+                    ExternalDefinitionCreationOptions option = new ExternalDefinitionCreationOptions(paramName, ParameterType.Text)                    
+                    {
+                        UserModifiable = true
+                    };;
+                    #endif
+                    #if REVIT2022
                     ExternalDefinitionCreationOptions option = new ExternalDefinitionCreationOptions(paramName, SpecTypeId.String.Text)
-#endif
-#if REVIT2023
-                    ExternalDefinitionCreationOptions option = new ExternalDefinitionCreationOptions(paramName, SpecTypeId.String.Text)
-#endif
-
                     {
                         UserModifiable = true
                     };
+                    #endif
+                    #if REVIT2023
+                    ExternalDefinitionCreationOptions option = new ExternalDefinitionCreationOptions(paramName, SpecTypeId.String.Text)                    
+                    {
+                        UserModifiable = true
+                    };
+                    #endif
+
                     switch (paramName)
                     {
                         case "Clash":
-                            option.Description = "Determina si el elemento tiene interferencia con otro. ";
+                            option.Description = "Determines if the element has interference with another. ";
                             break;
 
                         case "Clash  Category":
-                            option.Description = "La Categoría del Elemento contra el que existe la interferencia. ";
+                            option.Description = "The Category of the Element against which the interference exists. ";
                             break;
 
                         case "Clash Comments":
-                            option.Description = "Comentario sobre la interferencia. ";
+                            option.Description = "Comment on interference. ";
                             break;
 
                         case "Clash Grid Location":
-                            option.Description = "Zona más cerca de la interferencia. ";
+                            option.Description = "Area closest to the interference. ";
                             break;
 
                         case "Clash Solved":
-                            option.Description = "Interferencia resuelta. Sí está activo en un Elemento, ese Elemento no será detectado con interferencias en el análisis. ";
+                            option.Description = "Interference resolved. If it is active on an Element, this Element will not be detected with interference in the analysis. ";
                             break;
 
                         case "Done":
-                            option.Description = "Tarea resuelta. ";
+                            option.Description = "Solved task. ";
                             break;
 
                         case "ID Element":
-                            option.Description = "Número de ID del Elemento";
+                            option.Description = "Element ID number.";
                             break;
 
                         case "Percent Done":
-                            option.Description = "Porcentaje de Tarea resuelta. ";
+                            option.Description = "Task Solved Percentage.";
                             break;
 
                         case "Zone":

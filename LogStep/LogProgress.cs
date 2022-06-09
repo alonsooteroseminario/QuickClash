@@ -13,11 +13,10 @@ namespace QuickClash
         public static void UpDate(string messageProcess)
         {
             DateTime now = DateTime.Now;
-            string path_AppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
             string version = SetVersion();
 
-            string path = path_AppData + "\\Autodesk\\Revit\\Addins\\" + version + "\\QuickClash\\LogProgress.txt";
+            string path = "\\C:\\ProgramData\\Autodesk\\Revit\\Addins\\" + version + "\\LogProgress.txt";
 
             using (StreamWriter sw = File.CreateText(path))
             {
@@ -27,18 +26,18 @@ namespace QuickClash
 
         public static string SetVersion()
         {
-#if REVIT2019
+            #if REVIT2019
             string version = "2019";
-#endif
-#if REVIT2020
+            #endif
+            #if REVIT2020
             string version = "2020";
-#endif
-#if REVIT2021
+            #endif
+            #if REVIT2021
             string version = "2021";
-#endif
-#if REVIT2022
+            #endif
+            #if REVIT2022
             string version = "2022";
-#endif
+            #endif
             return version;
         }
     }
