@@ -11,26 +11,26 @@ namespace QuickClash
     {
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
-            try
-            {
-                Intersect.MultipleElementsToMultipleCategory(commandData);
+            //try
+            //{
+                Intersect2.MultipleElementsToMultipleCategory(commandData);
 
-                Intersect.MultipleElementsToMultipleFamilyInstances(commandData);
+                Intersect2.MultipleElementsToMultipleFamilyInstances(commandData);
 
-                Intersect.MultipleFamilyInstanceToMultipleFamilyInstances_BBox(commandData);
+                Intersect2.MultipleFamilyInstanceToMultipleFamilyInstances_BBox(commandData);
 
                 SetClashGridLocation.DoActiveView(commandData);
 
                 SetIDValue.Do(commandData, "ActiveView");
 
                 return Result.Succeeded;
-            }
-            catch (Exception e)
-            {
-                _ = TaskDialog.Show("Error", e.Message);
-                LogProgress.UpDate(e.Message);
-                return Result.Failed;
-            }
+            //}
+            //catch (Exception e)
+            //{
+            //    _ = TaskDialog.Show("Error", e.Message);
+            //    LogProgress.UpDate(e.Message);
+            //    return Result.Failed;
+            //}
 
         }
     }

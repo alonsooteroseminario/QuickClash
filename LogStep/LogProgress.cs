@@ -12,16 +12,16 @@ namespace QuickClash
         /// <returns></returns>
         public static void UpDate(string messageProcess)
         {
-            DateTime now = DateTime.Now;
+            //DateTime now = DateTime.Now;
 
-            string version = SetVersion();
+            //string version = SetVersion();
 
-            string path = "\\C:\\ProgramData\\Autodesk\\Revit\\Addins\\" + version + "\\LogProgress.txt";
+            //string path = "\\C:\\ProgramData\\Autodesk\\Revit\\Addins\\" + version + "\\LogProgress.txt";
 
-            using (StreamWriter sw = File.CreateText(path))
-            {
-                sw.WriteLine(messageProcess + " " + now.ToLongTimeString());
-            }
+            //using (StreamWriter sw = File.CreateText(path))
+            //{
+            //    sw.WriteLine(messageProcess + " " + now.ToLongTimeString());
+            //}
         }
 
         public static string SetVersion()

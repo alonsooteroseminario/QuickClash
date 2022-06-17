@@ -51,7 +51,7 @@ namespace QuickClash
 				    BuiltInCategory.OST_DuctFitting,
                     BuiltInCategory.OST_DuctTerminal,
                     BuiltInCategory.OST_ElectricalEquipment,
-                    BuiltInCategory.OST_ElectricalFixtures,
+                    //BuiltInCategory.OST_ElectricalFixtures,
                     BuiltInCategory.OST_LightingDevices,
                     BuiltInCategory.OST_LightingFixtures,
                     BuiltInCategory.OST_MechanicalEquipment,
@@ -60,7 +60,7 @@ namespace QuickClash
 				    //BuiltInCategory.OST_FlexPipeCurves,
 				    BuiltInCategory.OST_PipeFitting,
                     BuiltInCategory.OST_PlumbingFixtures,
-                    BuiltInCategory.OST_SpecialityEquipment,
+                    //BuiltInCategory.OST_SpecialityEquipment,
                     BuiltInCategory.OST_Sprinklers,
                     BuiltInCategory.OST_PipeAccessory,
                     BuiltInCategory.OST_DuctAccessory

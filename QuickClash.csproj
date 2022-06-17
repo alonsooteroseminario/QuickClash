@@ -85,6 +85,7 @@
     <Compile Include="Core\Get\GetAllClashElements.cs" />
     <Compile Include="Core\Get\GetElements.cs" />
     <Compile Include="Core\Get\GetIntersections.cs" />
+    <Compile Include="Core\Intersect\Intersect2.cs" />
     <Compile Include="Core\Intersect\Intersect.cs" />
     <Compile Include="Commands\QuickClash.cs" />
     <Compile Include="LogStep\LogProgress.cs" />

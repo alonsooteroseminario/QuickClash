@@ -105,8 +105,10 @@ namespace QuickClash
                     }
                 }
 
-                ICollection<ElementId> collectoreID = new List<ElementId>();
-                collectoreID.Add(eID);
+                ICollection<ElementId> collectoreID = new List<ElementId>
+                {
+                    eID
+                };
 
                 foreach (BuiltInCategory bic in UI_list3)
                 {

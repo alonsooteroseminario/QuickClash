@@ -83,29 +83,32 @@ namespace QuickClash
                 Element e = doc.GetElement(eid);
                 Options op = new Options();
                 GeometryElement gm = e.get_Geometry(op);
-                Solid so = gm.First() as Solid;
-                XYZ p = so.ComputeCentroid();
-                XYZ xyz = new XYZ(p.X, p.Y, 0);
-                double distanceMin = 0;
-                double distance = 0;
-                distanceMin = xyz.DistanceTo(intersectionPoints.First().Value);
-                foreach (KeyValuePair<string, XYZ> kp in intersectionPoints)
+                if (gm.Count() != 0)
                 {
-                    distance = xyz.DistanceTo(kp.Value);
-                    if (distance < distanceMin)
+                    Solid so = gm.First() as Solid;
+                    XYZ p = so.ComputeCentroid();
+                    XYZ xyz = new XYZ(p.X, p.Y, 0);
+                    double distanceMin = 0;
+                    double distance = 0;
+                    distanceMin = xyz.DistanceTo(intersectionPoints.First().Value);
+                    foreach (KeyValuePair<string, XYZ> kp in intersectionPoints)
                     {
-                        distanceMin = distance;
-                        intersection = kp.Key;
+                        distance = xyz.DistanceTo(kp.Value);
+                        if (distance < distanceMin)
+                        {
+                            distanceMin = distance;
+                            intersection = kp.Key;
+                        }
                     }
-                }
-                double distanceInMeter = distanceMin / 3.281;
-                Parameter param = e.LookupParameter("Clash Grid Location");
-                string param_value = intersection;
-                using (Transaction t = new Transaction(doc, "Set Clash grid location to element"))
-                {
-                    _ = t.Start();
-                    _ = param.Set(param_value);
-                    _ = t.Commit();
+                    double distanceInMeter = distanceMin / 3.281;
+                    Parameter param = e.LookupParameter("Clash Grid Location");
+                    string param_value = intersection;
+                    using (Transaction t = new Transaction(doc, "Set Clash grid location to element"))
+                    {
+                        _ = t.Start();
+                        _ = param.Set(param_value);
+                        _ = t.Commit();
+                    }
                 }
             }
             foreach (ElementId eid in clashID_familyinstance)
@@ -208,29 +211,32 @@ namespace QuickClash
                 Element e = doc.GetElement(eid);
                 Options op = new Options();
                 GeometryElement gm = e.get_Geometry(op);
-                Solid so = gm.First() as Solid;
-                XYZ p = so.ComputeCentroid();
-                XYZ xyz = new XYZ(p.X, p.Y, 0);
-                double distanceMin = 0;
-                double distance = 0;
-                distanceMin = xyz.DistanceTo(intersectionPoints.First().Value);
-                foreach (KeyValuePair<string, XYZ> kp in intersectionPoints)
+                if(gm.Count() != 0)
                 {
-                    distance = xyz.DistanceTo(kp.Value);
-                    if (distance < distanceMin)
+                    Solid so = gm.First() as Solid;
+                    XYZ p = so.ComputeCentroid();
+                    XYZ xyz = new XYZ(p.X, p.Y, 0);
+                    double distanceMin = 0;
+                    double distance = 0;
+                    distanceMin = xyz.DistanceTo(intersectionPoints.First().Value);
+                    foreach (KeyValuePair<string, XYZ> kp in intersectionPoints)
                     {
-                        distanceMin = distance;
-                        intersection = kp.Key;
+                        distance = xyz.DistanceTo(kp.Value);
+                        if (distance < distanceMin)
+                        {
+                            distanceMin = distance;
+                            intersection = kp.Key;
+                        }
                     }
-                }
-                double distanceInMeter = distanceMin / 3.281;
-                Parameter param = e.LookupParameter("Clash Grid Location");
-                string param_value = intersection;
-                using (Transaction t = new Transaction(doc, "Set Clash grid location to element"))
-                {
-                    _ = t.Start();
-                    _ = param.Set(param_value);
-                    _ = t.Commit();
+                    double distanceInMeter = distanceMin / 3.281;
+                    Parameter param = e.LookupParameter("Clash Grid Location");
+                    string param_value = intersection;
+                    using (Transaction t = new Transaction(doc, "Set Clash grid location to element"))
+                    {
+                        _ = t.Start();
+                        _ = param.Set(param_value);
+                        _ = t.Commit();
+                    }
                 }
             }
             foreach (ElementId eid in clashID_familyinstance)
